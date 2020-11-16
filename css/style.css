@@ -92,3 +92,59 @@ h2 {
 	margin-right: auto;
 }
 
+#measure-vis {
+	width: 100%;
+	margin: 0 auto;
+	height: 90%;
+}
+
+
+.axis line,
+.axis path {
+	fill: none;
+	stroke: #555;
+	shape-rendering: crispEdges;
+}
+
+.athlete-weight-height {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 50vh;
+	background-color:whitesmoke;
+	padding: 20px;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.athlete-gender-age {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 40vh;
+	padding: 20px;
+}
+
+.bootstrap-table {
+	height: 100%;
+	overflow-y: scroll;
+	background-color: white;
+}
+
+#measure-table {
+	width: 40%;
+	height: 100%;
+}
+
+.weight-height-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 10%;
+}
+
+.athlete-weight-height-vis {
+	background-color: white;
+	padding: 17px;
+	border-radius: 10px;
+}

@@ -11,6 +11,8 @@
 
     <!-- CSS libraries -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
 
     <!-- Custom CSS code -->
     <link rel="stylesheet" href="css/style.css">
@@ -54,17 +56,43 @@
 </div>
 <div id="slide4" class="slide">
     <div class="container-fluid justify-content-center align-self-center">
-        <h1 class="center padding-bottom">Distribution of Rio 2016 Athletes by Height/Weight, Gender, and Age</h1>
-        <div class="row">
-            <div class="col-6">
-                <h2>Sports Categorized by Height and Weight of Athletes</h2>
-                <img class="width-100" src="img/vis2a.jpg">
+        <h1 class="center ">Physical Distribution of Rio 2016 Athletes</h1>
+        <div class="athlete-stats-dashboard">
+            <div>
+
+                <div class="athlete-weight-height">
+                    <div class="col-6 athlete-weight-height-vis">
+                        <div class="weight-height-header">
+                            <h2>Athlete Weight & Height by Sport</h2>
+                            <select id="gender" onchange="measureVis.wrangleData(); measureTable.wrangleData()">
+                                <option value="F">Female Athletes</option>
+                                <option value="M">Male Athletes</option>
+                            </select>
+                        </div>
+                        <div id="measure-vis"></div>
+                    </div>
+                    <div class="col-6">
+                        <table id="table" class="table sortable">
+                            <thead>
+                            <th data-sortable="true" data-field="sport">Sport</th>
+                            <th data-sortable="true" data-field="weight">Avg Weight</th>
+                            <th data-sortable="true" data-field="height">Avg Height</th>
+                            <th data-sortable="true" data-field="age">Avg Age</th>
+                            </thead>
+                            <tbody id="measure-table"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <h2>Gender Ratio and Number of Athletes</h2>
-                <img class="width-100" src="img/vis2b.jpg">
-                <h2>Age Distribution of Athletes</h2>
-                <img class="width-100" src="img/vis2c.jpg">
+            <div class="athlete-gender-age">
+                <div class="col-6">
+                    <h2>Gender Ratio and Number of Athletes</h2>
+                    <img class="width-100" src="img/vis2b.jpg">
+                </div>
+                <div class="col-6">
+                    <h2>Age Distribution of Athletes</h2>
+                    <img class="width-100" src="img/vis2c.jpg">
+                </div>
             </div>
         </div>
     </div>
@@ -145,5 +173,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="js/main.js"></script>
+
+<script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+<script src="js/measure-vis.js"></script>
+<script src="js/measure-table.js"></script>
 </body>
 </html>
