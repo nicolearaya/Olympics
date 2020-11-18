@@ -151,3 +151,32 @@ h2 {
 	padding: 17px;
 	border-radius: 10px;
 }
+
+#userAge, #userGender, #userHeight, #userWeight {
+	display: flex;
+}
+
+#userGender {
+	height: 30px;
+	color: #666e76;
+}
+
+.btn-physical {
+	background-color: #0286c3;
+	border: none;
+	font-family: 'Roboto', sans-serif;
+}
+
+.node-labels {
+	text-anchor: middle;
+}
+
+#nodeTooltip {
+	font-family: 'Roboto', sans-serif;
+}
+
+h6 {
+	font-size: 14px;
+}
+
+

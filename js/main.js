@@ -15,12 +15,19 @@ function loadVis(data) {
                 athlete.Height = +athlete.Height * 0.393701
                 athlete.Weight = +athlete.Weight * 2.20462
                 athlete.Age = +athlete.Age
+                athlete.Sex = athlete.Sex
                 cleanData.push(athlete)
             }
         }
     })
 
     measureVis = new MeasureVis("measure-vis", cleanData);
-    measureTable = new MeasureTable("measure-table", cleanData)
+    measureTable = new MeasureTable("measure-table", cleanData);
+    physicalVis = new PhysicalVis("user-physical-trait-vis", cleanData);
 
+};
+
+function physicalUpdate(){
+    document.getElementById("btn-physical").disabled = true;
+    physicalVis.wrangleData()
 }
