@@ -22,14 +22,14 @@ class IncomeVis {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left/2}, ${vis.margin.top})`);
+            .attr('transform', `translate (${vis.margin.left/2}, 0})`);
 
         vis.path = d3.geoPath();
 
         vis.USA = topojson.feature(vis.geoData, vis.geoData.objects.counties).features;
 
         vis.viewpoint = {'width': 975, 'height': 610};
-        vis.zoom = (vis.width) / vis.viewpoint.width;
+        vis.zoom = (vis.width - 100) / vis.viewpoint.width;
 
         vis.counties = vis.svg.append("g")
             .attr("class", "counties")
@@ -58,7 +58,7 @@ class IncomeVis {
 
         vis.legend = d3.select(".counties").append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width /2 - 80}, ${vis.height - 100})`)
+            .attr('transform', `translate(${vis.width /2 - 80}, ${vis.height - 50})`)
 
         vis.linearGradient = vis.legend.append("linearGradient")
             .attr("id", "linear-gradient");
