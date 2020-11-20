@@ -36,7 +36,7 @@ class MeasureTable {
             return {"sport":row[0], "weight":row[1].Weight.toFixed(1), "height": row[1].Height.toFixed(1), "age": row[1].Age.toFixed(1)}
         })
 
-        console.log(vis.sportInfoArray)
+        //console.log(vis.sportInfoArray)
 
         // Parse through data to create table
         $('table').bootstrapTable({})

@@ -42,7 +42,7 @@
 
 <div id="slide3" class="slide background-grey">
     <div class="container-fluid justify-content-center align-self-center">
-                <h1 class="center slide-title">What Olympic sport would you play based on your physical traits?</h1>
+                <h1 class="center slide-title padding-bottom">What Olympic sport would you play based on your physical traits?</h1>
 <!--                <div id="vis1">-->
 <!--                    <img id="vis1-img" src="img/vis1.JPG">-->
 <!--                </div>-->
@@ -154,14 +154,15 @@
         </div>
     </div>
 </div>
-<div id="slide6" class="slide">
+<div id="slide6" class="slide padding-top-thin">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="height: 100%; width:100%">
             <div class="col-4">
                 <h1 class="padding-bottom">How does median income of a hometown affect number of athletes and Olympic wins?</h1>
             </div>
             <div class="col-8 center">
-                <img class="width-100" src="img/vis4.JPG">
+                <h2>Median Household Income of US</h2>
+                <div id="household-income-map" style="height: 100%; width:100%"></div>
             </div>
         </div>
     </div>
@@ -218,11 +219,16 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<script src="js/main.js"></script>
 
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+
+<script src="js/income-vis.js"></script>
 <script src="js/measure-vis.js"></script>
 <script src="js/measure-table.js"></script>
 <script src="js/physical-vis.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

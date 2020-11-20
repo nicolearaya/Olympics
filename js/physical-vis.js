@@ -33,7 +33,7 @@ class PhysicalVis {
         }
 
         vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":(d3.count(v, femaleCount)/d3.count(v, d=> 1)), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
-        console.log(vis.sportInfo)
+        //console.log(vis.sportInfo)
 
         // Draw circles
         vis.rScale = d3.scaleLinear()
@@ -48,7 +48,7 @@ class PhysicalVis {
         vis.sportColors = vis.sportInfo.map(function (val, i) {
             return [val[0], vis.colors[i]];
         });
-        console.log(vis.sportColors)
+        //console.log(vis.sportColors)
 
         // Init circle nodes at center of the page (Source: https://www.d3-graph-gallery.com/graph/circularpacking_basic.html)
         vis.node = vis.svg.append("g")

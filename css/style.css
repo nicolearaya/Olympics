@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto Light', sans-serif;
 	font-weight: 300;
 }
 
@@ -24,7 +24,7 @@ h2 {
 	width: 100vw;
 	height: 100vh;
 	min-height: 712px;
-	padding: 10%;
+	padding: 8%;
 }
 
 .padding-bottom{
@@ -32,7 +32,7 @@ h2 {
 }
 
 .padding-top-thin{
-	padding-top: 5%;
+	padding-top: 4%;
 }
 
 #slide1{
@@ -101,6 +101,12 @@ h2 {
 	height: 90%;
 }
 
+.svgTitle {
+	font-family: 'Roboto Light', sans-serif;
+	font-weight: 300;
+	color: #868686;
+	font-size: 20px;
+}
 
 .axis line,
 .axis path {
@@ -179,4 +185,12 @@ h6 {
 	font-size: 14px;
 }
 
-
+.q0-9 { fill:rgb(247,251,255); }
+.q1-9 { fill:rgb(222,235,247); }
+.q2-9 { fill:rgb(198,219,239); }
+.q3-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q5-9 { fill:rgb(66,146,198); }
+.q6-9 { fill:rgb(33,113,181); }
+.q7-9 { fill:rgb(8,81,156); }
+.q8-9 { fill:rgb(8,48,107); }

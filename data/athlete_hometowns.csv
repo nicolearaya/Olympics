@@ -1,0 +1,803 @@
+city,state,summer_winter
+Mammoth Lakes,CA,winter
+Jackson ,WY,winter
+Buffalo,NY,winter
+Park City,UT,winter
+New Castle,CO,winter
+Hingham,MA,winter
+Bend,OR,winter
+Eagle-Vail,CO,winter
+Jackson ,WY,winter
+Vail,CO,winter
+Portland,OR,winter
+Tahoe City,CA,winter
+Keene,NY,winter
+Crested Butte,CO,winter
+Starksboro,VT,winter
+Truckee,CA,winter
+Bend,OR,winter
+Salt Lake City,UT,winter
+Reno,NV,winter
+Warren,VT,winter
+Park City,UT,winter
+Aspen,CO,winter
+Sundance,UT,winter
+Lake Placid,NY,winter
+Morrisville,VT,winter
+Barton,VT,winter
+Cape Elizabeth,ME,winter
+Old Forge,NY,winter
+Boulder,CO,winter
+Lake Placid,NY,winter
+Lake Placid,NY,winter
+Stockholm,ME,winter
+Center Conway,NH,winter
+Marine ,MN,winter
+Chicago,IL,winter
+Denver ,CO,winter
+Newtown,PA,winter
+Douglasville,GA,winter
+Powhatan,VA,winter
+Whitehall,NY,winter
+Monterey,CA,winter
+Alpine,UT,winter
+Stockbridge,GA,winter
+Melrose,MA,winter
+Cypress,TX,winter
+Gresham,OR,winter
+San Antonio,TX,winter
+Newport Beach,CA,winter
+Pueblo West,CO,winter
+Las Vegas,NV,winter
+Winthrop,WA,winter
+Anchorage,AK,winter
+Peru,VT,winter
+Afton,MN,winter
+Minneapolis,MN,winter
+Stillwater,MN,winter
+Elmore,VT,winter
+Craftsbury,VT,winter
+Anchorage,AK,winter
+Craftsbury,VT,winter
+East Montpelier,VT,winter
+Winthrop,WA,winter
+Lyme,NH,winter
+Aspen,CO,winter
+Fairbanks,AK,winter
+Fairbanks,AK,winter
+Aspen,CO,winter
+Anchorage,AK,winter
+Shaftsbury,VT,winter
+Craftsbury,VT,winter
+Duluth,MN,winter
+Duluth,MN,winter
+McFarland,WI,winter
+Eagan,MN,winter
+McFarland,WI,winter
+Duluth,MN,winter
+McFarland,WI,winter
+Duluth,MN,winter
+Duluth,MN,winter
+Chisholm,MN,winter
+Fremont,CA,winter
+Redondo Beach,CA,winter
+Sylvania,OH,winter
+Arcadia,CA,winter
+Addison,IL,winter
+Ann Arbor,MI,winter
+Carpentersville,IL,winter
+Ann Arbor,MI,winter
+Salt Lake City,UT,winter
+Madison,CT,winter
+San Diego ,CA,winter
+Los Angeles,CA,winter
+Ann Arbor,MI,winter
+Palo Alto,CA,winter
+South Lake Tahoe,CA,winter
+Ashburn,VA,winter
+Manchester Center,VT,winter
+Andover,MA,winter
+Vail,CO,winter
+Alta,WY,winter
+West Dover,VT,winter
+Telluride,CO,winter
+Madison,CT,winter
+Park City,UT,winter
+Pittsford,NY,winter
+Carmel,CA,winter
+Missoula,MT,winter
+Whitefish,MT,winter
+Boulder,CO,winter
+Crested Butte,CO,winter
+Madison,CT,winter
+Aspen,CO,winter
+Lawrenceburg,IN,winter
+Park City,UT,winter
+Telluride,CO,winter
+Rochester,NY,winter
+Pelham,NH,winter
+Bethel,ME,winter
+Dover,VT,winter
+Park City,UT,winter
+Butte,MT,winter
+Reno,NV,winter
+Basalt,CO,winter
+Eastvale,CA,winter
+Westfield,MA,winter
+Vadnais Heights,MN,winter
+Plymouth,MN,winter
+Palos Heights,IL,winter
+Dousman,WI,winter
+Danvers,MA,winter
+Burlington,MA,winter
+Lakewood,CO,winter
+Farmington,MI,winter
+Madison,WI,winter
+Sun Valley,ID,winter
+Grand Forks,ND,winter
+Grand Forks,ND,winter
+Warroad,MN,winter
+Minnetonka,MN,winter
+Plymouth,MN,winter
+Montpelier,VT,winter
+Buffalo,NY,winter
+Delafield,WI,winter
+Andover,MN,winter
+Rockville ,MD,winter
+Roseville,MN,winter
+Milford,CT,winter
+Marysville,MI,winter
+Ladera Ranch,CA,winter
+Moorhead,MN,winter
+North Reading,MA,winter
+Marlborough,MA,winter
+Scituate,MA,winter
+Bellmore,NY,winter
+Rochester,NY,winter
+Canton,NY,winter
+Bensalem,PA,winter
+Abington,PA,winter
+Buffalo,NY,winter
+Rindge,NH,winter
+Winter Park,FL,winter
+Boston ,MA,winter
+Yardley,PA,winter
+Vienna,VA,winter
+Wilmington,NC,winter
+Lapeer,MI,winter
+Bloomington,MN,winter
+Highlands Ranch,CO,winter
+Brighton,MA,winter
+Canton,MI,winter
+Erie,PA,winter
+Glen Rock,PA,winter
+Remsen,NY,winter
+Suffield,CT,winter
+Eastport,NY,winter
+Saranac Lake,NY,winter
+Salt Lake City ,UT,winter
+Huntington Station,NY,winter
+Fort Washington,PA,winter
+Berwick,PA,winter
+Ridgefield,CT,winter
+Steamboat Springs,CO,winter
+Steamboat Springs,CO,winter
+Steamboat Springs,CO,winter
+Steamboat Springs,CO,winter
+Eau Claire,WI,winter
+Breckenridge,CO,winter
+Modesto,CA,winter
+Prairie du Chien,WI,winter
+Smithtown,NY,winter
+Florence,WI,winter
+Park City,UT,winter
+Park City,UT,winter
+Wauconda,IL,winter
+Cary,IL,winter
+Barrington,IL,winter
+Park City,UT,winter
+South Lake Tahoe,CA,winter
+Mammoth Lakes,CA,winter
+Steamboat Springs,CO,winter
+Salt Lake City,UT,winter
+Roxbury,CT,winter
+Rigby,ID,winter
+Torrance,CA,winter
+San Clemente,CA,winter
+Anchorage,AK,winter
+Westport,CT,winter
+Wrightwood,CA,winter
+Eagle,CO,winter
+Iron River,MI,winter
+Saugus,MA,winter
+Silverthorne,CO,winter
+Steamboat Springs,CO,winter
+Bend,OR,winter
+Silverthorne,CO,winter
+Hailey,ID,winter
+Norwood,CO,winter
+West Bloomfield,MI,winter
+Rumson,NJ,winter
+Eagle,CO,winter
+Anchorage,AK,winter
+Marstons Mills,MA,winter
+Carlsbad,CA,winter
+High Point,NC,winter
+Ocala,FL,winter
+Ocala,FL,winter
+Crestview,FL,winter
+West Jordan,UT,winter
+Kearns,UT,winter
+Chicago,IL,winter
+Houston,TX,winter
+Winston Salem,NC,winter
+Glenview,IL,winter
+Oak Park,IL,winter
+Ocala,FL,winter
+Waukesha,WI,winter
+Reston,VA,winter
+Glenview,IL,winter
+Melvindale,MI,winter
+Federal Way,WA,winter
+Laurel,MD,winter
+Pittsburgh,PA,winter
+Ann Arbor,MI,winter
+Federal Way,WA,winter
+Globe,AZ,summer
+Wellington,MO ,summer
+Gainesville,FL ,summer
+Flint,TX,summer
+Orange,CA,summer
+Orange,CA ,summer
+Los Angeles,CA ,summer
+Diamond Bar,CA,summer
+"Minneapolis, St. Paul",MN,summer
+Westminster,CA,summer
+Arcadia,CA,summer
+New York,NY,summer
+Ames,IA,summer
+Houston,TX,summer
+Mobile,AL ,summer
+Compton,CA,summer
+"Washington, D.C. ",DC,summer
+Palmdale,CA,summer
+Saginaw,MI,summer
+West Orange,NJ,summer
+Houston,TX,summer
+Philadelphia,PA,summer
+Los Angeles ,CA ,summer
+Baton Rouge,LA ,summer
+Syosset,NY,summer
+Indianapolis,IN,summer
+Queens,NY ,summer
+Wilmington,DE,summer
+Miami,FL ,summer
+Houston,TX,summer
+Baltimore,MD,summer
+Atlanta,GA ,summer
+North Syracuse,NY ,summer
+Chino,CA,summer
+Hutchinson,MN,summer
+Santa Maria,CA,summer
+Cleveland,OH,summer
+Wichita,KS,summer
+"Washington, D.C. ",DC,summer
+Newark,NJ,summer
+Kissimmee,FL ,summer
+Los Angeles,CA,summer
+Flint,MI,summer
+Drums,PA,summer
+Salisbury,CT,summer
+Charlotte,NC,summer
+Huntington Beach,CA ,summer
+Darnestown,MD,summer
+Las Vegas,NV,summer
+Lakeside,CA,summer
+Tucson,AZ,summer
+Visalia,CA,summer
+St. Cloud,MN,summer
+Durango,CO,summer
+Jericho,VT ,summer
+Boulder ,CO ,summer
+Perkasie,PA,summer
+Topton,PA,summer
+Arden Hills,MN,summer
+Brownsburg,IN,summer
+Temecula,CA,summer
+San Diego,CA,summer
+Lafayette,CA ,summer
+Grand Rapids,MI,summer
+Boulder ,CO,summer
+Boulder ,CO,summer
+Boise,ID,summer
+Glens Falls,NY,summer
+San Francisco,CA ,summer
+West Lafayette,IN ,summer
+Tempe,AZ,summer
+Amherst,MA,summer
+Clayton,CA,summer
+Carmel,IN,summer
+The Woodlands,TX,summer
+Indianapolis,IN,summer
+Upper Arlington,OH,summer
+Dover,NH,summer
+Seattle,WA,summer
+San Diego,CA,summer
+Wellington,FL ,summer
+Orlando,FL ,summer
+Orangevale,CA,summer
+West Grove,PA,summer
+Cochranville,PA,summer
+Mineral Wells,TX,summer
+Middleburg,VA,summer
+Wellington,FL ,summer
+Brewster,NY,summer
+Los Angeles ,CA,summer
+Cazenovia,NY,summer
+South Euclid,OH,summer
+"Washington, D.C. ",DC,summer
+San Antonio,TX,summer
+San Antonio,TX,summer
+Pacifica,CA ,summer
+Brooklyn,NY ,summer
+San Francisco,CA,summer
+San Francisco,CA,summer
+New York,NY,summer
+Lexington,KY,summer
+Brooklyn,NY,summer
+Sherborn,MA,summer
+Bronx,NY,summer
+Matawan,NJ,summer
+Maplewood,NJ,summer
+Avenel,NJ,summer
+Portland,OR,summer
+Blue Bell,PA,summer
+Doylestown,PA,summer
+Berlin,NJ,summer
+Landenberg,PA,summer
+Virginia Beach,VA,summer
+Mohegan Lake,NY,summer
+Chapel Hill,NC,summer
+Robesonia,PA,summer
+Larksville,PA,summer
+Lititz,PA,summer
+Perkasie,PA,summer
+Perkasie,PA,summer
+Moosic,PA,summer
+Wilmington,DE,summer
+Cherry Hill,NJ,summer
+Lancaster,PA,summer
+Murrieta,CA,summer
+Sea Island,GA ,summer
+Houston,TX,summer
+Bagdad,FL ,summer
+The Woodlands,TX,summer
+Roswell,NM,summer
+Coral Springs,FL ,summer
+Houston,TX,summer
+Sparks,NV,summer
+Newport Beach,CA,summer
+Gilbert,AZ,summer
+Homestead,FL ,summer
+Spring,TX,summer
+Los Angeles,CA,summer
+Old Bridge,NJ,summer
+Dallas,TX,summer
+Needham,MA,summer
+Topanga,CA,summer
+St. Francis,MN,summer
+New York,NY,summer
+Northbrook,IL,summer
+OK,NY,summer
+Libertyville,IL,summer
+Lake Forest,CA,summer
+San Diego,CA,summer
+Piscataway,NJ,summer
+Davie,FL ,summer
+Tacoma,WA,summer
+Miami,FL ,summer
+Middletown,OH,summer
+Oak Harbor,WA,summer
+Roswell,NM,summer
+Fayetteville,AR,summer
+Fayetteville,AR,summer
+North Hills,CA,summer
+Barrington,RI,summer
+Cambridge,MA,summer
+Millbury,OH,summer
+Lafayette,CA,summer
+Ironton,MO,summer
+Phoenixville,PA,summer
+Miami,FL ,summer
+New Canaan,CT,summer
+Springfield,VA,summer
+Pittsford,NY,summer
+Menlo Park,CA,summer
+Boston,MA,summer
+Folsom,CA,summer
+Old Lyme,CT,summer
+Hollis,NH,summer
+Cinnaminson,NJ,summer
+Redmond,WA,summer
+Philadelphia,PA,summer
+Linwood,NJ,summer
+Kirkland,WA,summer
+Ann Arbor,MI,summer
+Cleveland,OH,summer
+Newton,MA,summer
+Oakland,CA,summer
+Park City,UT,summer
+Baton Rouge,LA,summer
+Flushing,MI,summer
+Fair Lawn,NJ,summer
+St. Croix Falls,WI,summer
+Jackson,MI,summer
+University Place,WA,summer
+West Lafayette,IN,summer
+Chesterfield,NH,summer
+Boothbay Harbor,ME,summer
+Naples,NY,summer
+Pittsburgh,PA,summer
+Buffalo,NY,summer
+Moorestown,NJ,summer
+San Diego,CA,summer
+Orlando,FL ,summer
+Daytona Beach,FL ,summer
+Pacifica,CA,summer
+Minneapolis,MN,summer
+San Diego,CA,summer
+Columbus ,OH,summer
+Lancaster,MA,summer
+Massillon,OH,summer
+Wahiawa,HI,summer
+East Palo Alto,CA,summer
+Centennial,CO,summer
+Redwood City,CA,summer
+Provo,UT,summer
+Stamford,CT,summer
+Honolulu,HI,summer
+West Nyack,NY,summer
+Boody,IL,summer
+Richmond,VA,summer
+Sacramento,CA,summer
+Boston,MA,summer
+Berkeley,CA,summer
+San Diego,CA,summer
+Hopkins,MN,summer
+Eagle River,AK,summer
+Denver,CO,summer
+Fallbrook,CA,summer
+Detroit,MI,summer
+Warwick,RI,summer
+"St. Thomas, Virgin Islands",-,summer
+Annapolis,MD ,summer
+Coronado,CA,summer
+Kirkland,WA,summer
+Newport Beach,CA,summer
+Clearwater,FL ,summer
+San Diego,CA,summer
+Boca Raton,FL ,summer
+Belmont,CA,summer
+Miami,FL ,summer
+Providence,RI,summer
+East Troy,WI,summer
+San Diego,CA,summer
+Twin Falls,ID,summer
+Brandon,FL ,summer
+San Antonio,TX,summer
+Phoenix ,AZ,summer
+Kansas City,KS,summer
+Naples,FL ,summer
+Brown Mills,NJ,summer
+San Clemente,CA,summer
+Fairfax,VA,summer
+Olympia,WA,summer
+Darlington,WI,summer
+Woburn,MA,summer
+Springfield,VA,summer
+Columbus,GA,summer
+Eatonton,GA,summer
+Hillsgrove,PA,summer
+Alliance,NE,summer
+Eagle River,AK,summer
+Muncy Valley,PA,summer
+El Monte,CA,summer
+Houston,TX,summer
+Rockville Centre,NY ,summer
+Rolling Hills Estates,CA,summer
+Basking Ridge,NJ,summer
+Golden,CO ,summer
+Mesa,AZ,summer
+Pittsburgh,PA ,summer
+Dumfries,VA,summer
+Delran,NJ ,summer
+Northport,NY ,summer
+Diamond Bar,CA ,summer
+Seymour,CT ,summer
+Fayetteville,GA ,summer
+Palos Verdes Estates,CA,summer
+Highlands Ranch,CO,summer
+Redding,CA,summer
+St. Louis,MO ,summer
+Richland,WA ,summer
+Bremerton,WA,summer
+Atlanta,GA,summer
+Rockville,MD ,summer
+Naperville,IL,summer
+Orange Park,FL ,summer
+Winnetka,IL,summer
+Valencia,CA ,summer
+San Antonio,TX,summer
+Henrico,VA,summer
+Springfield,IL,summer
+Fair Haven,NJ ,summer
+Bel Air,MD ,summer
+Greensboro,GA ,summer
+Daytona Beach,FL ,summer
+Las Vegas,NV ,summer
+Ponte Vedra Beach,FL ,summer
+Corvallis,OR,summer
+Baltimore,MD ,summer
+Valparaiso,IN,summer
+Minneapolis,MN ,summer
+Berkeley,CA ,summer
+Huntington Beach,CA,summer
+Denver,CO ,summer
+Houston,TX,summer
+Winston-Salem,NC ,summer
+Saunderstown,RI,summer
+Santa Rosa,CA,summer
+Spring Grove,PA ,summer
+Centennial,CO ,summer
+Santa Rosa,CA ,summer
+Evansville,IN ,summer
+Bethesda,MD ,summer
+Sugar Land,TX,summer
+Clearwater,FL ,summer
+Colleyville,TX,summer
+Brooklyn,NY,summer
+Cochranville,PA,summer
+Canton,MI,summer
+Pittsburgh,PA,summer
+Chicago,IL,summer
+Danville,CA,summer
+Lawrenceville,GA,summer
+Saugus,CA,summer
+Westampton,NJ,summer
+Chattanooga,TN,summer
+Malibu,CA,summer
+Granite Bay,CA,summer
+Buffalo,NY,summer
+Concord,CA,summer
+Alpharetta,GA ,summer
+Milpitas,CA,summer
+Houston,TX,summer
+Fort Lee,NJ,summer
+Palo Alto,CA,summer
+Fremont,CA ,summer
+Colleyville,TX,summer
+Sugar Land,TX,summer
+Wylie,TX,summer
+Sturgis,SD ,summer
+Nashville,TN,summer
+Los Angeles,CA,summer
+Arlington,VA,summer
+Lincoln,NE,summer
+Lake Worth,FL ,summer
+Phoenix,AZ,summer
+Carmel,IN,summer
+Ft. Lauderdale,FL ,summer
+Rancho Santa Fe,CA,summer
+Palm Beach Gardens,FL ,summer
+Palm Beach Gardens,FL ,summer
+Idalou,TX,summer
+Chicago,IL,summer
+Eugene,OR,summer
+Philadelphia,PA,summer
+Manalapan,NJ,summer
+Passaic,NJ,summer
+Riverside,CA,summer
+Kannapolis,NC ,summer
+Tampa,FL ,summer
+Corona,CA,summer
+Colorado Springs,CO,summer
+St. Louis,MO ,summer
+Stillwater,MN,summer
+Colorado Springs,CO,summer
+Festus,MO ,summer
+Sandhill,MS,summer
+Orlando,FL ,summer
+St. Petersburg,FL ,summer
+Glastonbury,CT ,summer
+Indianapolis,IN,summer
+Carlinville,IL,summer
+Ovilla,TX,summer
+Atlanta,GA,summer
+Portland,OR,summer
+Beaverton,OR,summer
+Phoenix,AZ,summer
+LaPorte,TX,summer
+Jonesboro,AR,summer
+Crested Butte,CO,summer
+Atlanta ,GA,summer
+Sacramento,CA ,summer
+Boring,OR,summer
+Gresham,OR,summer
+Smithson Valley,TX,summer
+Las Vegas,NV ,summer
+Topsfield,MA,summer
+Fort Collins,CO,summer
+Bend,OR ,summer
+Philadelphia,PA,summer
+Morristown,NJ ,summer
+Portage,MI,summer
+Los Angeles,CA,summer
+Chaffee County,CO ,summer
+Bryan,TX,summer
+Nixa,MO ,summer
+Methuen,MA,summer
+Voorhees,NJ ,summer
+Pensacola,FL ,summer
+Lexington,KY,summer
+University Place,WA,summer
+Sacramento,CA,summer
+Pembroke Pines,FL ,summer
+Mount Laurel ,NJ ,summer
+Manchester,CT,summer
+Queens,NY ,summer
+McAlmont,AR,summer
+Darby,PA,summer
+Newberg,OR,summer
+Sioux City,IA,summer
+Elmira,NY ,summer
+Portland,OR,summer
+Algonquin,IL,summer
+San Diego,CA,summer
+Indianapolis,IN,summer
+San Francisco,CA,summer
+Oxford,MS,summer
+Beaverton,OR,summer
+Colorado Springs,CO,summer
+Nazareth,PA,summer
+Toledo,OH,summer
+Tucson,AZ,summer
+Texarkana,TX,summer
+Riverside,CA,summer
+Geneva,NE,summer
+Big Bear Lake,CA,summer
+Los Angeles,CA,summer
+Hampton,VA,summer
+Port Arthur,TX ,summer
+Dunellen,NJ ,summer
+Clermont,FL ,summer
+Eugene,OR,summer
+Portsmouth,VA,summer
+Columbus,WI,summer
+Greenville,SC ,summer
+Jamaica,NY ,summer
+Akron,OH,summer
+Los Angeles,CA,summer
+Carrollton,TX,summer
+Mount Olive,NJ ,summer
+Somerset,NJ ,summer
+Clovis,CA,summer
+Old Monroe,MO ,summer
+St. Louis,MO ,summer
+Gulfport,MS,summer
+Oklahoma City,OK,summer
+Hernando,MS,summer
+Chesapeake,VA ,summer
+Florissant,MO ,summer
+Miami,FL,summer
+San Francisco,CA,summer
+Charleston,SC ,summer
+Rocklin,CA,summer
+Boulder,CO,summer
+Indianapolis,IN,summer
+Bayside,NY,summer
+Fredonia,NY ,summer
+Renton,WA,summer
+Fayetteville,GA,summer
+Little Rock,AR,summer
+Weatherford,TX,summer
+Lynchburg,VA,summer
+Long Beach,CA,summer
+Harbor City,CA ,summer
+Cabot,AR ,summer
+Dallas,TX,summer
+Kennesaw,GA,summer
+Philadelphia,PA,summer
+Vancouver,WA,summer
+Ithaca,NY ,summer
+Itasca,IL,summer
+San Diego,CA ,summer
+Evansville,IN ,summer
+Rochester,NY ,summer
+Nesconset,NY ,summer
+Portland,OR,summer
+Kaysville,UT,summer
+Leavenworth,KS,summer
+Marblehead,MA,summer
+Chula Vista,CA ,summer
+Spokane,WA,summer
+Geneva,IL,summer
+Wildwood Crest,NJ,summer
+St. Paul,MN,summer
+Hanover,NH,summer
+Hampstead,MD,summer
+West Seneca,NY,summer
+Honolulu,HI,summer
+Cincinnati,OH,summer
+Wheaton,IL,summer
+Alpine,CA,summer
+Richmond,VA,summer
+Ellicott City,MD,summer
+Corona,CA,summer
+Honolulu,HI,summer
+Honolulu,HI,summer
+Saugus,CA,summer
+St. Louis,MO,summer
+Cincinnati,OH,summer
+Ft. Lauderdale,FL,summer
+Dubuque,IA,summer
+Hopewell,PA,summer
+Leland,MI,summer
+Portland,OR,summer
+Hooper,NE,summer
+Bonsall,CA,summer
+San Diego,CA,summer
+Wilmington,IL,summer
+Bartlett,IL,summer
+Kent,WA,summer
+Ormond Beach,FL,summer
+Bountiful,UT,summer
+Cooper City,FL,summer
+Newbury Park,CA,summer
+Carlsbad,CA,summer
+Costa Mesa,CA,summer
+Estero,FL,summer
+Saratoga,CA,summer
+Long Beach,CA,summer
+North Tustin,CA,summer
+Huntington Beach,CA,summer
+Santee,CA,summer
+Newport Beach,CA,summer
+New Canaan,CT,summer
+Westlake Village,CA,summer
+Newport Beach,CA,summer
+Newbury Park,CA,summer
+Loomis,CA,summer
+Westwoods,CA,summer
+Villa Park,CA,summer
+Coronado,CA,summer
+Atherton,CA,summer
+Santa Barbara,CA,summer
+Seal Beach,CA,summer
+Laguna Beach,CA,summer
+Laguna Beach,CA,summer
+Newport Beach,CA ,summer
+Santa Barbara,CA ,summer
+Miami,FL,summer
+Anaheim,CA,summer
+Newport Beach,CA,summer
+Isla Vista,CA ,summer
+Walnut Creek,CA,summer
+Danville,CA ,summer
+Gainesville,GA,summer
+Shreveport,LA,summer
+Redmond,WA ,summer
+Desert Hot Springs,CA,summer
+Chaska,MN,summer
+Sicklerville,NJ ,summer
+Columbia,MO ,summer
+Ingleside,IL,summer
+Columbus,OH,summer
+Barnegat,NJ ,summer
+Colorado Springs,CO ,summer
+San Ramon,CA ,summer
+Woodbine,MD ,summer
+Germantown,WI,summer
+Lockport,IL,summer
+Denver,CO ,summer
+Rocky Point,MD,summer
+Greenfield,MA,summer
