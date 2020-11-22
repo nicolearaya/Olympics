@@ -12,19 +12,19 @@ class ParallelCoordVisVis {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 10};
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
-        // SVG drawing area
+        // svg drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // Prep data and set dimensions
+        // prep data and set dimensions
         function femaleCount(d) {
             if (d.Sex === "F") {
                 return 1
@@ -110,7 +110,7 @@ class ParallelCoordVisVis {
             .text(d => d)
             .style("fill", "black");
 
-        //Calculate sport report card
+        // calculate sport report card
         vis.dimensions.forEach(dimension => {
             let bucket = new Bucket(3, vis.y[dimension].domain()[0], vis.y[dimension].domain()[1])
             vis.sportInfo.forEach(sport => {
@@ -130,7 +130,7 @@ class ParallelCoordVisVis {
 
         function displayTable(event, d) {
 
-            // Erase previous table
+            // erase previous table
             d3.selectAll(".dimension")
                 .remove()
                 .exit()
@@ -152,7 +152,7 @@ class ParallelCoordVisVis {
             document.getElementById("sport-score").innerHTML = score;
             document.getElementById("sport-score").style.color = color;
 
-            //Display table
+            // display table
             let table = d3.select("#sport-table").append("table")
                 .attr("class", "table dimension");
             let tbody = table.append("tbody");
