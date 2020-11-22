@@ -32,7 +32,7 @@ class PhysicalVis {
             }
         }
 
-        vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":(d3.count(v, femaleCount)/d3.count(v, d=> 1)), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
+        vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
         console.log(vis.sportInfo)
 
         // Draw circles
