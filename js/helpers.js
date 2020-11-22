@@ -101,7 +101,7 @@ class Bucket {
     getBucketIdxForValue(val) {
         let idx = 0;
 
-        // Find bucket, put values on the outer size of the range in the last bucket
+        // Find bucket based on bucket cutoff value
         while ((idx < this.bucketCount - 1) && val > this.rangeLow + this.stepSize * (idx + 1)) {
             idx++;
         }
@@ -109,6 +109,7 @@ class Bucket {
         return idx;
     }
 
+    // Sum the bucket index numbers for each dimension
     getBucketCategory(sport, val) {
         let idx = this.getBucketIdxForValue(val);
         if (bucketed[sport] == null) {

@@ -1,9 +1,10 @@
 
-// init global variables & switches
+// Init global variables & switches
 let measureVis,
     measureTable,
     physicalVis,
-    incomeVis;
+    incomeVis,
+    parallelcoordVis;
 
 let bucketed = [];
 
@@ -20,14 +21,9 @@ Promise.all(promises)
     .catch( function (err){console.log(err)} );
 
 
-// d3.csv("data/athlete_events.csv").then(function(data) {
-//     loadVis(data);
-// });
-
-
 function loadVis(data) {
 
-    //check data
+    // Check data
     console.log(data)
 
     let athleteData = data[0];
