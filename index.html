@@ -156,15 +156,16 @@
         </div>
     </div>
 </div>
-<div id="slide6" class="slide padding-top-thin">
+<div id="slide6" class="slide">
     <div class="container-fluid">
         <div class="row" style="height: 100%; width:100%">
             <div class="col-4">
-                <h1 class="padding-bottom">How does median income of a hometown affect number of athletes and Olympic wins?</h1>
+                <h1 class="padding-bottom">How does median income of a hometown affect number of athletes sent to the Olympics?</h1>
             </div>
             <div class="col-8 center">
-                <h2>Median Household Income of US</h2>
-                <div id="household-income-map" style="height: 100%; width:100%"></div>
+                <div id="baseline"></div>
+                <div id="baseline"></div>
+                <div id="income-plot" style="height: 100%; width:100%"></div>
             </div>
         </div>
     </div>
@@ -184,15 +185,13 @@
 </div>
 <div id="slide8" class="slide padding-top-thin">
     <div class="container-fluid">
-        <h1 class="center padding-bottom">How does the cost of a sport correlate with medal wins by country?</h1>
-        <div class="row">
+        <h1 class="center padding-bottom">How does hosting the Olympics affect a country's chances of winning medals?</h1>
+        <div class="row" style="height: 100%; width:100%;">
             <div class="col-8">
-                <h2>Global map of medal wins by country</h2>
-                <img class="width-100" src="img/vis6a.JPG">
+                <h2>Medal Wins by Host Countries</h2>
+                <div id="host-country-wins" class="host-country-wins"></div>
             </div>
             <div class="col-4">
-                <h2>Sports Cost and Country Wins</h2>
-                <img class="width-100" src="img/vis6b.JPG">
             </div>
         </div>
     </div>
@@ -222,11 +221,18 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
+
+<script src="https://d3js.org/d3-collection.v1.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<script src="https://d3js.org/d3-path.v2.min.js"></script>
+<script src="https://d3js.org/d3-axis.v2.min.js"></script>
 
+<script src="https://d3js.org/d3-time.v2.min.js"></script>
+<script src="js/host-medals-vis.js"></script>
+<script src="js/income-plot.js"></script>
 <script src="js/income-vis.js"></script>
 <script src="js/measure-vis.js"></script>
 <script src="js/measure-table.js"></script>

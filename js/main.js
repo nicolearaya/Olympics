@@ -36,6 +36,9 @@ function physicalUpdate(){
 let promises = [
     d3.json("https://d3js.org/us-10m.v1.json"), //https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // already projected -> you can just scale it to ft your browser window
     d3.csv("data/5Y2018_income.csv"),
+    d3.csv("data/final_income_plot_data.csv"),
+    d3.csv("data/hosts_medals.csv"),
+    d3.csv("data/summer_hosts.csv")
 ];
 
 Promise.all(promises)
@@ -43,8 +46,7 @@ Promise.all(promises)
     .catch( function (err){console.log(err)} );
 
 function initIncomeVis(dataArray) {
-    // log data
-    console.log('check out the data', dataArray);
+
     let incomeData = [];
     dataArray[1].forEach(row => {
         row.ESTIMATE = parseFloat(row.ESTIMATE.replace(/,/g, ''));
@@ -52,7 +54,10 @@ function initIncomeVis(dataArray) {
         })
 
     incomeVis = new IncomeVis("household-income-map", dataArray[0], incomeData);
+    incomePlot = new IncomePlot("income-plot", dataArray[2]);
+    hostMedalsVis = new HostMedalsVis("host-country-wins", dataArray[3], dataArray[4])
 }
+
 
 
 

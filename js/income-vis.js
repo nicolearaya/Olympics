@@ -12,17 +12,15 @@ class IncomeVis {
     initVis() {
         let vis = this;
 
-        console.log(d3.min(vis.incomeData, d=>d.ESTIMATE))
         //margin conventions, title, tooltip, legend, and scales
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
         vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-        console.log(vis.width, vis.margin.left)
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left/2}, 0})`);
+            .attr('transform', `translate (${vis.margin.left}, 0)`);
 
         vis.path = d3.geoPath();
 
@@ -100,7 +98,6 @@ class IncomeVis {
 
     updateVis(){
         let vis = this;
-        console.log(vis.incomeData)
 
         vis.counties
             .attr("fill", function(d) {
