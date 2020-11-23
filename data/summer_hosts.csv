@@ -1,0 +1,13 @@
+id,host,year,country,cost,medals
+0,Tokyo,1964,Japan,0.282,29
+2,Munich,1972,West Germany,1.009,40
+3,Montreal,1976,Canada,6.093,11
+4,Moscow,1980,Russia,6.331,195
+5,Los Angeles,1984,United States,0.719,174
+7,Barcelona,1992,Spain,9.687,22
+8,Atlanta,1996,United States,4.143,101
+9,Sydney,2000,Australia,5.026,58
+10,Athens,2004,Greece,2.942,16
+11,Beijing,2008,China,6.81,100
+12,London,2012,United Kingdom,14.957,65
+13,Rio,2016,Brazil,4.557,19

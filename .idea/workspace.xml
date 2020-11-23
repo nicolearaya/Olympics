@@ -20,10 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="084d6cac-53af-467f-8a3a-a70bb4e94d31" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/combined_roster.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/final_income_plot_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/hosts_medals.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/summer_hosts.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/us_cities_counties.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/helpers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/host-medals-vis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/income-plot-data-wrangling.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/income-plot.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/parallel-coord-vis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/countryMedalsGDP.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/countryMedalsGDP.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/athlete_hometowns.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/athlete_hometowns_all.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/uscities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/uscities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/vis3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/vis5.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/income-plot.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/income-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/income-vis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/physical-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/physical-vis.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +87,7 @@
       <workItem from="1605479063298" duration="5474000" />
       <workItem from="1605556904048" duration="1802000" />
       <workItem from="1605655228800" duration="2779000" />
-      <workItem from="1605821253871" duration="40523000" />
+      <workItem from="1605821253871" duration="41145000" />
     </task>
     <servers />
   </component>

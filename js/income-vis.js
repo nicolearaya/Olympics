@@ -1,8 +1,10 @@
 class IncomeVis {
 
-    constructor(parentElement, geoData, incomeData) {
+    constructor(parentElement, geoData, cityData, homeData, incomeData) {
         this.parentElement = parentElement;
-        this.geoData = geoData
+        this.geoData = geoData;
+        this.cityData = cityData;
+        this.homeData = homeData;
         this.incomeData = incomeData;
         this.displayData = [];
 
@@ -12,21 +14,23 @@ class IncomeVis {
     initVis() {
         let vis = this;
 
-        console.log(d3.min(vis.incomeData, d=>d.ESTIMATE))
         //margin conventions, title, tooltip, legend, and scales
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 30, right: 20, bottom: 20, left: 20};
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
         vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
-        console.log(vis.width, vis.margin.left)
+
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate(${vis.margin.left/2}, 0)`);
+            .attr('transform', `translate(${vis.margin.left/2}, 0)`)
+            .attr('transform', `translate (${vis.margin.left/2}, 0)`);
 
-        vis.path = d3.geoPath();
+        vis.projection = d3.geoAlbersUsa();
+        vis.path = d3.geoPath().projection(vis.projection);
 
-        vis.USA = topojson.feature(vis.geoData, vis.geoData.objects.counties).features;
+        vis.county = topojson.feature(vis.geoData, vis.geoData.objects.counties).features;
+        vis.state = topojson.feature(vis.geoData, vis.geoData.objects.states).features;
 
         vis.viewpoint = {'width': 975, 'height': 610};
         vis.zoom = (vis.width - 100) / vis.viewpoint.width;
@@ -34,12 +38,21 @@ class IncomeVis {
         vis.counties = vis.svg.append("g")
             .attr("class", "counties")
             .selectAll("path")
-            .data(vis.USA)
+            .data(vis.county)
             .enter().append("path")
             .attr("d", vis.path)
             .attr("fill", "#C7C7C7")
             .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
 
+        vis.states = vis.svg.append("g")
+            .selectAll(".states")
+            .data(vis.state)
+            .enter()
+            .append("path")
+            .attr("class", "states")
+            .attr("d", vis.path)
+            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`)
+            .style("fill", "transparent");
 
         vis.svg.append("path")
             .datum(topojson.mesh(vis.geoData, vis.geoData.objects.states, function(a, b) { return a !== b; }))
@@ -49,10 +62,21 @@ class IncomeVis {
             .attr("d", vis.path)
             .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
 
+        // add city points
+        vis.svg.selectAll(".cities")
+            .data(vis.cityData)
+            .enter()
+            .append("circle")
+            .attr("class", "cities")
+            .attr("cx", d=> vis.projection(d.geometry.coordinates)[0])
+            .attr("cy", d=> vis.projection(d.geometry.coordinates)[1])
+            .attr("r", 3)
+            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
+
         // append tooltip
-        /*vis.tooltip = d3.select("body").append('div')
+        vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
-            .attr('id', 'mapTooltip')*/
+            .attr('id', 'incomeMapTooltip')
 
         vis.axis = d3.axisBottom()
 
@@ -93,6 +117,52 @@ class IncomeVis {
             .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
             .range(["#C7DFFF", "#08306B"]);
 
+        let displayData = vis.homeData;
+
+        // prepare hometown data by grouping all rows by state
+        let athleteDataByState = Array.from(d3.group(displayData, d =>d.State), ([key, value]) => ({key, value}))
+
+        // have a look
+        console.log(athleteDataByState)
+
+        // init final data structure in which both data sets will be merged into
+        vis.stateInfo = []
+
+        // merge
+        vis.geoData.objects.states.geometries.forEach( d => {
+
+            //init counters
+            let stateName = d.properties["name"];
+            let athleteCount = 0;
+            let sports = {}
+
+            athleteDataByState.forEach( state => {
+
+                if (nameConverter.getFullName(state.key) === stateName) {
+                    // sum up number of athletes for each state
+                    state.value.forEach(entry => {
+                        athleteCount += 1;
+
+                        if (entry["Sport"] in sports) {
+                            sports[entry["Sport"]] += 1;
+                        } else {
+                            sports[entry["Sport"]] = 1;
+                        }
+                    });
+                }
+            })
+
+            let topSports = Object.entries(sports).sort(([,a],[,b]) => b- a);
+
+            // populate the final data structure
+            vis.stateInfo[stateName] = {
+                state: stateName,
+                athleteCount: athleteCount,
+                topSports: topSports.slice(0,5)
+            }
+
+        })
+
 
         vis.updateVis()
     }
@@ -100,7 +170,6 @@ class IncomeVis {
 
     updateVis(){
         let vis = this;
-        console.log(vis.incomeData)
 
         vis.counties
             .attr("fill", function(d) {
@@ -127,6 +196,41 @@ class IncomeVis {
 
         vis.Xaxis.call(vis.axis)
 
+        // get name of top sports
+        function insertSport (d) {
+            let output = ``;
+            let unit = "athletes";
+            vis.stateInfo[d.properties.name].topSports.forEach(sport => {
+                if (sport[1] === 1) {
+                    unit = "athlete"
+                }
+                output += `<h6>${sport[0]}: ${sport[1]} ${unit}</h6>`
+            })
+            return output
+        }
+
+        vis.states
+            .on("mouseover", function(event, d) {
+
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                     <div>
+                         <h5>${d.properties.name}<h3>
+                         <h6>Total number of athletes: ${vis.stateInfo[d.properties.name].athleteCount}</h6>
+                         <h6><u>Top Sports:</u></h6>
+                         ${insertSport(d)}
+                     </div>`)
+            })
+            .on("mouseout", function(event, d){
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            });
     }
 }
-
