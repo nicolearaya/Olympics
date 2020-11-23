@@ -12,15 +12,21 @@ function loadVis(data) {
     data.forEach(athlete => {
         if (athlete.Height != "NA" && athlete.Weight != "NA") {
             if (athlete.Year == 2016 && athlete.Team == "United States") {
-                athlete.Height = +athlete.Height * 0.393701
-                athlete.Weight = +athlete.Weight * 2.20462
+                athlete.Height = (+athlete.Height * 0.393701).toFixed(2)
+                athlete.Weight = (+athlete.Weight * 2.20462).toFixed(2)
                 athlete.Age = +athlete.Age
                 cleanData.push(athlete)
             }
         }
     })
 
+    cleanData = _.uniqBy(cleanData, function(athlete) { return [athlete.Sport, athlete.ID].join(); });
+
+    console.log(cleanData)
+
     measureVis = new MeasureVis("measure-vis", cleanData);
-    measureTable = new MeasureTable("measure-table", cleanData)
+    measureTable = new MeasureTable("measure-table", cleanData);
+    genderRatio = new GenderRatio("gender-ratio", cleanData);
+    ageRange = new AgeRange("age-range", cleanData)
 
 }
