@@ -38,7 +38,7 @@ class IncomePlot {
             .tickFormat((d,i) => vis.brackets[i])
 
         vis.visArea.append("g")
-            .attr("transform", "translate(0," + vis.height + ")")
+            .attr("transform", "translate(0," + (vis.height - 50) + ")")
             .call(vis.xAxis)
             .selectAll("text")
             .attr("transform", "rotate(-45)")
@@ -47,15 +47,15 @@ class IncomePlot {
         // Add Y axis
         vis.y = d3.scaleLinear()
             .domain([0, d3.max(vis.data, d => d.summer )])
-            .range([ vis.height, 0 ]);
+            .range([ vis.height - 50, 0 ]);
         vis.visArea.append("g")
             .call(d3.axisLeft(vis.y));
         //y axis label
 
-        vis.xlabel = d3.select("#" + vis.parentElement).append("text")
+        vis.xlabel = vis.svg.append("text")
             .attr("transform",
                 "translate(" + (vis.width/2) + " ," +
-                (vis.height + 30) + ")")
+                (vis.height+35) + ")")
             .style("text-anchor", "middle")
             .text("Athlete Hometown County Median Household Income");
 
@@ -74,7 +74,7 @@ class IncomePlot {
             .attr("x1", vis.x(5.7617))
             .attr("y1", -20)
             .attr("x2", vis.x(5.7617))
-            .attr("y2", vis.height)
+            .attr("y2", vis.height-50)
             .attr("stroke-width", "1.5")
             .attr("stroke", "green")
             .attr("opacity", ".5")
@@ -92,14 +92,14 @@ class IncomePlot {
             .attr("x1", vis.x(6.318))
             .attr("y1", -20)
             .attr("x2", vis.x(6.318))
-            .attr("y2", vis.height)
+            .attr("y2", vis.height-50)
             .attr("stroke-width", "1.5")
             .attr("stroke", "steelblue")
             .attr("opacity", ".5")
             .style("visibility", "hidden");
 
         // Add the line
-        vis.visArea.append("path")
+        vis.sumLine = vis.visArea.append("path")
             .datum(vis.data)
             .attr("fill", "none")
             .attr("stroke", "green")
@@ -108,16 +108,19 @@ class IncomePlot {
                 .x(function(d) { return vis.x(d.incomeBracket) })
                 .y(function(d) { return vis.y(d.summer) })
             )
+            .style("visibility", "visible");
 
-        vis.visArea.append("path")
+        vis.wintLine = vis.visArea.append("path")
             .datum(vis.data)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
+            .attr("id", "wintLine")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.incomeBracket) })
                 .y(function(d) { return vis.y(d.winter) })
             )
+            .style("visibility", "visible")
 
         vis.wintDot = vis.visArea.selectAll(".dot-wint")
             .data(vis.data)
@@ -132,7 +135,8 @@ class IncomePlot {
                 return vis.y(d.winter);
             })
             .attr("fill", "steelblue")
-            .style("opacity", ".7");
+            .style("opacity", ".7")
+            .style("visibility", "visible");
 
         vis.wintDot
             .on("mouseover", function(event, d) {
@@ -229,14 +233,16 @@ class IncomePlot {
         vis.legend = vis.svg.append("g")
             .attr("transform",
                 "translate(" + (vis.width-80) + " ," +
-                vis.height/6 + ")");
+                20 + ")");
 
         vis.legend.append("rect")
             .attr("x","0")
             .attr("y", "0")
-            .attr("width", "120")
+            .attr("rx", "2")
+            .attr("ry", "2")
+            .attr("width", "119")
             .attr("height", "80")
-            .attr("stroke", "black")
+            .attr("stroke", "#777777")
             .attr("fill", "transparent")
 
         //legend circles
@@ -268,8 +274,13 @@ class IncomePlot {
             .attr("alignment-baseline", "central")
             .text("Winter");
 
-
-
+        vis.legend
+            .append("foreignObject")
+            .attr('x', 15)
+            .attr('y',  15)
+            .attr('width', 30)
+            .attr('height', 20)
+            .append("xhtml:tree")
 
         vis.wrangleData()
     }
@@ -283,7 +294,61 @@ class IncomePlot {
 
     updateVis(){
         let vis = this;
-
+        let selectValue = $("#toggleIncomePlot").val();
+        if (selectValue === "Summer"){
+            vis.wintLine
+                .transition()
+                .duration(800)
+                .style("opacity","0");
+            d3.selectAll(".dot-wint")
+                .transition()
+                .duration(800)
+                .style("opacity","0");
+            vis.sumLine
+                .transition()
+                .duration(800)
+                .style("opacity","1");
+            d3.selectAll(".dot-sum")
+                .transition()
+                .duration(800)
+                .style("opacity","0.7")
+        }
+        if (selectValue === "Winter"){
+            vis.sumLine
+                .transition()
+                .duration(800)
+                .style("opacity","0");
+            d3.selectAll(".dot-sum")
+                .transition()
+                .duration(800)
+                .style("opacity","0")
+            vis.wintLine
+                .transition()
+                .duration(800)
+                .style("opacity","1");
+            d3.selectAll(".dot-wint")
+                .transition()
+                .duration(800)
+                .style("opacity","0.7")
+        }
+        if (selectValue === "Both"){
+            vis.sumLine
+                .transition()
+                .duration(800)
+                .style("opacity","1");
+            d3.selectAll(".dot-sum")
+                .transition()
+                .duration(800)
+                .style("opacity","0.7")
+            vis.wintLine
+                .transition()
+                .duration(800)
+                .style("opacity","1");
+            d3.selectAll(".dot-wint")
+                .transition()
+                .duration(800)
+                .style("opacity","0.7")
+        }
     }
 }
 
