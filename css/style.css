@@ -296,6 +296,8 @@ h6 {
 #gdp-vis {
 	width: 100%;
 	height: 80vh;
+	background-color: #d9d9d9;
+	border-radius: 10px;
 }
 
 .gdp-tooltip {
@@ -337,4 +339,26 @@ h6 {
 	font-size: 12px;
 	padding-top: 20%;
 	text-align: center;
+}
+
+.gdp-bylines {
+	fill: #6d6d6d;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.gdp-titles {
+	fill: #6d6d6d;
+	font-size: 17px;
+	font-weight: 300;
+	text-anchor: middle;
+}
+
+.gdp-year {
+	fill: #6d6d6d;
+	background-color: white;
+	border-radius: 10px;
+	font-size: 20px;
+	font-weight: 300;
+	text-anchor: middle;
 }

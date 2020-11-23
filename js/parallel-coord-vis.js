@@ -35,12 +35,12 @@ class ParallelCoordVisVis {
 
         vis.sportInfo = d3.rollups(vis.athleteData, v => {
             return {
-                "WeightMin": d3.min(v, d => d.Weight),
-                "WeightMax": d3.max(v, d => d.Weight),
+                "WeightMin": d3.min(v, d => +d.Weight),
+                "WeightMax": d3.max(v, d => +d.Weight),
                 "WeightRange": d3.max(v, d => d.Weight) - d3.min(v, d => d.Weight),
                 "WeightMean": d3.mean(v, d => d.Weight),
-                "HeightMin": d3.min(v, d => d.Height),
-                "HeightMax": d3.max(v, d => d.Height),
+                "HeightMin": d3.min(v, d => +d.Height),
+                "HeightMax": d3.max(v, d => +d.Height),
                 "HeightRange": d3.max(v, d => d.Height) - d3.min(v, d => d.Height),
                 "HeightMean": d3.mean(v, d => d.Height),
                 "AgeMin": d3.min(v, d => d.Age),
@@ -50,7 +50,6 @@ class ParallelCoordVisVis {
                 "Gender": d3.count(v, femaleCount) / d3.count(v, d => 1)
             }
         }, d => d.Sport)
-        console.log(vis.sportInfo)
 
         vis.y = {};
         vis.dimensions = ["Gender", "Age", "Height", "Weight"];
@@ -157,10 +156,12 @@ class ParallelCoordVisVis {
                 .attr("class", "table dimension");
             let tbody = table.append("tbody");
 
+            console.log(d[1])
+
             let tableData = [{"label": "Sport", "data": d[0]},
                 {"label": "Gender Ratio", "data" : d3.format(".0%")(d[1].Gender) + " Female"},
                 {"label": "Age Range", "data" : d[1].AgeMin + " - " + d[1].AgeMax},
-                {"label": "Height Range", "data" : (d[1].HeightMin).toFixed(1) + " - " + (d[1].HeightMax).toFixed(1) + " in"},
+                {"label": "Height Range", "data" : d[1].HeightMin.toFixed(1) + " - " + (d[1].HeightMax).toFixed(1) + " in"},
                 {"label": "Weight Range", "data" : (d[1].WeightMin).toFixed(1) + " - " + (d[1].WeightMax).toFixed(1) + " lb"}];
 
             let rows = tbody.selectAll("tr")

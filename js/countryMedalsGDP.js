@@ -86,7 +86,7 @@ class MedalGDPvis {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 40, right: 20, bottom: 40, left: 40 };
+        vis.margin = { top: 80, right: 60, bottom: 100, left: 90 };
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -114,13 +114,13 @@ class MedalGDPvis {
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
             .tickFormat(d3.format(","))
-            .tickSize(10)
+            .tickSize(5)
             .ticks(8);
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
             .tickFormat(d3.format(","))
-            .tickSize(10);
+            .tickSize(5);
 
         vis.svg.append("g")
             .attr("class", "x-axis axis")
@@ -130,23 +130,57 @@ class MedalGDPvis {
             .attr("class", "y-axis axis")
             .attr("transform", "translate(-10, 0)");
 
-        // X axis title
+
+        // chart title container
+        vis.svg.append("rect")
+            .attr("class", "gdp-year-box")
+            .attr("width", 70)
+            .attr("height", 40)
+            .attr("x", (vis.width / 2) - 35)
+            .attr("y", -60)
+            .attr("fill", "#e9e9e9")
+
+        // chart year
         vis.svg.append("text")
+            .attr("class", "gdp-year")
+            .attr("x", vis.width / 2)
+            .attr("y", -30)
+            .text("1952")
+
+        // X axis byline
+        vis.svg.append("text")
+            .attr("class", "gdp-bylines")
             .attr("x", vis.width)
-            .attr("y", vis.height - 10)
+            .attr("y", vis.height)
             .attr("text-anchor", "end")
-            .attr("font-size", 13)
-            .text("GDP");
+            .text("USD ($) per Person");
+
+        // Y axis byline
+        vis.svg.append("text")
+            .attr("class", "gdp-bylines")
+            .attr("transform", "rotate(90)")
+            .attr("y", 0)
+            .text("Bronze, Silver, & Gold Medals");
+
+        // x axis title
+        vis.svg.append("text")
+            .attr("class", "gdp-titles")
+            .attr("x", vis.width / 2)
+            .attr("y", vis.height + 70)
+            .text("Real GDP per Capita")
 
         // Y axis title
         vis.svg.append("text")
-            .attr("transform", "rotate(90)")
-            .attr("y", 0)
-            .attr("font-size", 13)
-            .text("Number of Wins");
+            .attr("class", "gdp-titles")
+            .attr("transform", `rotate(-90)translate(-${vis.height/2}, -50)`)
+            .text("Total Medals Won")
 
         // Call axis function with the new domain
-        vis.svg.select(".x-axis").call(vis.xAxis);
+        vis.svg.select(".x-axis").call(vis.xAxis)
+            .selectAll("text")
+            .attr("transform", "rotate(-45)")
+            .attr("x", -20)
+            .attr("y", 5);
         vis.svg.select(".y-axis").call(vis.yAxis);
 
 
@@ -169,6 +203,7 @@ class MedalGDPvis {
         rangeSlider.noUiSlider.on('update', function (values, handle) {
             rangeSliderValueElement.innerHTML = values[handle];
             vis.showYear(values[handle])
+            d3.select(".gdp-year").text(values[handle])
         });
 
         // Create tooltip
@@ -218,7 +253,7 @@ class MedalGDPvis {
                     return vis.radius(vis.countryData[d][year][2])
                 }
             })
-            .style("opacity", d => { if (vis.countryData[d][year]) { return .2 } else { return 0}})
+            .style("opacity", d => { if (vis.countryData[d][year]) { return .8 } else { return 0}})
             .attr("fill", d => {
                 switch(d) {
                     case 'United Kingdom': return "darkblue"; break;
@@ -254,7 +289,7 @@ class MedalGDPvis {
                     case 'Egypt': return "yellow"; break;
                     case 'Morocco': return "yellow"; break;
                     case 'Cameroon': return "yellow"; break;
-                    default: return "gray";
+                    default: return "#b1b1b1";
                 }
             })
 
