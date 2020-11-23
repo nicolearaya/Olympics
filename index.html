@@ -174,10 +174,17 @@
                 <h1 class="padding-bottom">How does household income of a hometown affect number of athletes sent to the Olympics?</h1>
                 <div><strong>Athletes are more likely to come from households with higher income levels than the median household income.</strong> Perhaps participating in the Olympics is not just determined by natural talent, but by the ability to access resources that hone, train, and build that talent. Is this trend also represented globally?</div>
             </div>
-            <div class="col-8 center">
-                <h2>Median Household Income of US</h2>
-                <div id="baseline"></div>
-                <div id="income-plot" style="height: 100%; width:100%"></div>
+            <div class="col-8">
+                <h2 class="center">Median Household Income of US</h2>
+                <select id="toggleIncomePlot" class="float-right" onchange="incomePlot.updateVis()">
+                    <option value="Both">Both</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Winter">Winter</option>
+                </select>
+                <span id="toggleIncomePlotLabel" class="float-right">Toggle by Season: </span>
+                <div id="baseline" class="center"></div>
+                <div id="income-plot" style="height: 100%; width:100%">
+                </div>
             </div>
         </div>
     </div>

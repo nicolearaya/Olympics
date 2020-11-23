@@ -6,6 +6,7 @@ let measureVis,
     genderRatio,
     ageRange,
     incomeVis,
+    incomePlot,
     parallelcoordVis;
 
 let bucketed = [];
