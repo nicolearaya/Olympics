@@ -12,7 +12,9 @@
     <!-- CSS libraries -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
 
     <!-- Custom CSS code -->
     <link rel="stylesheet" href="css/style.css">
@@ -42,10 +44,7 @@
 
 <div id="slide3" class="slide background-grey">
     <div class="container-fluid justify-content-center align-self-center">
-                <h1 class="center slide-title padding-bottom">What Olympic sport would you play based on your physical traits?</h1>
-<!--                <div id="vis1">-->
-<!--                    <img id="vis1-img" src="img/vis1.JPG">-->
-<!--                </div>-->
+        <h1 class="center slide-title">What Olympic sport would you play based on your physical traits?</h1>
         <div class="row center user-sports-guess-dashboard">
             <div class="col-5 user-input">
                 <div class="user-input-header">
@@ -89,14 +88,9 @@
                 <div class="user-input-header">
                     <h2>Olympic athletes' traits: </h2>
                 </div>
-                <div id="user-physical-trait-vis" style="height: 100%">
-<!--                    tableu goes here-->
-                </div>
-
-
+                <div id="user-physical-trait-vis" style="height: 100%"></div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -143,16 +137,22 @@
         </div>
     </div>
 </div>
-<div id="slide5" class="slide background-grey padding-top-thin">
-    <div class="container-fluid">
-        <div class="row" style="height: 100%; width:100%">
-            <div class="col-1"></div>
-            <div class="col-md-10 center">
-                <h1>US Olympic Athlete Hometowns</h1>
-                <h2>How many athletes are from your hometown?</h2>
-                <div id="household-income-map" style="height: 100%; width:100%"></div>
+<div id="slide5" class="slide background-grey">
+    <div class="container-fluid justify-content-center align-self-center">
+        <h1 class="center slide-title padding-bottom">US Olympic Athlete Hometowns</h1>
+        <h2>How many athletes are from your home state?</h2>
+
+        <div class="row center hometown-map-dashboard">
+            <!-- LEFT -->
+            <div class="col-8">
+                <div id="household-income-map"></div>
             </div>
-            <div class="col-1"></div>
+
+            <!-- RIGHT -->
+            <div class="col-4">
+                <h6 id="income-map-text">We can also think about inclusivity and access in terms of geographic representation. Let’s first take a look at the U.S. Where do U.S. Olympic athletes come from?</h6>
+                <h7>The colors on the map show the median household incomes of US counties and each red dot indicates the hometown of a US Olympic athlete. We see that, on the whole, <strong>athletes are more likely to come from areas with higher median household incomes.</strong> This is interesting…might income be an indicator for one’s potential to become an olympic athlete?</h7>
+            </div>
         </div>
     </div>
 </div>
@@ -178,7 +178,6 @@
                 <h2>How does a country's wealth affect the probability of winning medals?</h2>
             </div>
             <div class="col-8 center">
-                <img class="width-100" src="img/vis5.JPG">
             </div>
         </div>
     </div>
@@ -187,7 +186,7 @@
     <div class="container-fluid">
         <h1 class="center padding-bottom">How does hosting the Olympics affect a country's chances of winning medals?</h1>
         <div class="row" style="height: 100%; width:100%;">
-            <div class="col-8">
+            <div class="col-8" >
                 <h2>Medal Wins by Host Countries</h2>
                 <div id="host-country-wins" class="host-country-wins"></div>
             </div>
@@ -200,13 +199,18 @@
     <div class="container-fluid">
         <h1 class="center padding-bottom">Which sports are the most truly accessible and meritocratic?</h1>
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <h2>Trends of High and Low Accessibility Features</h2>
-                <img class="width-100" src="img/vis7a.JPG">
+                <div id="parallel-coord-vis"></div>
             </div>
-            <div class="col-6">
-                <h2>Sports Ranked by Diversity</h2>
-                <img class="width-100" src="img/vis7b.JPG">
+            <div class="col-4 center">
+                <h2>Sport Report Card</h2>
+                <div class="row justify-content-center report-card">
+                    <div class="align-self-center">
+                        <div class="center" id="sport-score"></div>
+                        <div id="sport-table"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -222,6 +226,7 @@
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
 
+<!-- d3 -->
 <script src="https://d3js.org/d3-collection.v1.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -229,14 +234,23 @@
 <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 <script src="https://d3js.org/d3-path.v2.min.js"></script>
 <script src="https://d3js.org/d3-axis.v2.min.js"></script>
-
 <script src="https://d3js.org/d3-time.v2.min.js"></script>
-<script src="js/host-medals-vis.js"></script>
+
+
 <script src="js/income-plot.js"></script>
 <script src="js/income-vis.js"></script>
 <script src="js/measure-vis.js"></script>
 <script src="js/measure-table.js"></script>
 <script src="js/physical-vis.js"></script>
+<script src="js/parallel-coord-vis.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/host-medals-vis.js"></script>
 <script src="js/main.js"></script>
+
+<!-- leaflet -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
 </body>
 </html>

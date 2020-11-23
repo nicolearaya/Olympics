@@ -185,6 +185,10 @@ h6 {
 	font-size: 14px;
 }
 
+h7 {
+	font-size: 12px;
+}
+
 .host-country-wins {
 	width: 100%;
 	display: flex;
@@ -194,6 +198,30 @@ h6 {
 	padding: 20px;
 	border-radius: 10px;
 	margin-top: 20px;
+}
+
+.hometown-map-dashboard {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 70vh;
+	margin-top: 20px;
+}
+
+#household-income-map {
+	height: 100%;
+	width: 100%;
+}
+
+#incomeMapTooltip {
+	border: thin solid grey;
+	border-radius: 5px;
+	background: white;
+	padding: 15px;
+}
+
+#income-map-text {
+	color: #ee2f4d;
 }
 
 .q0-9 { fill:rgb(247,251,255); }
@@ -206,3 +234,24 @@ h6 {
 .q7-9 { fill:rgb(8,81,156); }
 .q8-9 { fill:rgb(8,48,107); }
 
+.cities {
+	fill: #ee2f4d;
+	opacity: 0.5;
+}
+
+#parallel-coord-vis {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 60vh;
+	margin-top: 20px;
+}
+
+#report-card {
+	height: 100%;
+	width: 100%;
+}
+
+#sport-score {
+	font-weight: bold;
+}
