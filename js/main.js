@@ -38,12 +38,12 @@ function physicalUpdate(){
 }
 
 // load data using promises
-let promises = [
+incomePromises = [
     d3.json("https://d3js.org/us-10m.v1.json"), //https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // already projected -> you can just scale it to ft your browser window
     d3.csv("data/5Y2018_income.csv"),
 ];
 
-Promise.all(promises)
+Promise.all(incomePromises)
     .then( function(data){ initIncomeVis(data) })
     .catch( function (err){console.log(err)} );
 

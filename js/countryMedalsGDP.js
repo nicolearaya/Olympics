@@ -5,13 +5,13 @@ let olympicYears = [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 
 let olympicCountries = ["Finland", "Norway", "Taiwan", "Netherlands", "France", "Italy", "Spain", "Azerbaijan", "Russia", "Belarus", "Cameroon", "United States", "Hungary", "Australia", "Iran", "Canada", "Pakistan", "Uzbekistan", "Tajikistan", "Japan", "Germany", "South Africa", "Turkey", "Bulgaria", "Egypt", "United Kingdom", "Sweden", "Jordan", "Romania", "Switzerland", "Mexico", "Ghana", "Morocco", "New Zealand", "Argentina", "Cuba", "Uruguay", "Poland", "Czech Republic", "Nigeria", "Brazil", "Lithuania", "Chile", "Ukraine", "Greece", "Uganda", "Syria", "Saudi Arabia", "Croatia", "Armenia", "Serbia", "Niger", "India", "Algeria", "Austria", "Jamaica", "Colombia", "Botswana", "Tunisia", "South Korea", "North Korea", "China", "Denmark", "Israel", "Kazakhstan", "Georgia", "Kenya", "Malaysia", "Iraq", "Slovakia", "Belgium", "Paraguay", "Montenegro", "Ireland", "Portugal", "Guatemala", "Tanzania", "Lebanon", "Kyrgyzstan", "Venezuela", "Thailand", "Togo", "Peru", "Estonia", "Slovenia", "Zimbabwe", "Mongolia", "Senegal", "Dominican Republic", "Philippines", "Latvia", "Singapore", "Namibia", "Vietnam", "Macedonia", "Bahrain", "Sri Lanka", "Mauritius", "Panama", "Zambia", "Mozambique", "Afghanistan", "Burundi", "Gabon", "Ecuador", "Costa Rica", "Djibouti"];
 
 // Load data files
-let promises = [
+let gdppromises = [
     d3.csv("data/athlete_events.csv"),
     d3.csv("data/noc_regions.csv"),
     d3.csv("data/gdp-per-capita-clio-infra.csv")
 ];
 
-Promise.all(promises)
+Promise.all(gdppromises)
     .then( function(data){ formatData(data)})
     .catch( function (err){console.log(err)} );
 
@@ -45,12 +45,8 @@ function formatData(dataArray) {
     data.forEach(athlete => {
         // If the athlete has a medal and comes from a country that's being recorded
         if (athlete.Medal !== 'NA' && olympicCountries.includes(athlete.NOC)) {
-            console.log(athlete)
             countryData[athlete.NOC][athlete.Year][0] += 1;
         }
-        // if (!olympicCountries.includes(athlete.NOC)) {
-        //     console.log(athlete.NOC)
-        // }
     })
 
     // Add GDP Data

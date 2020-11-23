@@ -22,7 +22,7 @@ class IncomeVis {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left/2}, 0})`);
+            .attr('transform', `translate(${vis.margin.left/2}, 0)`);
 
         vis.path = d3.geoPath();
 
