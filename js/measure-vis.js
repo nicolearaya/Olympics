@@ -72,98 +72,87 @@ class MeasureVis {
     wrangleData() {
         let vis = this;
 
+        // Get selected gender
         vis.sex = d3.select("#gender").property("value")
         vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
 
-        vis.updateVis();
-    }
-
-    updateVis() {
-        let vis = this;
-
         // Update domains
-        vis.x.domain(d3.extent(vis.displayData.map(x => x.Weight)));
-        vis.y.domain(d3.extent(vis.displayData.map(x => x.Height)));
+        vis.x.domain(d3.extent(vis.displayData.map(x => +x.Weight)));
+        vis.y.domain(d3.extent(vis.displayData.map(x => +x.Height)));
 
         // Call axis function with the new domain
         vis.svg.select(".x-axis").call(vis.xAxis);
         vis.svg.select(".y-axis").call(vis.yAxis);
 
-        // Create a list of all of the sports
-        vis.sportsList = [...new Set(vis.displayData.map(x => x.Sport))]
+        // Scale for radius of circles
+        vis.radius = d3.scaleSqrt()
+            .range([4, 10])
+            .domain([1, 10])
 
-        // Create scale for different sports
-        vis.colorScale = d3.scaleOrdinal()
-            .domain(vis.sportsList)
-            .range(['#000000',
-                    '#222034',
-                    '#45283c',
-                    '#663931',
-                    '#8f563b',
-                    '#df7126',
-                    '#d9a066',
-                    '#eec39a',
-                    '#fbf236',
-                    '#99e550',
-                    '#6abe30',
-                    '#37946e',
-                    '#4b692f',
-                    '#524b24',
-                    '#323c39',
-                    '#3f3f74',
-                    '#306082',
-                    '#5b6ee1',
-                    '#639bff',
-                    '#5fcde4',
-                    '#cbdbfc',
-                    '#dbdbdb',
-                    '#9badb7',
-                    '#847e87',
-                    '#696a6a',
-                    '#595652',
-                    '#76428a',
-                    '#ac3232',
-                    '#d95763',
-                    '#d77bba',
-                    '#8f974a',
-                    '#8a6f30']);
+        // Record height/weight frequencies for all athletes
+        vis.allHeightWeightData = {};
+        vis.displayData.map(x => {
+            vis.allHeightWeightData[`${x.Weight}, ${x.Height}`] = (vis.allHeightWeightData[`${x.Weight}, ${x.Height}`] || 0) + 1
+        })
 
-        // function for mouseover
-        let mouseOver = function(e, d) {
-            d3.selectAll(".dot")
-                .transition()
-                .duration(200)
-                .style("opacity", .1)
-            d3.selectAll(`.dot.${d.Sport.replace(/ /g,'')}`)
-                .transition()
-                .duration(200)
-                .style("opacity", 1)
-                .style("stroke-width", 3)
-                .style("stroke", "black")
-        }
-
-        let mouseLeave = function(e) {
-            d3.selectAll(`.dot`)
-                .transition()
-                .duration(200)
-                .style("stroke", "transparent")
-                .style("opacity", .8)
-        }
-
-        vis.dots = vis.svg.selectAll(".dot")
-            .data(vis.displayData)
+        vis.dots = vis.svg.selectAll(".all-height-weight-dot")
+            .data(Object.entries(vis.allHeightWeightData))
 
         vis.dots.enter().append("circle")
             .merge(vis.dots)
-            .attr("class", d => `dot ${d.Sport.replace(/ /g,'')}`)
-            .attr("cx", d => vis.x(d.Weight))
-            .attr("cy", d => vis.y(d.Height))
-            .attr("r", 4)
-            .attr("fill", d => {return vis.colorScale(d.Sport)})
-            .on("mouseover", mouseOver)
-            .on("mouseout", mouseLeave)
+            .attr("class", 'all-height-weight-dot')
+            .attr("cx", d => vis.x(d[0].split(", ")[0]))
+            .attr("cy", d => vis.y(d[0].split(", ")[1]))
+            .attr("r", d => vis.radius(d[1]))
+            .style("opacity", .1)
+            .attr("fill", "grey")
 
         vis.dots.exit().remove();
+
+        vis.svg.selectAll(".height-weight-dot").remove();
+
+
+    }
+
+    highlightVis(sport) {
+        let vis = this;
+
+        // Get currently selected sex
+        vis.sex = d3.select("#gender").property("value")
+
+        // Record frequency of athlete ages
+        vis.heightWeightData = {};
+
+        vis.displayData.map(x => {
+            if (x.Sport == sport) {
+                vis.heightWeightData[`${x.Weight}, ${x.Height}`] = (vis.heightWeightData[`${x.Weight}, ${x.Height}`] || 0) + 1
+            }
+        })
+
+        console.log(sport)
+        console.log(vis.heightWeightData)
+
+        vis.heightWeight = vis.svg.selectAll(".height-weight-dot")
+            .data(Object.entries(vis.heightWeightData))
+
+        vis.heightWeight.enter().append("circle")
+            .merge(vis.heightWeight)
+            .attr("class", "height-weight-dot")
+            .attr("cx", d => vis.x(d[0].split(", ")[0]))
+            .attr("cy", d => vis.y(d[0].split(", ")[1]))
+            .attr("r", d => vis.radius(d[1]))
+            .attr("stroke", "black")
+            .attr("fill", d => {
+                if (vis.sex == "F") {
+                    return "orange"
+                } else {
+                    return "green"
+                }
+            })
+
+        vis.heightWeight.exit().remove();
+
+
 
     }
 

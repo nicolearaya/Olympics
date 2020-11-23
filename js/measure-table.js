@@ -36,16 +36,10 @@ class MeasureTable {
             return {"sport":row[0], "weight":row[1].Weight.toFixed(1), "height": row[1].Height.toFixed(1), "age": row[1].Age.toFixed(1)}
         })
 
-        //console.log(vis.sportInfoArray)
-
         // Parse through data to create table
         $('table').bootstrapTable({})
 
         $('table').bootstrapTable("load", vis.sportInfoArray)
-
-
-
-
 
     }
 }
@@ -53,26 +47,12 @@ class MeasureTable {
 $(document).ready(function() {
 
     $('tbody').on('mouseover', 'tr', function() {
-        let selectedSport = $(this).children(":first").text().replace(/ /g,'');
-        d3.selectAll(".dot")
-            .transition()
-            .duration(200)
-            .style("stroke", "transparent")
-            .style("opacity", .1)
-        d3.selectAll(`.dot.${selectedSport}`)
-            .transition()
-            .duration(200)
-            .style("opacity", 1)
-            .style("stroke-width", 3)
-            .style("stroke", "black")
-    })
+        let sport = $(this).children(":first").text()
 
-    $('tbody').on('mouseout', 'tr', function() {
-        d3.selectAll(`.dot`)
-            .transition()
-            .duration(200)
-            .style("stroke", "transparent")
-            .style("opacity", .8)
+        measureVis.highlightVis(sport)
+        ageRange.highlightVis(sport)
+        genderRatio.displayData(sport)
+
     })
 
 });

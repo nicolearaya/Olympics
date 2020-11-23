@@ -15,6 +15,7 @@ h1 {
 h2 {
 	color: #868686;
 	font-size: 20px;
+	font-weight: 300;
 }
 
 
@@ -119,7 +120,7 @@ h2 {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	height: 50vh;
+	height: 80vh;
 	background-color:whitesmoke;
 	padding: 20px;
 	border-radius: 10px;
@@ -135,14 +136,27 @@ h2 {
 }
 
 .bootstrap-table {
-	height: 100%;
+	height: 90%;
 	overflow-y: scroll;
 	background-color: white;
 }
 
-#measure-table {
-	width: 40%;
+
+#gender-ratio {
+	width: 100%;
 	height: 100%;
+}
+
+#age-range {
+	width: 100%;
+	height: 100%;
+}
+
+.weight-height-vis-container {
+	height: 60%;
+	background-color: #e9e9e9;
+	padding: 17px;
+	border-radius: 10px;
 }
 
 .weight-height-header {
@@ -152,10 +166,18 @@ h2 {
 	height: 10%;
 }
 
-.athlete-weight-height-vis {
-	background-color: white;
+#measure-vis {
+	width: 100%;
+	margin: 0 auto;
+	height: 85%;
+}
+
+.gender-age-vis-container {
+	height: 18%;
+	background-color: #e9e9e9;
 	padding: 17px;
 	border-radius: 10px;
+	margin-top: 2%;
 }
 
 #userAge, #userGender, #userHeight, #userWeight {
@@ -194,3 +216,58 @@ h6 {
 .q6-9 { fill:rgb(33,113,181); }
 .q7-9 { fill:rgb(8,81,156); }
 .q8-9 { fill:rgb(8,48,107); }
+
+
+.toggle {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 10%;
+}
+
+.color-key {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.color-key span {
+	margin: 0 10px;
+}
+
+.green {
+	width: 12px;
+	height: 12px;
+	background-color: green;
+}
+
+.orange {
+	margin-left: 30px;
+	width: 12px;
+	height: 12px;
+	background-color: orange;
+}
+
+#gender {
+	padding: 5px;
+	margin-left: 10px;
+}
+
+#gdp-vis {
+	width: 100%;
+	height: 80vh;
+}
+
+.gdp-tooltip {
+	position: absolute;
+	text-align: center;
+	width: 60px;
+	height: 28px;
+	padding: 2px;
+	font: 12px sans-serif;
+	background: lightsteelblue;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
+}

@@ -11,8 +11,8 @@ function loadVis(data) {
     data.forEach(athlete => {
         if (athlete.Height != "NA" && athlete.Weight != "NA") {
             if (athlete.Year == 2016 && athlete.Team == "United States") {
-                athlete.Height = +athlete.Height * 0.393701
-                athlete.Weight = +athlete.Weight * 2.20462
+                athlete.Height = (+athlete.Height * 0.393701).toFixed(2)
+                athlete.Weight = (+athlete.Weight * 2.20462).toFixed(2)
                 athlete.Age = +athlete.Age
                 athlete.Sex = athlete.Sex
                 cleanData.push(athlete)
@@ -20,9 +20,14 @@ function loadVis(data) {
         }
     })
 
+    cleanData = _.uniqBy(cleanData, function(athlete) { return [athlete.Sport, athlete.ID].join(); });
+
     measureVis = new MeasureVis("measure-vis", cleanData);
     measureTable = new MeasureTable("measure-table", cleanData);
     physicalVis = new PhysicalVis("user-physical-trait-vis", cleanData);
+
+    genderRatio = new GenderRatio("gender-ratio", cleanData);
+    ageRange = new AgeRange("age-range", cleanData)
 
 };
 
@@ -43,8 +48,7 @@ Promise.all(promises)
     .catch( function (err){console.log(err)} );
 
 function initIncomeVis(dataArray) {
-    // log data
-    console.log('check out the data', dataArray);
+
     let incomeData = [];
     dataArray[1].forEach(row => {
         row.ESTIMATE = parseFloat(row.ESTIMATE.replace(/,/g, ''));
@@ -53,6 +57,3 @@ function initIncomeVis(dataArray) {
 
     incomeVis = new IncomeVis("household-income-map", dataArray[0], incomeData);
 }
-
-
-
