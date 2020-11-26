@@ -113,9 +113,10 @@ class Bucket {
     getBucketCategory(sport, val) {
         let idx = this.getBucketIdxForValue(val);
         if (bucketed[sport] == null) {
-            bucketed[sport] = idx;
+            bucketed[sport] = {total: idx, dimensions: [idx]};
         } else {
-            bucketed[sport] += idx;
+            bucketed[sport].total += idx;
+            bucketed[sport].dimensions.push(idx)
         }
     }
 }

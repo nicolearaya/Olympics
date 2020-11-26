@@ -152,6 +152,7 @@ class IncomeVis {
                 }
             })
 
+            // sort the sports for each state by most popular based on number of athletes of each sport
             let topSports = Object.entries(sports).sort(([,a],[,b]) => b- a);
 
             // populate the final data structure
