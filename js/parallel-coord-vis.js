@@ -86,17 +86,18 @@ class ParallelCoordVisVis {
                 i ++;
             }
 
+            // keep track of minimum and maximum proportions of countries winning each sport
+            if (sport[1].length > propMax) {
+                propMax = sport[1].length;
+            }
+            if (sport[1].length < propMin) {
+                propMin = sport[1].length;
+            }
+
             let props = {},
                 j = 0;
             while (j < sport[1].length) {
                 props[sport[1][j][0]] = +(sport[1][j][1]/total).toFixed(2);
-                // keep track of minimum and maximum proportions of countries winning each sport
-                if (sport[1][j][1]/total > propMax) {
-                    propMax = sport[1][j][1]/total;
-                }
-                if (sport[1][j][1]/total < propMin) {
-                    propMin = sport[1][j][1]/total;
-                }
                 j++;
             }
 
@@ -142,7 +143,7 @@ class ParallelCoordVisVis {
                 if (dimension === "Gender") {
                     bucket.getBucketCategory(sport[0], sport[1][dimension])
                 } else if (dimension === "Winner Diversity") {
-                    bucket.getBucketCategory(sport[0], Object.values(sport.Winners)[0])
+                    bucket.getBucketCategory(sport[0], sport.DistinctWinnerCount)
                 } else {
                     bucket.getBucketCategory(sport[0], sport[1][dimension + "Range"])
                 }
@@ -160,7 +161,7 @@ class ParallelCoordVisVis {
             } else if (bucketed[sport[0]].total == 9 || bucketed[sport[0]].total == 10) {
                 bucketed[sport[0]].score = "SILVER"
                 bucketed[sport[0]].color = "darkgrey"
-            } else if (bucketed[sport[0]].total == 11 || bucketed[sport[0]].total == 12) {
+            } else if (bucketed[sport[0]].total > 10) {
                 bucketed[sport[0]].score = "GOLD"
                 bucketed[sport[0]].color = "gold"
             } else {
@@ -180,7 +181,7 @@ class ParallelCoordVisVis {
                 if (p === "Gender") {
                     return [vis.x(p), vis.y[p](d[1][p])]
                 } else if (p === "Winner Diversity") {
-                    return [vis.x(p), vis.y[p](Object.values(d.Winners)[0])]
+                    return [vis.x(p), vis.y[p](d.DistinctWinnerCount)]
                 } else {
                     return [vis.x(p), vis.y[p](d[1][p + "Range"])]
                 }
@@ -244,7 +245,7 @@ class ParallelCoordVisVis {
             }
 
             let tableData = [{"label": "Sport", "data": d[0]},
-                {"label": "Winner Diversity", "data" : d.DistinctWinnerCount + " Different Countries Won (highest share of wins is " + d3.format(".0%")(Object.values(d.Winners)[0]) +")"},
+                {"label": "Winner Diversity", "data" : d.DistinctWinnerCount + " Different Countries Won (" + Object.keys(d.Winners)[0] + " won " + d3.format(".0%")(Object.values(d.Winners)[0]) +" of the time)"},
                 {"label": "Gender Ratio", "data" : d3.format(".0%")(d[1].Gender) + " Female"},
                 {"label": "Age Range", "data" : d[1].AgeMin + " - " + d[1].AgeMax},
                 {"label": "Height Range", "data" : displayHeight(d[1].HeightMin) + " - " + displayHeight(d[1].HeightMax)},
