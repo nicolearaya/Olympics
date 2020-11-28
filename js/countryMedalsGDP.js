@@ -2,7 +2,7 @@
 // Record olympic years and olympic countries
 // Only going to olympic year 2010, since GDP data only goes to there
 let olympicYears = [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016];
-let olympicCountries = ["Finland", "Norway", "Taiwan", "Netherlands", "France", "Italy", "Spain", "Azerbaijan", "Russia", "Belarus", "Cameroon", "United States", "Hungary", "Australia", "Iran", "Canada", "Pakistan", "Uzbekistan", "Tajikistan", "Japan", "Germany", "South Africa", "Turkey", "Bulgaria", "Egypt", "United Kingdom", "Sweden", "Jordan", "Romania", "Switzerland", "Mexico", "Ghana", "Morocco", "New Zealand", "Argentina", "Cuba", "Uruguay", "Poland", "Czech Republic", "Nigeria", "Brazil", "Lithuania", "Chile", "Ukraine", "Greece", "Uganda", "Syria", "Saudi Arabia", "Croatia", "Armenia", "Serbia", "Niger", "India", "Algeria", "Austria", "Jamaica", "Colombia", "Botswana", "Tunisia", "South Korea", "North Korea", "China", "Denmark", "Israel", "Kazakhstan", "Georgia", "Kenya", "Malaysia", "Iraq", "Slovakia", "Belgium", "Paraguay", "Montenegro", "Ireland", "Portugal", "Guatemala", "Tanzania", "Lebanon", "Kyrgyzstan", "Venezuela", "Thailand", "Togo", "Peru", "Estonia", "Slovenia", "Zimbabwe", "Mongolia", "Senegal", "Dominican Republic", "Philippines", "Latvia", "Singapore", "Namibia", "Vietnam", "Macedonia", "Bahrain", "Sri Lanka", "Mauritius", "Panama", "Zambia", "Mozambique", "Afghanistan", "Burundi", "Gabon", "Ecuador", "Costa Rica", "Djibouti"];
+let olympicCountries = ['United Kingdom', 'Germany', 'Spain', 'Italy', 'France', 'United States', 'Canada', 'Finland', 'Sweden', 'Switzerland', 'Norway', 'Netherlands', 'Poland', 'Denmark', 'Australia', 'Austria', 'Belgium', 'Hungary', 'New Zealand', 'Hungary', 'Greece', 'Portugal', 'Romania', 'Serbia', 'Bulgaria', 'Czech Republic', 'Iceland', 'Ireland', 'Croatia', 'Slovakia', 'Slovenia', 'Macedonia', 'Montenegro', "Taiwan", "Azerbaijan", "Russia", "Belarus", "Cameroon", "Iran", "Pakistan", "Uzbekistan", "Tajikistan", "Japan", "South Africa", "Turkey", "Egypt", "Jordan", "Mexico", "Ghana", "Morocco", "Argentina", "Cuba", "Uruguay", "Nigeria", "Brazil", "Lithuania", "Chile", "Ukraine", "Uganda", "Syria", "Saudi Arabia", "Armenia", "Niger", "India", "Algeria", "Jamaica", "Colombia", "Botswana", "Tunisia", "South Korea", "North Korea", "China", "Israel", "Kazakhstan", "Georgia", "Kenya", "Malaysia", "Iraq", "Paraguay", "Guatemala", "Tanzania", "Lebanon", "Kyrgyzstan", "Venezuela", "Thailand", "Togo", "Peru", "Estonia", "Zimbabwe", "Mongolia", "Senegal", "Dominican Republic", "Philippines", "Latvia", "Singapore", "Namibia", "Vietnam", "Bahrain", "Sri Lanka", "Mauritius", "Panama", "Zambia", "Mozambique", "Afghanistan", "Burundi", "Gabon", "Ecuador", "Costa Rica", "Djibouti"]
 
 // Load data files
 let gdppromises = [
@@ -86,10 +86,11 @@ class MedalGDPvis {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 80, right: 60, bottom: 100, left: 90 };
+        vis.margin = { top: 100, right: 100, bottom: 100, left: 100 };
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
+
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -97,6 +98,41 @@ class MedalGDPvis {
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+        // Create blur filter for edges of graph
+        vis.defs = vis.svg.append("defs");
+
+        vis.filter = vis.defs.append("filter")
+            .attr("id", "edge-blur")
+            .attr("height", "140%")
+            .attr("width", "140%");
+
+        vis.filter.append("feGaussianBlur")
+            .attr("in", "SourceGraphic")
+            .attr("stdDeviation", 30)
+            .attr("result", "blur")
+            .attr("x", -30)
+            .attr("y", -40);
+
+        vis.clipPath = vis.defs.append("clipPath")
+            .attr("id", "clipMask")
+            .style("pointer-events", "none")
+            .append("rect")
+            .attr("x", -10)
+            .attr("y", -60)
+            .attr("width", vis.width + 60)
+            .attr("height", vis.height + 70)
+
+        // Background fill
+        vis.background = vis.svg.append('rect')
+            .attr("width", vis.width + 20)
+            .attr("height", vis.height + 20)
+            .attr("x", -30)
+            .attr("y", 30)
+            .attr("fill", "#d9d9d9")
+            .attr("filter", "url(#edge-blur)")
+            .attr("clip-path", "url(#clipMask)")
+
 
         // Scales and axes
         vis.x = d3.scaleSymlog()
@@ -129,16 +165,6 @@ class MedalGDPvis {
         vis.svg.append("g")
             .attr("class", "y-axis axis")
             .attr("transform", "translate(-10, 0)");
-
-
-        // chart title container
-        vis.svg.append("rect")
-            .attr("class", "gdp-year-box")
-            .attr("width", 70)
-            .attr("height", 40)
-            .attr("x", (vis.width / 2) - 35)
-            .attr("y", -60)
-            .attr("fill", "#e9e9e9")
 
         // chart year
         vis.svg.append("text")
@@ -198,12 +224,19 @@ class MedalGDPvis {
             })
         });
 
-        var rangeSliderValueElement = document.getElementById('slider-range-value');
+        vis.rangeSliderValueElement = document.getElementById('slider-range-value');
 
         rangeSlider.noUiSlider.on('update', function (values, handle) {
-            rangeSliderValueElement.innerHTML = values[handle];
+            vis.rangeSliderValueElement.innerHTML = values[handle];
             vis.showYear(values[handle])
             d3.select(".gdp-year").text(values[handle])
+        });
+
+        // Create button to play
+        vis.playButton = document.getElementById('play-button');
+        vis.playButton.addEventListener('click', function () {
+            setInterval(update, 500);
+            rangeSlider.noUiSlider.set(1952)
         });
 
         // Create tooltip
@@ -256,40 +289,89 @@ class MedalGDPvis {
             .style("opacity", d => { if (vis.countryData[d][year]) { return .8 } else { return 0}})
             .attr("fill", d => {
                 switch(d) {
-                    case 'United Kingdom': return "darkblue"; break;
-                    case 'Germany': return "darkblue"; break;
-                    case 'Spain': return "darkblue"; break;
-                    case 'Italy': return "darkblue"; break;
-                    case 'France': return "darkblue"; break;
-                    case 'United States': return "lightblue"; break;
-                    case 'Canada': return "lightblue"; break;
-                    case 'Russia': return "red"; break;
-                    case 'North Korea': return "red"; break;
-                    case 'China': return "orange"; break;
-                    case 'Japan': return "orange"; break;
-                    case 'Taiwan': return "orange"; break;
-                    case 'Philippines': return "orange"; break;
-                    case 'South Korea': return "orange"; break;
-                    case 'Vietnam': return "orange"; break;
-                    case 'Thailand': return "orange"; break;
-                    case 'Argentina': return "green"; break;
-                    case 'Brazil': return "green"; break;
-                    case 'Mexico': return "green"; break;
-                    case 'Colombia': return "green"; break;
-                    case 'Cuba': return "green"; break;
-                    case 'Dominican Republic': return "green"; break;
-                    case 'Jamaica': return "green"; break;
-                    case 'Venezuela': return "green"; break;
-                    case 'Kenya': return "yellow"; break;
-                    case 'Ghana': return "yellow"; break;
-                    case 'Nigeria': return "yellow"; break;
-                    case 'Zimbabwe': return "yellow"; break;
-                    case 'South Africa': return "yellow"; break;
-                    case 'Uganda': return "yellow"; break;
-                    case 'Egypt': return "yellow"; break;
-                    case 'Morocco': return "yellow"; break;
-                    case 'Cameroon': return "yellow"; break;
-                    default: return "#b1b1b1";
+
+                    case 'Turkey': return '#A1C181'; break;
+                    case 'India': return '#A1C181'; break
+                    case 'Pakistan': return '#A1C181'; break
+                    case 'Iran': return '#A1C181'; break;
+                    case 'Lebanon': return '#A1C181'; break
+                    case 'Syria': return '#A1C181'; break;
+                    case 'Israel': return '#A1C181'; break
+                    case 'Saudi Arabia': return '#A1C181'; break
+                    case 'Bahrain': return '#A1C181'; break
+                    case 'Iraq': return '#A1C181'; break
+                    case 'Afghanistan': return '#A1C181'; break
+                    case 'Sri Lanka': return '#A1C181'; break
+                    case 'Jordan': return '#A1C181'; break
+
+                    case 'Russia': return "#C44D5B"; break;
+                    case 'Azerbaijan': return '#C44D5B'; break
+                    case 'Tajikistan': return '#C44D5B'; break
+                    case 'Armenia': return '#C44D5B'; break
+                    case 'Belarus': return "#C44D5B"; break;
+                    case 'Georgia': return '#C44D5B'; break
+                    case 'Kazakhstan': return '#C44D5B'; break;
+                    case 'Kyrgyzstan': return '#C44D5B'; break
+                    case 'Ukraine': return "#C44D5B"; break;
+                    case 'Uzbekistan': return '#C44D5B'; break
+                    case 'Estonia': return "#C44D5B"; break;
+                    case 'Latvia': return "#C44D5B"; break;
+                    case 'Lithuania': return "#C44D5B"; break;
+
+                    case 'China': return "#FE7F2D"; break;
+                    case 'Japan': return "#FE7F2D"; break;
+                    case 'Taiwan': return "#FE7F2D"; break;
+                    case 'Philippines': return "#FE7F2D"; break;
+                    case 'South Korea': return "#FE7F2D"; break;
+                    case 'Vietnam': return "#FE7F2D"; break;
+                    case 'Thailand': return "#FE7F2D"; break;
+                    case 'Singapore': return "#FE7F2D"; break;
+                    case 'Mongolia': return "#FE7F2D"; break;
+                    case 'Malaysia': return "#FE7F2D"; break;
+                    case 'North Korea': return "#FE7F2D"; break;
+
+                    case 'Argentina': return "#233D4D"; break;
+                    case 'Brazil': return "#233D4D"; break;
+                    case 'Mexico': return "#233D4D"; break;
+                    case 'Colombia': return "#233D4D"; break;
+                    case 'Cuba': return "#233D4D"; break;
+                    case 'Dominican Republic': return "#233D4D"; break;
+                    case 'Jamaica': return "#233D4D"; break;
+                    case 'Venezuela': return "#233D4D"; break;
+                    case 'Uruguay': return "#233D4D"; break;
+                    case 'Chile': return "#233D4D"; break;
+                    case 'Peru': return "#233D4D"; break;
+                    case 'Guatemala': return "#233D4D"; break;
+                    case 'Ecuador': return "#233D4D"; break;
+                    case 'Paraguay': return "#233D4D"; break;
+                    case 'Costa Rica': return "#233D4D"; break;
+                    case 'Panama': return "#233D4D"; break;
+
+                    case 'Kenya': return "#FCCA46"; break;
+                    case 'Ghana': return "#FCCA46"; break;
+                    case 'Nigeria': return "#FCCA46"; break;
+                    case 'Zimbabwe': return "#FCCA46"; break;
+                    case 'South Africa': return "#FCCA46"; break;
+                    case 'Uganda': return "#FCCA46"; break;
+                    case 'Egypt': return "#FCCA46"; break;
+                    case 'Morocco': return "#FCCA46"; break;
+                    case 'Cameroon': return "#FCCA46"; break;
+                    case 'Tunisia': return "#FCCA46"; break;
+                    case 'Zambia': return "#FCCA46"; break;
+                    case 'Tanzania': return "#FCCA46"; break;
+                    case 'Niger': return "#FCCA46"; break;
+                    case 'Algeria': return "#FCCA46"; break;
+                    case 'Mozambique': return "#FCCA46"; break;
+                    case 'Senegal': return "#FCCA46"; break;
+                    case 'Botswana': return "#FCCA46"; break;
+                    case 'Togo': return "#FCCA46"; break;
+                    case 'Namibia': return "#FCCA46"; break;
+                    case 'Mauritius': return "#FCCA46"; break;
+                    case 'Burundi': return "#FCCA46"; break;
+                    case 'Gabon': return "#FCCA46"; break;
+                    case 'Djibouti': return "#FCCA46"; break;
+
+                    default: return "#b0b0b0";
                 }
             })
 
