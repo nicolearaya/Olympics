@@ -72,9 +72,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="userHeight" class="col-sm-4 col-form-label">Height (in)</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="userInput" id="userHeight" placeholder="e.g. 70">
+                            <label for="userHeightFt" class="col-sm-4 col-form-label">Height</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="col-sm-3 userInput" id="userHeightFt" placeholder="e.g. 5">
+                                <label for="userHeightFt" class="col-sm-1">ft</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="col-sm-3 userInput" id="userHeightIn" placeholder="e.g. 10">
+                                <label for="userHeightIn" class="col-sm-1">in</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -260,7 +265,7 @@
                         <div id="sport-table"></div>
                     </div>
                 </div>
-                <h5 class="padding-top-thin">Sports are assigned a GOLD, SILVER, BRONZE ranking based on their level of accessibility, which we calculated based on level of female representation and the range of athletes' ages, heights, and weights.</h5>
+                <h5 class="padding-top-thin">Sports are assigned a GOLD, SILVER, BRONZE ranking based on their level of accessibility, which we calculated based on the number of different countries winning, gender ratio, and the range of athletes' ages, heights, and weights. Hover over the lines to see which sport they represent.</h5>
             </div>
         </div>
     </div>
