@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Olympics.iml" filepath="$PROJECT_DIR$/.idea/Olympics.iml" />
-      <module fileurl="file://$USER_HOME$/WebstormProjects/olympics/.idea/olympics.iml" filepath="$USER_HOME$/WebstormProjects/olympics/.idea/olympics.iml" />
     </modules>
   </component>
 </project>

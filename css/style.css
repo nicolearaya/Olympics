@@ -296,7 +296,7 @@ h6 {
 #gdp-vis {
 	width: 100%;
 	height: 80vh;
-	background-color: #d9d9d9;
+	background-color: #e2e2e2;
 	border-radius: 10px;
 }
 
@@ -361,4 +361,74 @@ h6 {
 	font-size: 20px;
 	font-weight: 300;
 	text-anchor: middle;
+}
+
+.gdp-key div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.gdp-key div div {
+	width: 12px;
+	height: 12px;
+	margin-right: 10px;
+}
+
+.western {
+	background-color: #b0b0b0;
+}
+
+.russia {
+	background-color: #C44D5B;
+}
+
+.east-asia {
+	background-color: #FE7F2D;
+}
+
+.central-asia {
+	background-color: #A1C181;
+}
+
+.latin-america {
+	background-color: #233D4D;
+}
+
+.africa {
+	background-color: #FCCA46;
+}
+
+#play-button {
+	border: none;
+	border-radius: 5px;
+	background-color: #dbdbdb;
+	padding: 10px 20px;
+	color: #676767;
+	font-weight: 300;
+}
+
+#play-button {
+	cursor: pointer;
+}
+
+.animation-toggle {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.slider-toggle {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+#slider {
+	width: 70%;
+	margin-right: 20px;
 }
