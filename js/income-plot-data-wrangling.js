@@ -112,6 +112,8 @@ class IncomePlotDataWrangling {
             })
             */
 
+            console.log(vis.filteredData)
+
             vis.incomeData.forEach( d => {
                 d.GEOID = +d.GEOID
                 }

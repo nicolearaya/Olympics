@@ -57,23 +57,51 @@ class IncomePlot {
                 "translate(" + (vis.width/2) + " ," +
                 (vis.height+35) + ")")
             .style("text-anchor", "middle")
+            .attr("class", "income-plot-axis")
             .text("Athlete Hometown County Median Household Income");
 
         vis.yAxisg = vis.visArea.append("g")
             .attr("transform",
-                "translate(" + 20 + " ," +
-                vis.height/2 + ")")
+                "translate(" + 10 + " ," +
+                (0) + ")")
 
         vis.yAxisg.append("text")
-            .attr("transform", "rotate(-90)")
-            .style("text-anchor", "middle")
+            .attr("transform", "rotate(90)")
+            .attr("class", "income-plot-axis")
             .text("Number of Athletes");
+
+        //move to front
+        d3.selection.prototype.moveToFront = function() {
+            return this.each(function(){
+                this.parentNode.appendChild(this);
+            });
+        };
+
+        //move to back
+        d3.selection.prototype.moveToBack = function() {
+            return this.each(function() {
+                var firstChild = this.parentNode.firstChild;
+                if (firstChild) {
+                    this.parentNode.insertBefore(this, firstChild);
+                }
+            });
+        };
+
+
+        vis.displayTextGroup = vis.visArea.append("g")
+            .attr("transform",
+                "translate(" + (vis.width/4*3) + " ," +
+                (vis.height/4) + ")")
+
+
+        vis.displayText = vis.displayTextGroup.append("text")
+
 
         //show baseline median incomes for comparison
         vis.medIncome2016 = vis.visArea.append("line")
-            .attr("x1", vis.x(5.7617))
+            .attr("x1", vis.x(6))
             .attr("y1", -20)
-            .attr("x2", vis.x(5.7617))
+            .attr("x2", vis.x(6))
             .attr("y2", vis.height-50)
             .attr("stroke-width", "1.5")
             .attr("stroke", "green")
@@ -82,16 +110,16 @@ class IncomePlot {
         //
         vis.baseline = d3.select("#baseline").append("text")
             .attr("y","0")
-            .attr("x",vis.x(5.7617))
+            .attr("x",vis.x(6))
             .text("2018 Median Household Income: $63,179")
             .style("text-anchor", "middle")
             .style("visibility", "hidden")
 
 
         vis.medIncome2018 = vis.visArea.append("line")
-            .attr("x1", vis.x(6.318))
+            .attr("x1", vis.x(7))
             .attr("y1", -20)
-            .attr("x2", vis.x(6.318))
+            .attr("x2", vis.x(7))
             .attr("y2", vis.height-50)
             .attr("stroke-width", "1.5")
             .attr("stroke", "steelblue")
@@ -143,14 +171,6 @@ class IncomePlot {
                 d3.select(this)
                     .attr("stroke-width", "1px")
                     .attr("stroke", "black")
-                vis.medIncome2018
-                    .style("visibility", "visible")
-                vis.baseline
-                    .attr("y","0")
-                    .attr("x",(vis.x(6.318)-100))
-                    .text("2018 Median Household Income: $63,179")
-                    .style("text-anchor", "middle")
-                    .style("visibility", "visible")
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -165,16 +185,14 @@ class IncomePlot {
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke-width', "0px")
-                vis.medIncome2018
-                    .style("visibility", "hidden")
-                vis.baseline
-                    .style("visibility", "hidden")
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
                     .style("top", 0)
                     .html(``);
             });
+
+
 
         vis.sumDot = vis.visArea.selectAll(".dot-sum")
             .data(vis.data)
@@ -196,13 +214,6 @@ class IncomePlot {
                 d3.select(this)
                     .attr("stroke-width", "1px")
                     .attr("stroke", "black")
-                vis.medIncome2016
-                    .style("visibility", "visible");
-                vis.baseline
-                    .attr("x",(vis.x(5.7617)))
-                    .text("2016 Median Household Income: $57,617")
-                    .style("text-anchor", "middle")
-                    .style("visibility", "visible");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -211,16 +222,11 @@ class IncomePlot {
                      <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
                          <h5>Income: $${d.bracket} per year<h3>
                          <h6>Number of Summer Athletes: ${d.summer}</h6> 
-                        
                      </div>`)
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke-width', "0px")
-                vis.medIncome2016
-                    .style("visibility", "hidden")
-                vis.baseline
-                    .style("visibility", "hidden")
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -230,9 +236,110 @@ class IncomePlot {
             })
 
 
+        //data above the national median:
+        vis.summerAbove = [[6,23],[7,94],[8,44],[9,52],[10,35],[11,9],[12,16],[13,2],[14,1],[15,0],[16,0]]
+        vis.winterAbove = [[7,49],[8,59],[9,39],[10,10],[11,11],[12,5],[13,2],[14,1],[15,0],[16,0]]
+
+        vis.sumAbove = vis.visArea.append("path")
+            .datum(vis.summerAbove)
+            .attr("fill", "#9edecf")
+            .style("opacity", "0.4")
+            .attr("stroke", "green")
+            .attr("stroke-width", 1)
+            .attr("d", d3.area()
+                .x(function(d) { return vis.x(d[0]) })
+                .y0(vis.height-50)
+                .y1(function(d) { return vis.y(d[1]) })
+
+            )
+            .style("visibility", "visible");
+
+        vis.wintAbove = vis.visArea.append("path")
+            .datum(vis.winterAbove)
+            .attr("fill", "#9eacde")
+            .style("opacity", "0.4")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1)
+            .attr("d", d3.area()
+                .x(function(d) { return vis.x(d[0]) })
+                .y0(vis.height-50)
+                .y1(function(d) { return vis.y(d[1]) })
+
+            )
+            .style("visibility", "visible");
+
+        //text displaying data about median income
+        vis.wintAbove
+            .on("mouseover", function(event, d) {
+                d3.select(this).moveToFront();
+                d3.select(this)
+                    .attr("stroke-width", "1.5")
+                    .attr("stroke", "black")
+                    .attr("opacity", "1")
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                         <h5>Winter Athletes Above National Median Household Income:<h3>
+                         <h6>179 Winter Athletes</h6>
+                         <h6>Percent of Total Winter Athletes: 65%</h6>
+                         <h6>2018 Median Household Income: $63,179</h6> 
+                     </div>`)
+
+            })
+            .on("mouseout", function(event, d){
+                d3.select(this)
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 1)
+                d3.select(".dot-wint")
+                    .moveToFront()
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            });
+
+
+        vis.sumAbove
+            .on("mouseover", function(event, d) {
+                d3.select(this).moveToFront();
+                d3.select(this)
+                    .attr("stroke-width", "1.5")
+                    .attr("stroke", "black")
+                    .attr("opacity", "1")
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                         <h5>Summer Athletes Above National Median Household Income:<h3>
+                         <h6>276 Summer Athletes</h6>
+                         <h6>Percent of Total Summer Athletes: 67%</h6>
+                         <h6>2016 Median Household Income: $57,617</h6> 
+                     </div>`)
+
+            })
+            .on("mouseout", function(event, d){
+                d3.select(this)
+                    .attr("stroke", "green")
+                    .attr("stroke-width", 1)
+                d3.select(this).moveToBack();
+                d3.select(".dot-sum")
+                    .moveToFront()
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            });
+
         vis.legend = vis.svg.append("g")
             .attr("transform",
-                "translate(" + (vis.width-80) + " ," +
+                "translate(" + (vis.width-100) + " ," +
                 20 + ")");
 
         vis.legend.append("rect")
@@ -240,8 +347,8 @@ class IncomePlot {
             .attr("y", "0")
             .attr("rx", "2")
             .attr("ry", "2")
-            .attr("width", "119")
-            .attr("height", "80")
+            .attr("width", "139")
+            .attr("height", "190")
             .attr("stroke", "#777777")
             .attr("fill", "transparent")
 
@@ -261,26 +368,76 @@ class IncomePlot {
             .attr("fill", "steelblue")
             .style("opacity", ".7");
 
+        vis.legend
+            .append("rect")
+            .attr("x",15)
+            .attr("y",100)
+            .attr("width",10)
+            .attr("height",10)
+            .attr("fill", "#9edecf")
+            .style("opacity", "0.6");
+        vis.legend
+            .append("rect")
+            .attr("x", 15)
+            .attr("y",150)
+            .attr("width",10)
+            .attr("height",10)
+            .attr("fill", "#9eacde")
+            .style("opacity", "0.6");
+
         //legend text
         vis.legend.append("text")
             .attr("x",35)
             .attr("y",20)
             .attr("alignment-baseline", "central")
+            .attr("font-size",13)
             .text("Summer");
 
         vis.legend.append("text")
             .attr("x",35)
             .attr("y",60)
             .attr("alignment-baseline", "central")
+            .attr("font-size",13)
             .text("Winter");
 
-        vis.legend
-            .append("foreignObject")
-            .attr('x', 15)
-            .attr('y',  15)
-            .attr('width', 30)
-            .attr('height', 20)
-            .append("xhtml:tree")
+        //legend text
+        vis.legend.append("text")
+            .attr("x",35)
+            .attr("y",97)
+            .append("tspan")
+            .attr("dy","0em")
+            .attr("font-size",13)
+            .text("Above National")
+            .append("tspan")
+            .attr("x",35)
+            .attr("dy","1em")
+            .attr("font-size",13)
+            .text("Median Income")
+            .append("tspan")
+            .attr("x",35)
+            .attr("dy","1em")
+            .attr("font-size",13)
+            .text("(Summer)");
+
+
+        vis.legend.append("text")
+            .attr("x",35)
+            .attr("y",147)
+            .append("tspan")
+            .attr("dy","0em")
+            .attr("font-size",13)
+            .text("Above National")
+            .append("tspan")
+            .attr("x",35)
+            .attr("dy","1em")
+            .attr("font-size",13)
+            .text("Median Income")
+            .append("tspan")
+            .attr("x",35)
+            .attr("dy","1em")
+            .attr("font-size",13)
+            .text("(Winter)");
+
 
         vis.wrangleData()
     }
@@ -290,64 +447,121 @@ class IncomePlot {
 
         vis.updateVis()
     }
-
-
     updateVis(){
         let vis = this;
         let selectValue = $("#toggleIncomePlot").val();
         if (selectValue === "Summer"){
+            //disable winter
             vis.wintLine
                 .transition()
                 .duration(800)
-                .style("opacity","0");
+                .style("opacity","0")
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
+            vis.wintAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0)
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
             d3.selectAll(".dot-wint")
                 .transition()
                 .duration(800)
-                .style("opacity","0");
+                .style("opacity","0")
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
+            //enable summer
             vis.sumLine
                 .transition()
                 .duration(800)
-                .style("opacity","1");
+                .style("opacity","1")
+                .style("visibility","visible");
+            vis.sumAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0.5)
+                .style("visibility","visible");
             d3.selectAll(".dot-sum")
                 .transition()
                 .duration(800)
-                .style("opacity","0.7")
+                .style("opacity","1")
+                .style("visibility","visible");
         }
         if (selectValue === "Winter"){
+            //disable summer
             vis.sumLine
                 .transition()
                 .duration(800)
-                .style("opacity","0");
+                .style("opacity","0")
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
+            vis.sumAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0)
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
             d3.selectAll(".dot-sum")
                 .transition()
                 .duration(800)
                 .style("opacity","0")
+                .transition()
+                .delay(800)
+                .style("visibility","hidden");
+
+            //enable winter
             vis.wintLine
                 .transition()
                 .duration(800)
-                .style("opacity","1");
+                .style("opacity","1")
+                .style("visibility","visible");
+            vis.wintAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0.5)
+                .style("visibility","visible");
             d3.selectAll(".dot-wint")
                 .transition()
                 .duration(800)
-                .style("opacity","0.7")
+                .style("opacity","1")
+                .style("visibility","visible");
         }
         if (selectValue === "Both"){
             vis.sumLine
                 .transition()
                 .duration(800)
-                .style("opacity","1");
+                .style("opacity","1")
+                .style("visibility","visible");
+            vis.wintAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0.5)
+                .style("visibility","visible");
+            vis.sumAbove
+                .transition()
+                .duration(800)
+                .style("opacity",0.5)
+                .style("visibility","visible");
             d3.selectAll(".dot-sum")
                 .transition()
                 .duration(800)
                 .style("opacity","0.7")
+                .style("visibility","visible");
             vis.wintLine
                 .transition()
                 .duration(800)
-                .style("opacity","1");
+                .style("opacity","1")
+                .style("visibility","visible");
             d3.selectAll(".dot-wint")
                 .transition()
                 .duration(800)
                 .style("opacity","0.7")
+                .style("visibility","visible");
         }
     }
 }

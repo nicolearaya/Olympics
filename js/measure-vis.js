@@ -129,8 +129,8 @@ class MeasureVis {
             }
         })
 
-        console.log(sport)
-        console.log(vis.heightWeightData)
+        //console.log(sport)
+        //console.log(vis.heightWeightData)
 
         vis.heightWeight = vis.svg.selectAll(".height-weight-dot")
             .data(Object.entries(vis.heightWeightData))
