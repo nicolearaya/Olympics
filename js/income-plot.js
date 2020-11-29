@@ -57,7 +57,7 @@ class IncomePlot {
                 "translate(" + (vis.width/2) + " ," +
                 (vis.height+35) + ")")
             .style("text-anchor", "middle")
-            .attr("class", "income-plot-axis")
+            .attr("class", "income-plot-label")
             .text("Athlete Hometown County Median Household Income");
 
         vis.yAxisg = vis.visArea.append("g")
@@ -67,7 +67,7 @@ class IncomePlot {
 
         vis.yAxisg.append("text")
             .attr("transform", "rotate(90)")
-            .attr("class", "income-plot-axis")
+            .attr("class", "income-plot-label")
             .text("Number of Athletes");
 
         //move to front
@@ -122,7 +122,7 @@ class IncomePlot {
             .attr("x2", vis.x(7))
             .attr("y2", vis.height-50)
             .attr("stroke-width", "1.5")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "blue")
             .attr("opacity", ".5")
             .style("visibility", "hidden");
 
@@ -141,7 +141,7 @@ class IncomePlot {
         vis.wintLine = vis.visArea.append("path")
             .datum(vis.data)
             .attr("fill", "none")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "blue")
             .attr("id", "wintLine")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
@@ -162,7 +162,7 @@ class IncomePlot {
             .attr("cy", function(d){
                 return vis.y(d.winter);
             })
-            .attr("fill", "steelblue")
+            .attr("fill", "blue")
             .style("opacity", ".7")
             .style("visibility", "visible");
 
@@ -176,7 +176,7 @@ class IncomePlot {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
                          <h5>Income: $${d.bracket} per year<h3>
                          <h6>Number of Winter Athletes: ${d.winter}</h6> 
                         
@@ -219,7 +219,7 @@ class IncomePlot {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
                          <h5>Income: $${d.bracket} per year<h3>
                          <h6>Number of Summer Athletes: ${d.summer}</h6> 
                      </div>`)
@@ -258,7 +258,7 @@ class IncomePlot {
             .datum(vis.winterAbove)
             .attr("fill", "#9eacde")
             .style("opacity", "0.4")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "blue")
             .attr("stroke-width", 1)
             .attr("d", d3.area()
                 .x(function(d) { return vis.x(d[0]) })
@@ -281,7 +281,7 @@ class IncomePlot {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
                          <h5>Winter Athletes Above National Median Household Income:<h3>
                          <h6>179 Winter Athletes</h6>
                          <h6>Percent of Total Winter Athletes: 65%</h6>
@@ -291,7 +291,7 @@ class IncomePlot {
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
-                    .attr("stroke", "steelblue")
+                    .attr("stroke", "blue")
                     .attr("stroke-width", 1)
                 d3.select(".dot-wint")
                     .moveToFront()
@@ -315,7 +315,7 @@ class IncomePlot {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
                          <h5>Summer Athletes Above National Median Household Income:<h3>
                          <h6>276 Summer Athletes</h6>
                          <h6>Percent of Total Summer Athletes: 67%</h6>
@@ -365,7 +365,7 @@ class IncomePlot {
             .attr("r", 5)
             .attr("cx", 20)
             .attr("cy",60)
-            .attr("fill", "steelblue")
+            .attr("fill", "blue")
             .style("opacity", ".7");
 
         vis.legend
@@ -390,14 +390,14 @@ class IncomePlot {
             .attr("x",35)
             .attr("y",20)
             .attr("alignment-baseline", "central")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Summer");
 
         vis.legend.append("text")
             .attr("x",35)
             .attr("y",60)
             .attr("alignment-baseline", "central")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Winter");
 
         //legend text
@@ -406,17 +406,17 @@ class IncomePlot {
             .attr("y",97)
             .append("tspan")
             .attr("dy","0em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Above National")
             .append("tspan")
             .attr("x",35)
             .attr("dy","1em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Median Income")
             .append("tspan")
             .attr("x",35)
             .attr("dy","1em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("(Summer)");
 
 
@@ -425,17 +425,17 @@ class IncomePlot {
             .attr("y",147)
             .append("tspan")
             .attr("dy","0em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Above National")
             .append("tspan")
             .attr("x",35)
             .attr("dy","1em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("Median Income")
             .append("tspan")
             .attr("x",35)
             .attr("dy","1em")
-            .attr("font-size",13)
+            .attr("class", "income-plot-label")
             .text("(Winter)");
 
 

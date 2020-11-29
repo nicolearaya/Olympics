@@ -181,7 +181,6 @@ function initIncomeVis(dataArray) {
 
     dataArray[4].forEach( d => {
         d.cost = +d.cost;
-        console.log(d.cost)
     })
     incomePlot = new IncomePlot("income-plot", dataArray[2]);
     hostMedalsVis = new HostMedalsVis("host-country-wins", dataArray[3], dataArray[4])
