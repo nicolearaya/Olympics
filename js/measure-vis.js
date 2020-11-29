@@ -74,7 +74,14 @@ class MeasureVis {
 
         // Get selected gender
         vis.sex = d3.select("#gender").property("value")
-        vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+
+        // If "All" option is selected, do not filter
+        if (vis.sex == 'A') {
+            vis.displayData = vis.data;
+        } else {
+            // Filter if M or F is selected
+            vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+        }
 
         // Update domains
         vis.x.domain(d3.extent(vis.displayData.map(x => +x.Weight)));
@@ -125,7 +132,7 @@ class MeasureVis {
 
         vis.displayData.map(x => {
             if (x.Sport == sport) {
-                vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}`] = (vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}`] || 0) + 1
+                vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}, ${x.Sex}`] = (vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}, ${x.Sex}`] || 0) + 1
             }
         })
 
@@ -135,18 +142,21 @@ class MeasureVis {
         vis.heightWeight.enter().append("circle")
             .merge(vis.heightWeight)
             .attr("class", "height-weight-dot")
+            .style("opacity", 1)
+
+        vis.heightWeight.transition().duration(500)
             .attr("cx", d => vis.x(d[0].split(", ")[0]))
             .attr("cy", d => vis.y(d[0].split(", ")[1]))
             .attr("r", d => vis.radius(d[1]))
             .attr("fill", d => {
-                if (vis.sex == "F") {
+                if (d[0].split(", ")[2] == "F") {
                     return "orange"
                 } else {
                     return "green"
                 }
             })
 
-        vis.heightWeight.exit().remove();
+        vis.heightWeight.exit().transition().style("opacity", .2).remove();
 
 
 

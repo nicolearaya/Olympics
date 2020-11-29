@@ -23,7 +23,7 @@ class AgeRange {
 
         // Scales and axes
         vis.radius = d3.scaleSqrt()
-            .range([2, 8])
+            .range([2, 6])
             .domain([1, 70])
 
         vis.x = d3.scaleLinear()
@@ -33,12 +33,12 @@ class AgeRange {
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
             .tickFormat(d3.format(","))
-            .tickSize(10)
+            .tickSize(45)
             .ticks(10);
 
         vis.svg.append("g")
-            .attr("class", "x-axis axis")
-            .attr("transform", "translate(0, 10)");
+            .attr("class", "x-axis axis x-grid")
+            .attr("transform", "translate(0, -10)");
 
         vis.svg.select(".x-axis").call(vis.xAxis);
 
@@ -52,7 +52,14 @@ class AgeRange {
 
         // Filter for gender
         vis.sex = d3.select("#gender").property("value")
-        vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+
+        // If "All" option is selected, do not filter
+        if (vis.sex == 'A') {
+            vis.displayData = vis.data;
+        } else {
+            // Filter if M or F is selected
+            vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+        }
 
         // Record ages for all athletes
         vis.allAgeData = {};
@@ -91,7 +98,7 @@ class AgeRange {
 
         vis.displayData.map(x => {
             if (x.Sport == sport) {
-                vis.ageData[x.Age] = (vis.ageData[x.Age] || 0) + 1
+                vis.ageData[`${x.Age}, ${x.Sex}`] = (vis.ageData[`${x.Age}, ${x.Sex}`] || 0) + 1
             }
         })
 
@@ -101,11 +108,17 @@ class AgeRange {
         vis.ages.enter().append("circle")
             .merge(vis.ages)
             .attr("class", "age-dot")
-            .attr("cx", d => vis.x(d[0]))
-            .attr("cy", 10)
+            .attr("cx", d => vis.x(d[0].split(", ")[0]))
+            .attr("cy", d => {
+                if (d[0].split(", ")[1] == "F") {
+                    return 15
+                } else {
+                    return 3
+                }
+            })
             .attr("r", d => vis.radius(d[1]))
             .attr("fill", d => {
-                if (vis.sex == "F") {
+                if (d[0].split(", ")[1] == "F") {
                     return "orange"
                 } else {
                     return "green"

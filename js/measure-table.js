@@ -20,7 +20,14 @@ class MeasureTable {
 
         // Update for gender
         vis.sex = d3.select("#gender").property("value")
-        vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+
+        // If "All" option is selected, do not filter
+        if (vis.sex == 'A') {
+            vis.displayData = vis.data;
+        } else {
+            // Filter if M or F is selected
+            vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+        }
 
         vis.updateVis();
     }
