@@ -1,18 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url("https://use.typekit.net/rfo7yex.css");
+
+:root {
+	--darkpurple: #100223;
+	--lighterpurple: #180237;
+	--yellow: #FBB22E;
+	--blue: #0286C3;
+	--green: #168C39;
+	--red: #EE2F4D;
+}
 
 body {
-	font-family: 'Roboto Light', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
 	font-weight: 300;
+	background-color: var(--lighterpurple);
+	color: #d1cde2;
 }
 
 h1 {
 	font-size: 36px;
-	font-family: Oswald, Arial, Helvetica, sans-serif;
-	color: #0286c3;
+	font-family: 'sofia-pro', sans-serif;
+	color: white;
+	font-weight: 400;
 }
 
 
 h2 {
+	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
 	color: #868686;
 	font-size: 20px;
 	font-weight: 300;
@@ -53,14 +67,14 @@ h2 {
 
 #title{
 	font-size: 40px;
-	font-family: Oswald, Arial, Helvetica, sans-serif;
-	color: #0286c3;
+	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
+	color: var(--blue);
 	margin-top: 40px;
 	margin-bottom: 10px;
 }
 
 #subtitle{
-	color: #ee2f4d;
+	color: var(--red);
 	font-size: 24px;
 	margin-bottom: 30px;
 	margin-top: 10px;
@@ -72,11 +86,11 @@ h2 {
 }
 
 .olympic-blue{
-	color: #0286c3;
+	color: var(--blue);
 }
 
 .background-grey {
-	background-color: #eeeeee;
+	background-color: var(--darkpurple);
 }
 
 #vis1-img{
@@ -121,7 +135,7 @@ h2 {
 	display: flex;
 	flex-direction: row;
 	height: 80vh;
-	background-color:whitesmoke;
+	background-color: #100223;
 	padding: 20px;
 	border-radius: 10px;
 	margin-top: 20px;
@@ -138,7 +152,11 @@ h2 {
 .bootstrap-table {
 	height: 90%;
 	overflow-y: scroll;
-	background-color: white;
+	background-color: #180237;
+}
+
+.table {
+	border-color: #180237;
 }
 
 
@@ -154,7 +172,7 @@ h2 {
 
 .weight-height-vis-container {
 	height: 60%;
-	background-color: #e9e9e9;
+	background-color: #180237;
 	padding: 17px;
 	border-radius: 10px;
 }
@@ -174,7 +192,7 @@ h2 {
 
 .gender-age-vis-container {
 	height: 18%;
-	background-color: #e9e9e9;
+	background-color: #180237;
 	padding: 17px;
 	border-radius: 10px;
 	margin-top: 2%;
@@ -446,4 +464,10 @@ h6 {
 #slider {
 	width: 70%;
 	margin-right: 20px;
+}
+
+
+#popularity-vis {
+	height: 70vh;
+	width: 100%;
 }

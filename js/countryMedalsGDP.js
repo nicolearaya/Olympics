@@ -234,9 +234,14 @@ class MedalGDPvis {
 
         // Create button to play
         vis.playButton = document.getElementById('play-button');
+
         vis.playButton.addEventListener('click', function () {
-            setInterval(update, 500);
-            rangeSlider.noUiSlider.set(1952)
+            var i = 0
+            for(i = 0; i <= 16; i++){
+                (function(i) {
+                    setTimeout(function() {rangeSlider.noUiSlider.set(1952 + (4 * i))}, 500 * i);
+                })(i);
+            }
         });
 
         // Create tooltip

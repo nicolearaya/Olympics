@@ -105,9 +105,7 @@
 
 <div id="slide4" class="slide">
     <div class="container-fluid justify-content-center align-self-center">
-        <h1 class="center ">Physical Distribution of Rio 2016 Athletes</h1>
-        <div class="athlete-stats-dashboard">
-            <div>
+        <h1 class="center ">Worldwide Physical Distribution of 2014 & 2016 Athletes</h1>
                 <div class="athlete-weight-height">
                     <div class="col-6">
                         <div class="toggle">
@@ -126,8 +124,8 @@
                         <table id="table" class="table sortable">
                             <thead>
                             <th data-sortable="true" data-field="sport">Sport</th>
-                            <th data-sortable="true" data-field="weight">Avg Weight</th>
-                            <th data-sortable="true" data-field="height">Avg Height</th>
+                            <th data-sortable="true" data-field="weight">Avg Weight (lb)</th>
+                            <th data-sortable="true" data-field="height">Avg Height (in)</th>
                             <th data-sortable="true" data-field="age">Avg Age</th>
                             </thead>
                             <tbody id="measure-table"></tbody>
@@ -148,9 +146,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div>
     </div>
 </div>
 <div id="slide5" class="slide background-grey">
@@ -212,7 +207,7 @@
                     <div><div class="africa"></div>Africa</div>
                 </div>
                 <div class="animation-toggle">
-                    <button id="play-button" onClick="medalGDPVis.play()">&#9654; Play</button>
+                    <button id="play-button">&#9654; Play</button>
                     <div class="slider-toggle">
                         <div id="slider"></div>
                         <div id="slider-range-value"></div>
@@ -290,6 +285,16 @@
     </div>
 </div>
 
+<div id="slide11" class="slide background-grey padding-top-thin">
+    <div class="container-fluid">
+        <h1 class="center padding-bottom">Popularity of Each Sport</h1>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-9"><div id="popularity-vis"></div></div>
+        </div>
+    </div>
+</div>
+
 
 </div>
 
@@ -313,6 +318,7 @@
 <script src="https://d3js.org/d3-time.v2.min.js"></script>
 
 
+<script src="js/main.js"></script>
 <script src="js/income-plot.js"></script>
 <script src="js/income-vis.js"></script>
 <script src="js/measure-vis.js"></script>
@@ -321,12 +327,12 @@
 <script src="js/parallel-coord-vis.js"></script>
 <script src="js/helpers.js"></script>
 <script src="js/host-medals-vis.js"></script>
-<script src="js/main.js"></script>
 <script src="js/countryMedalsGDP.js"></script>
 <script src="js/genderRatio.js"></script>
 <script src="js/ageRange.js"></script>
 <script src="js/nouislider.js"></script>
 <script src="js/wNumb.js"></script>
+<script src="js/popularity.js"></script>
 
 <!-- leaflet -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

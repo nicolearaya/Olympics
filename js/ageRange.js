@@ -23,12 +23,12 @@ class AgeRange {
 
         // Scales and axes
         vis.radius = d3.scaleSqrt()
-            .range([4, 10])
-            .domain([1, 10])
+            .range([2, 8])
+            .domain([1, 70])
 
         vis.x = d3.scaleLinear()
             .range([0, vis.width])
-            .domain([15,55]);
+            .domain([10,65]);
 
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
@@ -104,7 +104,6 @@ class AgeRange {
             .attr("cx", d => vis.x(d[0]))
             .attr("cy", 10)
             .attr("r", d => vis.radius(d[1]))
-            .attr("stroke", "black")
             .attr("fill", d => {
                 if (vis.sex == "F") {
                     return "orange"
