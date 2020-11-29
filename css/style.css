@@ -295,23 +295,20 @@ th {
 }
 
 h5 {
-	font-family: 'Roboto Light', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 }
 
 h6 {
+	font-family: 'Roboto Light', sans-serif;
 	font-size: 14px;
 }
 
-.host-country-wins {
+
+.income-plot-dashboard {
 	width: 100%;
-	display: flex;
-	flex-direction: row;
 	height: 70vh;
-	background-color:whitesmoke;
-	padding: 20px;
 	border-radius: 10px;
-	margin-top: 20px;
 }
 
 .hometown-map-dashboard {
@@ -405,7 +402,7 @@ h6 {
 }
 
 #toggleIncomePlot {
-	width: 120px;
+	width: 140px;
 	padding: 5px;
 	margin-left: 10px;
 }
@@ -415,6 +412,49 @@ h6 {
 	height: 80vh;
 	background-color: #e2e2e2;
 	border-radius: 10px;
+}
+
+.text-dark {
+	color: #1c1c1c;
+}
+
+.hostLegend {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 15%;
+}
+
+#hostVisLegend {
+	padding: 5px;
+}
+
+.host-country-wins {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 55vh;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.hostDashboard{
+	height: 70vh;
+	background-color:whitesmoke;
+	padding: 20px;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.hostBlueDot {
+	width: 12px;
+	height: 12px;
+	background-color: green;
+}
+
+.hostPlotLabel .incomePlotLabel {
+	color: #d1cde2;
 }
 
 .gdp-tooltip {
@@ -482,6 +522,12 @@ h6 {
 
 .padding-bottom-thin{
 	padding-bottom: 20px;
+}
+
+
+.income-plot-label {
+	font-size: 13px;
+	fill: #d1cde2;
 }
 
 .gdp-key div {

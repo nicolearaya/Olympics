@@ -7,7 +7,8 @@ let measureVis,
     ageRange,
     incomeVis,
     incomePlot,
-    parallelcoordVis;
+    parallelcoordVis,
+    hostMedalsVis;
 
 let bucketed = [];
 
@@ -176,6 +177,10 @@ function initIncomeVis(dataArray) {
     dataArray[1].forEach(row => {
         row.ESTIMATE = parseFloat(row.ESTIMATE.replace(/,/g, ''));
         incomeData.push(row)
+    })
+
+    dataArray[4].forEach( d => {
+        d.cost = +d.cost;
     })
     incomePlot = new IncomePlot("income-plot", dataArray[2]);
     hostMedalsVis = new HostMedalsVis("host-country-wins", dataArray[3], dataArray[4])
