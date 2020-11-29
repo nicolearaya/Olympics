@@ -18,7 +18,8 @@ let promises = [
     d3.csv("data/combined_roster.csv"),
     d3.csv("data/5Y2018_income.csv"),
     d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-    d3.csv("data/noc_regions.csv")
+    d3.csv("data/noc_regions.csv"),
+    d3.csv("data/popularity.csv")
 ];
 
 Promise.all(promises)
@@ -32,6 +33,7 @@ function loadVis(data) {
     let incomeData = data[2];
     let geoData = data[3];
     let regionData = data[4];
+    let popularityData = data[5]
 
     // Prepare athlete data
     let cleanAthlete = [];
@@ -51,12 +53,6 @@ function loadVis(data) {
 
     cleanAthlete = _.uniqBy(cleanAthlete, function(athlete) { return [athlete.Sport, athlete.ID].join(); });
 
-
-    genderRatio = new GenderRatio("gender-ratio", cleanAthlete);
-    ageRange = new AgeRange("age-range", cleanAthlete)
-
-    measureVis = new MeasureVis("measure-vis", cleanAthlete);
-    measureTable = new MeasureTable("measure-table", cleanAthlete);
     physicalVis = new PhysicalVis("user-physical-trait-vis", cleanAthlete);
 
     // Prepare hometown data
@@ -111,6 +107,9 @@ function loadVis(data) {
     athleteData.forEach(athlete => {
         if (athlete.Height != "NA" && athlete.Weight != "NA") {
             if (athlete.Year == 2016 || athlete.Year == 2014) {
+                if (athlete.Sport == 'Athletics') {athlete.Sport = 'Track & Field'};
+                if (athlete.Sport == 'Hockey') {athlete.Sport = 'Field Hockey'};
+
                 if (athlete.Year == 2016 && athlete.Team == "United States") {
                     cleanGlobalPhysical.push(athlete)
                 } else {
@@ -138,9 +137,19 @@ function loadVis(data) {
         d.NOC = regionData.find(country => country.NOC == d.NOC).region;
     })
 
+    let cleanedPhysical = _.uniqBy(cleanGlobalPhysical, function(athlete) { return [athlete.Sport, athlete.ID].join(); });
+
+    // Init vis for physical measurements
+    genderRatio = new GenderRatio("gender-ratio", cleanedPhysical);
+    ageRange = new AgeRange("age-range", cleanedPhysical)
+    measureVis = new MeasureVis("measure-vis", cleanedPhysical);
+    measureTable = new MeasureTable("measure-table", cleanedPhysical);
 
     // Init parallel coord vis
     parallelcoordVis = new ParallelCoordVisVis("parallel-coord-vis", cleanGlobalPhysical, cleanGlobalGold);
+
+    // Init vis for popularity stats
+    popularityVis = new PopularityVis("popularity-vis", popularityData)
 };
 
 

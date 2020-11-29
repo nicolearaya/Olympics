@@ -72,9 +72,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="userHeight" class="col-sm-4 col-form-label">Height (in)</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="userInput" id="userHeight" placeholder="e.g. 70">
+                            <label for="userHeightFt" class="col-sm-4 col-form-label">Height</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="col-sm-3 userInput" id="userHeightFt" placeholder="e.g. 5">
+                                <label for="userHeightFt" class="col-sm-1">ft</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="col-sm-3 userInput" id="userHeightIn" placeholder="e.g. 10">
+                                <label for="userHeightIn" class="col-sm-1">in</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -100,15 +105,14 @@
 
 <div id="slide4" class="slide">
     <div class="container-fluid justify-content-center align-self-center">
-        <h1 class="center ">Physical Distribution of Rio 2016 Athletes</h1>
-        <div class="athlete-stats-dashboard">
-            <div>
+        <h1 class="center ">Worldwide Physical Distribution of 2014 & 2016 Athletes</h1>
                 <div class="athlete-weight-height">
-                    <div class="col-6">
+                    <div class="col-6 measures-left">
                         <div class="toggle">
                             <div>
                                 <span>Toggle by Sex: </span>
                                 <select id="gender" onchange="measureVis.wrangleData(); measureTable.wrangleData(); ageRange.wrangleData()">
+                                    <option value="A">All</option>
                                     <option value="F">Female</option>
                                     <option value="M">Male</option>
                                 </select>
@@ -118,34 +122,31 @@
                                 <div class="orange"></div><span>Female</span>
                             </div>
                         </div>
-                        <table id="table" class="table sortable">
+                        <table id="table" class="table sortable"   data-height="500">
                             <thead>
-                            <th data-sortable="true" data-field="sport">Sport</th>
-                            <th data-sortable="true" data-field="weight">Avg Weight</th>
-                            <th data-sortable="true" data-field="height">Avg Height</th>
-                            <th data-sortable="true" data-field="age">Avg Age</th>
+                                <th data-sortable="true" data-field="sport" data-width="30" data-width-unit="%">Sport</th>
+                                <th data-sortable="true" data-field="weight" data-width="25" data-width-unit="%">Avg Weight (lb)</th>
+                                <th data-sortable="true" data-field="height" data-width="25" data-width-unit="%">Avg Height (in)</th>
+                                <th data-sortable="true" data-field="age" data-width="20" data-width-unit="%">Avg Age</th>
                             </thead>
                             <tbody id="measure-table"></tbody>
                         </table>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 measures-right">
                         <div class="weight-height-vis-container">
-                            <h2>Athlete Weight & Height by Sport</h2>
+                            <h3>Athlete Weight & Height by Sport</h3>
                             <div id="measure-vis"></div>
                         </div>
                         <div class="gender-age-vis-container">
-                            <h2>Age Distribution of Athletes</h2>
+                            <h3>Age Distribution of Athletes</h3>
                             <div id="age-range"></div>
                         </div>
                         <div class="gender-age-vis-container">
-                            <h2>Gender Ratio for Sport</h2>
+                            <h3>Gender Ratio for Sport</h3>
                             <div id="gender-ratio"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div>
     </div>
 </div>
 <div id="slide5" class="slide background-grey">
@@ -199,10 +200,22 @@
                 <h2>How does a country's wealth affect the probability of winning medals?</h2>
                 <div>This does seem to be a wider trend. <strong>Countries with higher GDP have won more olympic medals over the years.</strong></div>
                 <br/>
-                <div><i>To Do:</br>Add key: Orange for Eastern Asian countries, Red for Russia/North Korea, Dark Blue for Europe, Light Blue for North America, Yellow for African countries, and Green for Latin American countries</br>Add play function to loop through range slider</i></div><br/><br/>
 
-                <div id="slider"></div>
-                <div id="slider-range-value"></div>
+                <div class="gdp-key">
+                    <div><div class="western"></div>EU & NATO</div>
+                    <div><div class="russia"></div>Former USSR</div>
+                    <div><div class="east-asia"></div>East Asia</div>
+                    <div><div class="central-asia"></div>Central & West Asia</div>
+                    <div><div class="latin-america"></div>Latin America</div>
+                    <div><div class="africa"></div>Africa</div>
+                </div>
+                <div class="animation-toggle">
+                    <button id="play-button">&#9654; Play</button>
+                    <div class="slider-toggle">
+                        <div id="slider"></div>
+                        <div id="slider-range-value"></div>
+                    </div>
+                </div>
             </div>
             <div class="col-8 center">
                 <div id="gdp-vis"></div>
@@ -266,7 +279,7 @@
                         <div id="sport-table"></div>
                     </div>
                 </div>
-                <h5 class="padding-top-thin">Sports are assigned a GOLD, SILVER, BRONZE ranking based on their level of accessibility, which we calculated based on level of female representation and the range of athletes' ages, heights, and weights.</h5>
+                <h5 class="padding-top-thin">Sports are assigned a GOLD, SILVER, BRONZE ranking based on their level of accessibility, which we calculated based on the number of different countries winning, gender ratio, and the range of athletes' ages, heights, and weights. Hover over the lines to see which sport they represent.</h5>
             </div>
         </div>
     </div>
@@ -288,6 +301,16 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div id="slide11" class="slide background-grey padding-top-thin">
+    <div class="container-fluid">
+        <h1 class="center padding-bottom">Popularity of Each Sport</h1>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-9"><div id="popularity-vis"></div></div>
+        </div>
     </div>
 </div>
 
@@ -315,6 +338,7 @@
 <script src="https://d3js.org/d3-time.v2.min.js"></script>
 
 
+<script src="js/main.js"></script>
 <script src="js/income-plot.js"></script>
 <script src="js/income-vis.js"></script>
 <script src="js/measure-vis.js"></script>
@@ -323,12 +347,12 @@
 <script src="js/parallel-coord-vis.js"></script>
 <script src="js/helpers.js"></script>
 <script src="js/host-medals-vis.js"></script>
-<script src="js/main.js"></script>
 <script src="js/countryMedalsGDP.js"></script>
 <script src="js/genderRatio.js"></script>
 <script src="js/ageRange.js"></script>
 <script src="js/nouislider.js"></script>
 <script src="js/wNumb.js"></script>
+<script src="js/popularity.js"></script>
 
 <!-- leaflet -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

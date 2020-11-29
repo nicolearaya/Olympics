@@ -74,7 +74,14 @@ class MeasureVis {
 
         // Get selected gender
         vis.sex = d3.select("#gender").property("value")
-        vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+
+        // If "All" option is selected, do not filter
+        if (vis.sex == 'A') {
+            vis.displayData = vis.data;
+        } else {
+            // Filter if M or F is selected
+            vis.displayData = vis.data.filter(x => {return x.Sex == vis.sex})
+        }
 
         // Update domains
         vis.x.domain(d3.extent(vis.displayData.map(x => +x.Weight)));
@@ -86,13 +93,13 @@ class MeasureVis {
 
         // Scale for radius of circles
         vis.radius = d3.scaleSqrt()
-            .range([4, 10])
-            .domain([1, 10])
+            .range([2, 6])
+            .domain([1, 50])
 
         // Record height/weight frequencies for all athletes
         vis.allHeightWeightData = {};
         vis.displayData.map(x => {
-            vis.allHeightWeightData[`${x.Weight}, ${x.Height}`] = (vis.allHeightWeightData[`${x.Weight}, ${x.Height}`] || 0) + 1
+            vis.allHeightWeightData[`${~~x.Weight}, ${~~x.Height}`] = (vis.allHeightWeightData[`${~~x.Weight}, ${~~x.Height}`] || 0) + 1
         })
 
         vis.dots = vis.svg.selectAll(".all-height-weight-dot")
@@ -125,12 +132,9 @@ class MeasureVis {
 
         vis.displayData.map(x => {
             if (x.Sport == sport) {
-                vis.heightWeightData[`${x.Weight}, ${x.Height}`] = (vis.heightWeightData[`${x.Weight}, ${x.Height}`] || 0) + 1
+                vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}, ${x.Sex}`] = (vis.heightWeightData[`${~~x.Weight}, ${~~x.Height}, ${x.Sex}`] || 0) + 1
             }
         })
-
-        //console.log(sport)
-        //console.log(vis.heightWeightData)
 
         vis.heightWeight = vis.svg.selectAll(".height-weight-dot")
             .data(Object.entries(vis.heightWeightData))
@@ -138,19 +142,21 @@ class MeasureVis {
         vis.heightWeight.enter().append("circle")
             .merge(vis.heightWeight)
             .attr("class", "height-weight-dot")
+            .style("opacity", 1)
+
+        vis.heightWeight.transition().duration(500)
             .attr("cx", d => vis.x(d[0].split(", ")[0]))
             .attr("cy", d => vis.y(d[0].split(", ")[1]))
             .attr("r", d => vis.radius(d[1]))
-            .attr("stroke", "black")
             .attr("fill", d => {
-                if (vis.sex == "F") {
+                if (d[0].split(", ")[2] == "F") {
                     return "orange"
                 } else {
                     return "green"
                 }
             })
 
-        vis.heightWeight.exit().remove();
+        vis.heightWeight.exit().transition().style("opacity", .2).remove();
 
 
 

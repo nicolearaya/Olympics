@@ -112,7 +112,6 @@ class IncomePlotDataWrangling {
             })
             */
 
-            console.log(vis.filteredData)
 
             vis.incomeData.forEach( d => {
                 d.GEOID = +d.GEOID
@@ -253,7 +252,6 @@ class IncomePlotDataWrangling {
         d3.csv("data/final_income_plot_data.csv", function(d) {
             return d;
         }, function(error, rows) {
-            console.log(rows);
         })
 
         var myData = null;
@@ -261,12 +259,10 @@ class IncomePlotDataWrangling {
         d3.csv("data/final_income_plot_data.csv")
             .row(function(d) { return {key: d.key, value: d.value}; })
             .get(function(error, rows) {
-                console.log(rows);
                 myData = rows;// Now you can assign it
                 myDataIsReady()// Now you can draw it
             });
 
-        console.log(myData);// will trace null
 
         function myDataIsReady() {
             console.log(myData);// will trace the data that was loaded

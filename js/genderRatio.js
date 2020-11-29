@@ -33,12 +33,16 @@ class GenderRatio {
             .ticks(4);
 
         vis.svg.append("line")
+            .attr("class", "gender-line")
             .attr("x1", vis.width / 2)
-            .attr("y1", -10)
+            .attr("y1", -20)
             .attr("x2", vis.width / 2)
-            .attr("y2", 20)
-            .style("stroke", "black")
-            .style("stroke-dasharray", ("3, 3"))
+            .attr("y2", 30)
+
+        vis.svg.append('rect')
+            .attr("width", vis.width)
+            .attr("height", 5)
+            .attr("fill", "rgba(255,255,255,.1)")
 
         vis.wrangleData();
 
@@ -74,7 +78,7 @@ class GenderRatio {
             .attr("x", 0)
             .attr("y", 0)
             .attr("width", vis.x(vis.femalePercent))
-            .attr("height", 10)
+            .attr("height", 5)
             .attr("fill", "orange")
 
         // Append male count rectangle
@@ -82,21 +86,21 @@ class GenderRatio {
             .attr("x", vis.x(vis.femalePercent))
             .attr("y", 0)
             .attr("width", vis.x(1 - vis.femalePercent))
-            .attr("height", 10)
+            .attr("height", 5)
             .attr("fill", "green")
 
         vis.svg.append("text")
             .attr("class", "count")
             .text(vis.femaleCount + " Female Athletes")
-            .attr("font-size", 10)
-            .attr("y", 20)
+            .attr("font-size", 12)
+            .attr("y", 24)
 
         vis.svg.append("text")
             .attr("class", "count")
             .text(vis.maleCount + " Male Athletes")
-            .attr("font-size", 10)
+            .attr("font-size", 12)
             .attr("x", vis.width)
-            .attr("y", 20)
+            .attr("y", 24)
             .attr("text-anchor", "end")
 
     }
