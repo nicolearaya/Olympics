@@ -73,13 +73,11 @@
                         </div>
                         <div class="form-group row">
                             <label for="userHeightFt" class="col-sm-4 col-form-label">Height</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="col-sm-3 userInput" id="userHeightFt" placeholder="e.g. 5">
-                                <label for="userHeightFt" class="col-sm-1">ft</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="col-sm-3 userInput" id="userHeightIn" placeholder="e.g. 10">
-                                <label for="userHeightIn" class="col-sm-1">in</label>
+                            <div class="col-sm-8" style="display: flex; height: 100%">
+                                <input type="text" class="userInput" id="userHeightFt" placeholder="e.g. 5" style="width:25%">
+                                <label for="userHeightFt" style="width:10%">ft</label>
+                                <input type="text" class="userInput" id="userHeightIn" placeholder="e.g. 10" style="width:25%">
+                                <label for="userHeightIn" style="width:10%">in</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -94,9 +92,11 @@
             </div>
             <div class="col-7 user-physical-trait">
                 <div class="user-input-header">
-                    <h2>Olympic athletes' traits: </h2>
+                    <h2>2016 US Olympic athletes' traits: </h2>
                 </div>
-                <div id="user-physical-trait-vis" style="height: 100%"></div>
+                <div id="user-physical-trait-vis" style="height: 100%">
+                    <div id="hover-instruct" style="display: none">Hover over the circle to find out!</div>
+                </div>
             </div>
         </div>
         <h5 class="center padding-top-thin">We are able to guess which sport you’d play based on the fact that each sport advantages a different physique, gender, or age. We can see how certain sports are more inclusive and diverse than others in terms of these physical attributes.</h5>

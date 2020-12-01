@@ -2,7 +2,7 @@ class PhysicalVis {
     constructor(parentElement, data) {
         this.parentElement = parentElement;
         this.data = data;
-        this.displaydata = data;
+        this.displayData = data;
 
         this.initVis();
     }
@@ -23,15 +23,6 @@ class PhysicalVis {
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // Find averages of each sport
-        function femaleCount (d) {
-           if (d.Sex === "F") {
-                return 1
-            } else {
-                return NaN
-            }
-        }
-
         vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
 
         // Draw circles
@@ -47,7 +38,6 @@ class PhysicalVis {
         vis.sportColors = vis.sportInfo.map(function (val, i) {
             return [val[0], vis.colors[i]];
         });
-        //console.log(vis.sportColors)
 
         // Init circle nodes at center of the page (Source: https://www.d3-graph-gallery.com/graph/circularpacking_basic.html)
         vis.node = vis.svg.append("g")
@@ -64,6 +54,7 @@ class PhysicalVis {
                 }
             })
             .attr("opacity", 0.5);
+
 
         //Add tooltip
         vis.tooltip = d3.select("body").append("div")
@@ -101,7 +92,7 @@ class PhysicalVis {
             });
 
         // Add sports labels
-        vis.labels = vis.svg.append("g")
+        vis.label = vis.svg.append("g")
             .attr("class", "node-labels")
             .selectAll("text")
             .data(vis.sportInfo)
@@ -110,6 +101,8 @@ class PhysicalVis {
             .attr("display", d => {
                 if (d[1]["NumAthletes"] < 25) {
                     return "none"
+                } else {
+                    return "null"
                 }
             })
             .attr("font-size", d => {
@@ -144,7 +137,7 @@ class PhysicalVis {
                     .attr("cy", d => d.y)
                     .attr("r", d => vis.rScale(d[1]["NumAthletes"]))
 
-                vis.labels
+                vis.label
                     .attr("x", d => d.x)
                     .attr("y", d => d.y)
                     .text(d => {
@@ -156,6 +149,7 @@ class PhysicalVis {
                     })
             });
 
+
     }
 
 
@@ -164,29 +158,31 @@ class PhysicalVis {
 
         // Get user input
         vis.user = {};
+        let HeightFt;
 
         $(".userInput").each(function() {
             if ($(this).val() === '') {
                 alert("Input values in all fields before clicking 'Find'");
                 return false;
             } else {
-                var type = $(this).attr("id").slice(4,);
-                var val = $(this).val();
-                vis.user[type] = val;
+                let type = $(this).attr("id").slice(4,);
+                if (type === "HeightFt") {
+                    HeightFt = +$(this).val()
+                } else {
+                    let val = $(this).val();
+                    // convert feet and inches input into just inches
+                    if (type === "HeightIn") {
+                        val = +val + 12*HeightFt
+                        type = "Height"
+                    }
+                    vis.user[type] = val;
+                }
             }
         });
-        console.log(vis.user)
 
-        let differences = {}
+        // Check user's gender against most common gender of athletes for each sport
+        let genderMatch;
         vis.sportInfo.forEach(sport => {
-
-            // Check user's physical traits against averages of each sport
-            let ageDiff = Math.abs(sport[1].Age - vis.user.Age)
-            let heightDiff = Math.abs(sport[1].Height - vis.user.Height)
-            let weightDiff = Math.abs(sport[1].Weight - vis.user.Weight)
-            let genderMatch;
-
-            // Check user's gender against most common gender of athletes for each sport
             if (sport[1].Female < 0.5 && vis.user.Gender === "Male") {
                 genderMatch = 0
             } else if (sport[1].Female > 0.5 && vis.user.Gender === "Female") {
@@ -196,12 +192,26 @@ class PhysicalVis {
             } else {
                 genderMatch = 1
             }
+        })
+
+        // Filter data for gender based on user input
+        vis.displayData = vis.data.filter(x => {return x.Sex === vis.user.Gender.charAt(0)})
+        vis.filteredInfo = d3.rollups(vis.displayData, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
+
+        // Sum up the difference in value for the user's inputs and the averages of each sport
+        let differences = {}
+        vis.filteredInfo.forEach(sport => {
+
+            // Check user's physical traits against averages of each sport
+            let ageDiff = Math.abs(sport[1].Age - +vis.user.Age)
+            let heightDiff = Math.abs(sport[1].Height - +vis.user.Height)
+            let weightDiff = Math.abs(sport[1].Weight - +vis.user.Weight)
 
             differences[sport[0]] = ageDiff + heightDiff + weightDiff + genderMatch;
 
         })
 
-        // Find sport that matches user's traits the most
+        // Find sport that matches user's traits the most based on smallest deviation from average values
         let minDiff = Math.min(...Object.values(differences));
         vis.userSport = Object.keys(differences).find(key => differences[key] === minDiff);
 
@@ -212,12 +222,18 @@ class PhysicalVis {
     updateVis() {
         let vis = this;
 
+        // Display hover instruction
+        hovertext.style.display = "block";
+
         // Update node position and labels
         vis.displayData = vis.sportInfo.filter(function(d){
                 return d[0] === vis.userSport;
             })
 
         vis.node.data(vis.displayData, d=> d[0])
+            .exit().remove();
+
+        vis.label.data(vis.displayData, d=> d[0])
             .exit().remove();
 
         vis.simulation = d3.forceSimulation(vis.displayData)
@@ -232,7 +248,7 @@ class PhysicalVis {
                     .attr("cy", d => d.y)
                     .attr("r", 60)
 
-                vis.labels
+                vis.label
                     .attr("x", d => d.x)
                     .attr("y", d => d.y)
                     .attr("display", d=> {
@@ -249,5 +265,42 @@ class PhysicalVis {
                     .attr("font-size", "16px");
             });
 
+        vis.updateAgain()
+    }
+
+    updateAgain() {
+        let vis = this;
+
+        // Revert nodes to original position and let user input values multiple times
+        let count = 0;
+        let inputs = ["userAge", "userGender", "userWeight", "userHeightFt", "userHeightIn"];
+        inputs.forEach(i => {
+            document.getElementById(i).onchange = function() {
+                count += 1;
+
+                if (count === 1) {
+
+                    // Hide hover instructions
+                    hovertext.style.display = "none";
+
+                    let parent = document.getElementById(vis.parentElement);
+                    while (parent.firstChild) {
+                        console.log("here")
+                        parent.firstChild.remove();
+                    }
+                    vis.initVis();
+                }
+        }})
+
+    }
+
+}
+
+// Find averages of each sport
+function femaleCount (d) {
+    if (d.Sex === "F") {
+        return 1
+    } else {
+        return NaN
     }
 }

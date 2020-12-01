@@ -3,6 +3,7 @@
 let measureVis,
     measureTable,
     physicalVis,
+    hovertext,
     genderRatio,
     ageRange,
     incomeVis,
@@ -143,9 +144,9 @@ function loadVis(data) {
 };
 
 
+hovertext = document.getElementById("hover-instruct");
 function physicalUpdate(){
-    document.getElementById("btn-physical").disabled = true;
-    physicalVis.wrangleData()
+    physicalVis.wrangleData();
 }
 
 // load data using promises
