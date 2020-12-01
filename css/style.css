@@ -1,20 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url("https://use.typekit.net/rfo7yex.css");
+
+:root {
+	--darkpurple: #0c0223;
+	--lighterpurple: #15042d;
+	--yellow: #FBB22E;
+	--blue: #0286C3;
+	--green: #168C39;
+	--red: #EE2F4D;
+	--gray: #868686;
+	--offwhite: rgba(255,255,255,.9);
+	--lighteroverlay: rgba(255,255,255,.04)
+}
 
 body {
-	font-family: 'Roboto Light', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
 	font-weight: 300;
+	background-color: var(--lighterpurple);
+	color: #d1cde2;
 }
 
 h1 {
 	font-size: 36px;
-	font-family: Oswald, Arial, Helvetica, sans-serif;
-	color: #0286c3;
+	font-family: 'sofia-pro', sans-serif;
+	color: white;
+	font-weight: 400;
 }
 
 
 h2 {
-	color: #868686;
+	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
+	color: var(--offwhite);
 	font-size: 20px;
+	font-weight: 300;
+}
+
+h3 {
+	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
+	color: var(--offwhite);
+	font-size: 15px;
 	font-weight: 300;
 }
 
@@ -53,14 +77,14 @@ h2 {
 
 #title{
 	font-size: 40px;
-	font-family: Oswald, Arial, Helvetica, sans-serif;
-	color: #0286c3;
+	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
+	color: var(--blue);
 	margin-top: 40px;
 	margin-bottom: 10px;
 }
 
 #subtitle{
-	color: #ee2f4d;
+	color: var(--red);
 	font-size: 24px;
 	margin-bottom: 30px;
 	margin-top: 10px;
@@ -72,11 +96,11 @@ h2 {
 }
 
 .olympic-blue{
-	color: #0286c3;
+	color: var(--blue);
 }
 
 .background-grey {
-	background-color: #eeeeee;
+	background-color: var(--darkpurple);
 }
 
 #vis1-img{
@@ -105,14 +129,14 @@ h2 {
 .svgTitle {
 	font-family: 'Roboto Light', sans-serif;
 	font-weight: 300;
-	color: #868686;
+	color: var(--gray);
 	font-size: 20px;
 }
 
 .axis line,
 .axis path {
 	fill: none;
-	stroke: #555;
+	stroke: var(--gray);
 	shape-rendering: crispEdges;
 }
 
@@ -121,10 +145,17 @@ h2 {
 	display: flex;
 	flex-direction: row;
 	height: 80vh;
-	background-color:whitesmoke;
-	padding: 20px;
-	border-radius: 10px;
+	border-radius: 7px;
 	margin-top: 20px;
+}
+
+.measures-left {
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border: 1px solid var(--lighteroverlay);
+	background-color: var(--lighteroverlay);
 }
 
 .athlete-gender-age {
@@ -135,12 +166,67 @@ h2 {
 	padding: 20px;
 }
 
-.bootstrap-table {
-	height: 90%;
-	overflow-y: scroll;
-	background-color: white;
+.toggle {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
 }
 
+.bootstrap-table {
+	overflow-y: scroll;
+	border-radius: 5px;
+	background-color: var(--lighterpurple);
+	color: var(--offwhite);
+	width: 100%;
+}
+
+.fixed-table-container {
+	width: 100%;
+}
+
+table.table-bordered{
+	border: none;
+}
+
+.fixed-table-border{
+	border: none;
+}
+.bootstrap-table .fixed-table-container.fixed-height .table thead th + th {
+	border: none;
+	box-shadow: 4px 0 0px -2px var(--lighterpurple) inset;
+}
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer) {
+	border-bottom: none;
+}
+
+.fixed-table-footer {
+	display: none;
+}
+
+thead {
+	border-radius: 0;
+	border: 2px solid var(--lighterpurple);
+}
+
+table.table-bordered > thead > tr > th{
+	border: none;
+}
+table.table-bordered > tbody > tr > td{
+	border: none;
+}
+
+th {
+	font-weight: 300;
+	font-size: 14px;
+	background-color: var(--lighteroverlay)
+}
+
+.header{
+	position:sticky;
+	top: 0 ;
+}
 
 #gender-ratio {
 	width: 100%;
@@ -154,9 +240,21 @@ h2 {
 
 .weight-height-vis-container {
 	height: 60%;
-	background-color: #e9e9e9;
+	background-color: var(--darkpurple);
 	padding: 17px;
-	border-radius: 10px;
+	border-radius: 5px;
+}
+
+.weight-height-vis-container h2, .gender-age-vis-container h2 {
+	color: var(--offwhite);
+}
+
+.gender-age-vis-container {
+	height: 18%;
+	background-color: var(--darkpurple);
+	padding: 17px;
+	border-radius: 5px;
+	margin-top: 2%;
 }
 
 .weight-height-header {
@@ -172,13 +270,6 @@ h2 {
 	height: 85%;
 }
 
-.gender-age-vis-container {
-	height: 18%;
-	background-color: #e9e9e9;
-	padding: 17px;
-	border-radius: 10px;
-	margin-top: 2%;
-}
 
 #userAge, #userGender, #userHeight, #userWeight {
 	display: flex;
@@ -190,7 +281,7 @@ h2 {
 }
 
 .btn-physical {
-	background-color: #0286c3;
+	background-color: var(--blue);
 	border: none;
 	font-family: 'Roboto', sans-serif;
 }
@@ -204,23 +295,20 @@ h2 {
 }
 
 h5 {
-	font-family: 'Roboto Light', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 }
 
 h6 {
+	font-family: 'Roboto Light', sans-serif;
 	font-size: 14px;
 }
 
-.host-country-wins {
+
+.income-plot-dashboard {
 	width: 100%;
-	display: flex;
-	flex-direction: row;
 	height: 70vh;
-	background-color:whitesmoke;
-	padding: 20px;
 	border-radius: 10px;
-	margin-top: 20px;
 }
 
 .hometown-map-dashboard {
@@ -257,13 +345,6 @@ h6 {
 .q7-9 { fill:rgb(8,81,156); }
 .q8-9 { fill:rgb(8,48,107); }
 
-.toggle {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	height: 10%;
-}
 
 .color-key {
 	display: flex;
@@ -289,8 +370,30 @@ h6 {
 }
 
 #gender {
-	padding: 5px;
+	padding: 10px;
 	margin-left: 10px;
+	background-color: var(--lighteroverlay);
+	border-radius: 5px;
+	border: none;
+	color: var(--offwhite);
+	font-weight: 400;
+}
+
+.x-grid path {
+	stroke: none;
+}
+
+.x-grid .tick line {
+	stroke: rgba(255,255,255,.1)
+}
+
+.gender-line {
+	stroke: rgba(255,255,255,.1)
+}
+
+.count {
+	fill: rgba(255,255,255,.4);
+	font-weight: 300;
 }
 
 #toggleIncomePlotLabel {
@@ -299,7 +402,7 @@ h6 {
 }
 
 #toggleIncomePlot {
-	width: 120px;
+	width: 140px;
 	padding: 5px;
 	margin-left: 10px;
 }
@@ -307,8 +410,51 @@ h6 {
 #gdp-vis {
 	width: 100%;
 	height: 80vh;
-	background-color: #d9d9d9;
+	background-color: #e2e2e2;
 	border-radius: 10px;
+}
+
+.text-dark {
+	color: #1c1c1c;
+}
+
+.hostLegend {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 15%;
+}
+
+#hostVisLegend {
+	padding: 5px;
+}
+
+.host-country-wins {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 55vh;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.hostDashboard{
+	height: 70vh;
+	background-color:whitesmoke;
+	padding: 20px;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.hostBlueDot {
+	width: 12px;
+	height: 12px;
+	background-color: green;
+}
+
+.hostPlotLabel .incomePlotLabel {
+	color: #d1cde2;
 }
 
 .gdp-tooltip {
@@ -376,4 +522,86 @@ h6 {
 
 .padding-bottom-thin{
 	padding-bottom: 20px;
+}
+
+
+.income-plot-label {
+	font-size: 13px;
+	fill: #d1cde2;
+}
+
+.gdp-key div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.gdp-key div div {
+	width: 12px;
+	height: 12px;
+	margin-right: 10px;
+}
+
+.western {
+	background-color: #b0b0b0;
+}
+
+.russia {
+	background-color: #C44D5B;
+}
+
+.east-asia {
+	background-color: #FE7F2D;
+}
+
+.central-asia {
+	background-color: #A1C181;
+}
+
+.latin-america {
+	background-color: #233D4D;
+}
+
+.africa {
+	background-color: #FCCA46;
+}
+
+#play-button {
+	border: none;
+	border-radius: 5px;
+	background-color: #dbdbdb;
+	padding: 10px 20px;
+	color: #676767;
+	font-weight: 300;
+}
+
+#play-button {
+	cursor: pointer;
+}
+
+.animation-toggle {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.slider-toggle {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+#slider {
+	width: 70%;
+	margin-right: 20px;
+}
+
+
+#popularity-vis {
+	height: 70vh;
+	width: 100%;
 }

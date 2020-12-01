@@ -218,7 +218,7 @@ class IncomeVis {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div>
+                     <div class="text-dark">
                          <h5>${d.properties.name}<h3>
                          <h6>Total number of athletes: ${vis.stateInfo[d.properties.name].athleteCount}</h6>
                          <h6><u>Top Sports:</u></h6>
