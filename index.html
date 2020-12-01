@@ -156,7 +156,15 @@
 
         <div class="row hometown-map-dashboard">
             <!-- LEFT -->
-            <div class="col-8 center">
+
+            <div class="col-8 center hometown-map-left">
+                <div class="row">
+                    <span id="toggleIncomeMapLabel">Income Gradient:</span>
+                    <select id="toggleIncomeMap" onchange="incomeVis.updateVis()">
+                        <option value="On">On</option>
+                        <option value="Off">Off</option>
+                    </select>
+                </div>
                 <div id="household-income-map"></div>
             </div>
 
@@ -199,7 +207,7 @@
             <div class="col-4">
                 <h1 class="padding-bottom">Country Wins VS GDP</h1>
                 <h2>How does a country's wealth affect the probability of winning medals?</h2>
-                <div>This does seem to be a wider trend. <strong>Countries with higher GDP have won more olympic medals over the years.</strong></div>
+                <div>This does seem to be a wider trend. <strong>As countries increase their GDP, the number of medals they win increases.</strong></div>
                 <br/>
 
                 <div class="gdp-key">

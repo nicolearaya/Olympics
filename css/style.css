@@ -280,6 +280,15 @@ th {
 	color: #666e76;
 }
 
+#user-physical-trait-vis {
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+	border: 1px solid var(--lighteroverlay);
+	background-color: var(--lighteroverlay);
+}
+
 .btn-physical {
 	background-color: var(--blue);
 	border: none;
@@ -301,7 +310,7 @@ h5 {
 
 h6 {
 	font-family: 'Roboto Light', sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 
@@ -310,6 +319,8 @@ h6 {
 	height: 70vh;
 	border-radius: 10px;
 }
+
+/*Slide 5: Athlete hometown map*/
 
 .hometown-map-dashboard {
 	width: 100%;
@@ -327,8 +338,16 @@ h6 {
 #incomeMapTooltip, #parallelTooltip {
 	border: thin solid grey;
 	border-radius: 5px;
-	background: white;
+	background: var(--darkpurple);
 	padding: 15px;
+}
+
+#income-map-tooltip-title {
+	color: #ee2f4d;
+}
+
+.text-light {
+	color: #d1cde2;
 }
 
 #income-map-text {
@@ -338,13 +357,38 @@ h6 {
 .q0-9 { fill:rgb(247,251,255); }
 .q1-9 { fill:rgb(222,235,247); }
 .q2-9 { fill:rgb(198,219,239); }
-.q3-9 { fill:rgb(158,202,225); }
-.q4-9 { fill:rgb(107,174,214); }
+.q3-9 { fill: rgb(158, 202, 225); }
+.q4-9 { fill: rgb(107, 174, 214); }
 .q5-9 { fill:rgb(66,146,198); }
 .q6-9 { fill:rgb(33,113,181); }
-.q7-9 { fill:rgb(8,81,156); }
-.q8-9 { fill:rgb(8,48,107); }
+.q7-9 { fill: rgb(8, 81, 156); }
+.q8-9 { fill: rgb(8, 48, 107); }
 
+.income-legend-label {
+	fill: #d1cde2;
+	font-size: 13px;
+}
+
+.hometown-map-left {
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border: 1px solid var(--lighteroverlay);
+	background-color: var(--lighteroverlay);
+}
+
+#toggleIncomeMap {
+	padding: 5px;
+	width: 10%;
+	height:90%;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+#toggleIncomeMapLabel {
+	margin-left: 10px;
+}
 
 .color-key {
 	display: flex;
@@ -412,10 +456,6 @@ h6 {
 	height: 80vh;
 	background-color: #e2e2e2;
 	border-radius: 10px;
-}
-
-.text-dark {
-	color: #1c1c1c;
 }
 
 .hostLegend {
@@ -605,3 +645,4 @@ h6 {
 	height: 70vh;
 	width: 100%;
 }
+

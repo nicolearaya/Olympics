@@ -15,7 +15,7 @@ class IncomeVis {
         let vis = this;
 
         //margin conventions, title, tooltip, legend, and scales
-        vis.margin = {top: 30, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 10, right: 20, bottom: 3, left: 10};
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
         vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
@@ -23,8 +23,7 @@ class IncomeVis {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate(${vis.margin.left/2}, 0)`)
-            .attr('transform', `translate (${vis.margin.left/2}, 0)`);
+            .attr('transform', `translate(${vis.margin.left/2}, 0)`);
 
         vis.projection = d3.geoAlbersUsa();
         vis.path = d3.geoPath().projection(vis.projection);
@@ -35,6 +34,7 @@ class IncomeVis {
         vis.viewpoint = {'width': 975, 'height': 610};
         vis.zoom = (vis.width - 100) / vis.viewpoint.width;
 
+        // draw counties
         vis.counties = vis.svg.append("g")
             .attr("class", "counties")
             .selectAll("path")
@@ -44,6 +44,27 @@ class IncomeVis {
             .attr("fill", "#C7C7C7")
             .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
 
+        // draw borders
+        vis.svg.append("path")
+            .datum(topojson.mesh(vis.geoData, vis.geoData.objects.states, function(a, b) { return a !== b; }))
+            .attr("class", "county-borders")
+            .style("stroke", "white")
+            .style("fill", "transparent")
+            .attr("d", vis.path)
+            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
+
+        // add city points
+        vis.cities = vis.svg.selectAll(".cities")
+            .data(vis.cityData)
+            .enter()
+            .append("circle")
+            .attr("class", "cities")
+            .attr("cx", d=> vis.projection(d.geometry.coordinates)[0])
+            .attr("cy", d=> vis.projection(d.geometry.coordinates)[1])
+            .attr("r", 3)
+            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
+
+        // draw states
         vis.states = vis.svg.append("g")
             .selectAll(".states")
             .data(vis.state)
@@ -54,25 +75,6 @@ class IncomeVis {
             .attr("transform", `scale(${vis.zoom} ${vis.zoom})`)
             .style("fill", "transparent");
 
-        vis.svg.append("path")
-            .datum(topojson.mesh(vis.geoData, vis.geoData.objects.states, function(a, b) { return a !== b; }))
-            .attr("class", "county-borders")
-            .style("stroke", "white")
-            .style("fill", "transparent")
-            .attr("d", vis.path)
-            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
-
-        // add city points
-        vis.svg.selectAll(".cities")
-            .data(vis.cityData)
-            .enter()
-            .append("circle")
-            .attr("class", "cities")
-            .attr("cx", d=> vis.projection(d.geometry.coordinates)[0])
-            .attr("cy", d=> vis.projection(d.geometry.coordinates)[1])
-            .attr("r", 3)
-            .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
-
         // append tooltip
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
@@ -82,7 +84,12 @@ class IncomeVis {
 
         vis.legend = d3.select(".counties").append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width /2 - 80}, ${vis.height - 50})`)
+            .attr('transform', `translate(${vis.width /1.5}, ${vis.height - 40})`)
+
+        vis.svg.append("text")
+            .attr("class", "income-legend-label")
+            .attr("transform", `translate(${vis.width /1.5 - 20}, ${vis.height - 50})`)
+            .text("2018 US median household income")
 
         vis.linearGradient = vis.legend.append("linearGradient")
             .attr("id", "linear-gradient");
@@ -172,30 +179,51 @@ class IncomeVis {
     updateVis(){
         let vis = this;
 
-        vis.counties
-            .attr("fill", function(d) {
-                let result = vis.incomeData.find(obj => {
-                    return obj.GEOID === d.id
+        let selected = $("#toggleIncomeMap").val();
+        console.log(selected)
+        if (selected === "On") {
+
+            // display legend
+            vis.legend.attr("display", "null");
+            vis.Xaxis.attr("display", "null");
+            vis.svg.select(".income-legend-label").attr("display", "null");
+
+            vis.counties
+                .attr("fill", function(d) {
+                    let result = vis.incomeData.find(obj => {
+                        return obj.GEOID === d.id
+                    })
+                    if (result){
+                        return vis.color(result.ESTIMATE)
+                    }
+                    else {
+                        return "#CCCCCC"
+                    }
                 })
-                if (result){
-                    return vis.color(result.ESTIMATE)
-                }
-                else {
-                    return "#CCCCCC"
-                }
-            })
+                .attr("opacity", 1)
 
-        //update legend scale
-        vis.legendScale = d3.scaleLinear()
-            .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
-            .range([0,160])
+            //update legend scale
+            vis.legendScale = d3.scaleLinear()
+                .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
+                .range([0,160])
 
-        //update legend axis
-        vis.axis
-            .scale(vis.legendScale)
-            .tickValues([d3.min(vis.incomeData, d=>d.ESTIMATE), d3.max(vis.incomeData, d=>d.ESTIMATE)])
+            //update legend axis
+            vis.axis
+                .scale(vis.legendScale)
+                .tickValues([d3.min(vis.incomeData, d=>d.ESTIMATE), d3.max(vis.incomeData, d=>d.ESTIMATE)])
+                .tickFormat(x => {return "$" + d3.format(",.0f")(x)});
 
-        vis.Xaxis.call(vis.axis)
+            vis.Xaxis.call(vis.axis)
+        } else {
+            vis.counties
+                .attr("fill", "#6389ba")
+                .attr("opacity", 0.7);
+
+            // hide legend
+            vis.legend.attr("display", "none");
+            vis.Xaxis.attr("display", "none");
+            vis.svg.select(".income-legend-label").attr("display", "none");
+        }
 
         // get name of top sports
         function insertSport (d) {
@@ -218,8 +246,8 @@ class IncomeVis {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div class="text-dark">
-                         <h5>${d.properties.name}<h3>
+                     <div class="text-light">
+                         <h5 id="income-map-tooltip-title">${d.properties.name}<h3>
                          <h6>Total number of athletes: ${vis.stateInfo[d.properties.name].athleteCount}</h6>
                          <h6><u>Top Sports:</u></h6>
                          ${insertSport(d)}
