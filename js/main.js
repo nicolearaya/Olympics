@@ -43,6 +43,8 @@ function loadVis(data) {
     athleteData.forEach(athlete => {
         if (athlete.Height != "NA" && athlete.Weight != "NA") {
             if (athlete.Year == 2016 && athlete.Team == "United States") {
+                if (athlete.Sport == 'Athletics') {athlete.Sport = 'Track & Field'};
+                if (athlete.Sport == 'Hockey') {athlete.Sport = 'Field Hockey'};
                 athlete.Height = +(athlete.Height * 0.393701).toFixed(2)
                 athlete.Weight = +(athlete.Weight * 2.20462).toFixed(2)
                 athlete.Age = +athlete.Age
@@ -128,6 +130,8 @@ function loadVis(data) {
     athleteData.forEach(athlete => {
         if (athlete.Height != "NA" && athlete.Weight != "NA") {
             if (athlete.Medal === "Gold" && athlete.Year >= 1952) {
+                if (athlete.Sport == 'Athletics') {athlete.Sport = 'Track & Field'};
+                if (athlete.Sport == 'Hockey') {athlete.Sport = 'Field Hockey'};
                 cleanGlobalGold.push(athlete)
             }
         }

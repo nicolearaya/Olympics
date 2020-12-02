@@ -81,9 +81,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="userWeight" class="col-sm-4 col-form-label">Weight (lb)</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="userInput" id="userWeight" placeholder="e.g. 170">
+                            <label for="userWeight" class="col-sm-4 col-form-label">Weight</label>
+                            <div class="col-sm-8" style="display: flex">
+                                <input type="text" class="userInput" id="userWeight" placeholder="e.g. 170" style="width:35%">
+                                <label for="userWeight" style="width:15%">lbs</label>
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary" id="btn-physical" onclick="physicalUpdate()">Find</button>
@@ -277,8 +278,14 @@
         <h1 class="center padding-bottom">Which sports are the most truly accessible and meritocratic?</h1>
         <div class="row">
             <div class="col-8">
-                <h2>Trends of High and Low Accessibility Features</h2>
-                <div id="parallel-coord-vis"></div>
+                <h2>Trends of Accessibility</h2>
+                <div class="parallel-coord-vis-left">
+                    <div class="row parallel-coord-titles">
+                        <div id="accessibility-title"><h6>Accessibility</h6></div>
+                        <div id="features-title"><h6>Features</h6></div>
+                    </div>
+                    <div id="parallel-coord-vis"></div>
+                </div>
             </div>
             <div class="col-4 center">
                 <h2>Sport Report Card</h2>
@@ -288,7 +295,7 @@
                         <div id="sport-table"></div>
                     </div>
                 </div>
-                <h5 class="padding-top-thin">Sports are assigned a GOLD, SILVER, BRONZE ranking based on their level of accessibility, which we calculated based on the number of different countries winning, gender ratio, and the range of athletes' ages, heights, and weights. Hover over the lines to see which sport they represent.</h5>
+                <h5 class="padding-top-thin" id="parallel-vis-para">Sports are assigned a PASS or FAIL grade based on their accessibility score, which considers the number of different countries who have won gold in the sport since 1952, the number of athletes who competed in 2014 and 2016, the gender ratio of these athletes, and the ranges of their ages, heights, and weights. Sports with a score of 5 or above out of 10 receive a passing grade. Hover over the lines to see which sports have high or low accessibility.</h5>
             </div>
         </div>
     </div>

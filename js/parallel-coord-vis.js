@@ -13,7 +13,7 @@ class ParallelCoordVisVis {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 10};
+        vis.margin = {top: 20, right: 15, bottom: 20, left: 30};
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -49,7 +49,8 @@ class ParallelCoordVisVis {
                 "AgeMax": d3.max(v, d => d.Age),
                 "AgeRange": d3.max(v, d => d.Age) - d3.min(v, d => d.Age),
                 "AgeMean": d3.mean(v, d => d.Age),
-                "FemProp": d3.count(v, femaleCount) / d3.count(v, d => 1)
+                "FemProp": d3.count(v, femaleCount) / d3.count(v, d => 1),
+                "AthleteCount": d3.count(v, d => 1)
             }
         }, d => d.Sport)
 
@@ -116,16 +117,20 @@ class ParallelCoordVisVis {
 
         // set dimensions
         vis.y = {};
-        vis.dimensions = ["Winner Diversity", "Gender", "Age", "Height", "Weight"];
+        vis.dimensions = ["Winner Diversity", "Athlete Count", "Gender", "Age", "Height", "Weight"];
         vis.dimensions.forEach(dimension => {
 
             if (dimension === "Winner Diversity") {
-                vis.y[dimension] = d3.scaleLinear()
+                vis.y[dimension] = d3.scaleSymlog()
                     .domain([propMin, propMax])
                     .range([vis.height, 0])
             } else if (dimension === "Gender") {
-                vis.y[dimension] = d3.scaleLinear()
+                vis.y[dimension] = d3.scaleSymlog()
                     .domain([0, 0.5])
+                    .range([vis.height, 0])
+            } else if (dimension === "Athlete Count") {
+                vis.y[dimension] = d3.scaleSymlog()
+                    .domain([d3.min(vis.sportInfo, d => d[1]["AthleteCount"]), d3.max(vis.sportInfo, d => d[1]["AthleteCount"])])
                     .range([vis.height, 0])
             } else {
                 vis.y[dimension] = d3.scaleLinear()
@@ -134,9 +139,14 @@ class ParallelCoordVisVis {
             }
         });
 
+        // create scale for overall score
+        vis.y["High"] = d3.scaleLinear()
+            .domain([0, 10])
+            .range([vis.height,0])
+
         // calculate sport score by bucketing sport into different ranks for each dimension
         vis.dimensions.forEach(dimension => {
-            let bucket = new Bucket(5, vis.y[dimension].domain()[0], vis.y[dimension].domain()[1])
+            let bucket = new Bucket(6, vis.y[dimension].domain()[0], vis.y[dimension].domain()[1])
 
             vis.sportInfo.forEach(sport => {
 
@@ -144,35 +154,37 @@ class ParallelCoordVisVis {
                     bucket.getBucketCategory(sport[0], sport[1][dimension])
                 } else if (dimension === "Winner Diversity") {
                     bucket.getBucketCategory(sport[0], sport.DistinctWinnerCount)
-                } else {
+                } else if (dimension === "Athlete Count") {
+                    bucket.getBucketCategory(sport[0], sport[1]["AthleteCount"])
+                }
+                else {
                     bucket.getBucketCategory(sport[0], sport[1][dimension + "Range"])
                 }
             })
         })
 
+        // sports can have a max of 30 points based on the 6 dimensions we consider
+        // make score out of 10 instead of our of 30
+        Object.keys(bucketed).forEach(sport => {
+            bucketed[sport].total = bucketed[sport].total/3;
+        })
         console.log(bucketed)
+
         // assign sports medals based on score
-        // sports can have a max of 20 points based on the 5 dimensions we consider
-        // highest value is 9, which is pretty low, but we will use this distribution of scores to assign Gold, Silver, Bronze, and no award
+        // highest value is 7.6 out of 10 and sports that receive a 5 or above will have a passing grade (green) and those below a failing grade (red)
         vis.sportInfo.forEach(sport => {
-            if (bucketed[sport[0]].total == 7 || bucketed[sport[0]].total == 8) {
-                bucketed[sport[0]].score = "BRONZE"
-                bucketed[sport[0]].color = "sienna"
-            } else if (bucketed[sport[0]].total == 9 || bucketed[sport[0]].total == 10) {
-                bucketed[sport[0]].score = "SILVER"
-                bucketed[sport[0]].color = "darkgrey"
-            } else if (bucketed[sport[0]].total > 10) {
-                bucketed[sport[0]].score = "GOLD"
-                bucketed[sport[0]].color = "gold"
+            if (bucketed[sport[0]].total >= 5) {
+                bucketed[sport[0]].score = "PASS"
+                bucketed[sport[0]].color = "#168C39"
             } else {
-                bucketed[sport[0]].score = "No medal"
-                bucketed[sport[0]].color = "black"
+                bucketed[sport[0]].score = "FAIL"
+                bucketed[sport[0]].color = "#EE2F4D"
             }
         })
 
         // scales and path
         vis.x = d3.scalePoint()
-            .range([0, vis.width])
+            .range([18, vis.width])
             .padding(1)
             .domain(vis.dimensions);
 
@@ -182,7 +194,10 @@ class ParallelCoordVisVis {
                     return [vis.x(p), vis.y[p](d[1][p])]
                 } else if (p === "Winner Diversity") {
                     return [vis.x(p), vis.y[p](d.DistinctWinnerCount)]
-                } else {
+                } else if (p === "Athlete Count") {
+                    return [vis.x(p), vis.y[p](d[1]["AthleteCount"])]
+                }
+                else {
                     return [vis.x(p), vis.y[p](d[1][p + "Range"])]
                 }
             }))
@@ -200,8 +215,35 @@ class ParallelCoordVisVis {
             .append("text")
             .style("text-anchor", "middle")
             .attr("y", -9)
-            .text(d => d)
-            .style("fill", "black");
+            .text(d => {
+                if (d === "Winner Diversity") {
+                    return d
+                } else if (d === "Gender") {
+                    return d + " Ratio"
+                } else if (d === "Athlete Count") {
+                    return d
+                } else {
+                    return d + " Range"
+                }
+            })
+            .style("fill", "#d1cde2");
+
+        // draw axes for overall trend
+        vis.overallAxis = vis.svg.append("g")
+            .attr("transform", `translate(${vis.margin.left - 10})`)
+            .call(d3.axisLeft().scale(vis.y["High"]));
+
+        vis.overallAxis
+            .append("text")
+            .attr("y", -9)
+            .text("High")
+            .style("fill", "#d1cde2");
+
+        vis.overallAxis
+            .append("text")
+            .attr("y", 358)
+            .text("Low")
+            .style("fill", "#d1cde2");
 
         // draw lines
         vis.svg.selectAll("myPath")
@@ -211,8 +253,20 @@ class ParallelCoordVisVis {
             .attr("d", path)
             .style("fill", "none")
             .style("stroke", d => bucketed[d[0]].color)
-            .style("stroke-width", 2)
-            .style("opacity", 0.5)
+            .style("stroke-width", d => {
+                if (bucketed[d[0]].score === "PASS") {
+                    return 4
+                } else {
+                    return 2.5
+                }
+            })
+            .style("opacity", d => {
+                if (bucketed[d[0]].score === "PASS") {
+                    return 0.7
+                } else {
+                    return 0.3
+                }
+            })
             .on("mouseover", display)
             .on("mouseout", nondisplay);
 
@@ -224,14 +278,17 @@ class ParallelCoordVisVis {
 
         function addAxis(d, i) {
             d3.select(this)
-                .call(d3.axisLeft().scale(vis.y[d]).ticks(5))
+                .call(d3.axisLeft().scale(vis.y[d]).tickValues(vis.y[d].domain()))
         }
 
         function display(event, d) {
 
             // print score
-            document.getElementById("sport-score").innerHTML = bucketed[d[0]].score;
+            document.getElementById("sport-score").innerHTML = `${bucketed[d[0]].score}  ${bucketed[d[0]].total.toFixed(1)}/10`;
             document.getElementById("sport-score").style.color = bucketed[d[0]].color;
+
+            // hide explanation paragraph
+            document.getElementById("parallel-vis-para").style.display = "none";
 
             // display table
             let table = d3.select("#sport-table").append("table")
@@ -245,11 +302,12 @@ class ParallelCoordVisVis {
             }
 
             let tableData = [{"label": "Sport", "data": d[0]},
-                {"label": "Winner Diversity", "data" : d.DistinctWinnerCount + " Different Countries Won (" + Object.keys(d.Winners)[0] + " won " + d3.format(".0%")(Object.values(d.Winners)[0]) +" of the time)"},
-                {"label": "Gender Ratio", "data" : d3.format(".0%")(d[1].Gender) + " Female"},
-                {"label": "Age Range", "data" : d[1].AgeMin + " - " + d[1].AgeMax},
-                {"label": "Height Range", "data" : displayHeight(d[1].HeightMin) + " - " + displayHeight(d[1].HeightMax)},
-                {"label": "Weight Range", "data" : d[1].WeightMin.toFixed(0) + " - " + d[1].WeightMax.toFixed(0) + " lb"}];
+                {"label": "Winner Diversity", "data": d.DistinctWinnerCount + " Different Countries Won (" + Object.keys(d.Winners)[0] + " won " + d3.format(".0%")(Object.values(d.Winners)[0]) +" of the time)"},
+                {"label": "Athlete Count", "data": d[1].AthleteCount},
+                {"label": "Gender Ratio", "data": d3.format(".0%")(d[1].Gender) + " Female"},
+                {"label": "Age Range", "data": d[1].AgeMin + " - " + d[1].AgeMax},
+                {"label": "Height Range", "data": displayHeight(d[1].HeightMin) + " - " + displayHeight(d[1].HeightMax)},
+                {"label": "Weight Range", "data": d[1].WeightMin.toFixed(0) + " - " + d[1].WeightMax.toFixed(0) + " lbs"}];
 
             let rows = tbody.selectAll("tr")
                 .data(tableData)
@@ -269,7 +327,7 @@ class ParallelCoordVisVis {
                 .style("top", event.pageY + "px")
                 .html(`
                      <div>
-                         <h5>${d[0]}<h3>
+                         <h5>${d[0]}</h5>
                      </div>`)
         }
 
@@ -286,6 +344,12 @@ class ParallelCoordVisVis {
                 .style("left", 0)
                 .style("top", 0)
                 .html(``);
+
+            // erase previous printed score
+            document.getElementById("sport-score").innerHTML = "";
+
+            // show explanation paragraph
+            document.getElementById("parallel-vis-para").style.display = "block";
         }
     }
 }

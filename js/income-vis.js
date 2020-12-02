@@ -180,7 +180,6 @@ class IncomeVis {
         let vis = this;
 
         let selected = $("#toggleIncomeMap").val();
-        console.log(selected)
         if (selected === "On") {
 
             // display legend

@@ -270,9 +270,10 @@ th {
 	height: 85%;
 }
 
-
-#userAge, #userGender, #userHeight, #userWeight {
+/*Slide 2: User physical trait vis style*/
+#userAge, #userGender, #userHeightFt, #userHeightIn, #userWeight {
 	display: flex;
+	margin-bottom: .5rem;
 }
 
 #userGender {
@@ -292,7 +293,7 @@ th {
 .btn-physical {
 	background-color: var(--blue);
 	border: none;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
 }
 
 .node-labels {
@@ -300,16 +301,21 @@ th {
 }
 
 #nodeTooltip {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
+	color: var(--darkpurple);
+	border: thin solid #d0cccc;
+	border-radius: 5px;
+	background: #D0CCCC;
+	padding: 10px
 }
 
 h5 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
 	font-size: 14px;
 }
 
 h6 {
-	font-family: 'Roboto Light', sans-serif;
+	font-family: 'sofia-pro', sans-serif;
 	font-size: 13px;
 }
 
@@ -515,12 +521,13 @@ h6 {
 	opacity: 0.5;
 }
 
+/*Slide 9: Parallel Coord styles*/
 #parallel-coord-vis {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	height: 60vh;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 #report-card {
@@ -528,8 +535,40 @@ h6 {
 	width: 100%;
 }
 
+#parallelTooltip {
+ padding-bottom: 5px;
+}
+
 #sport-score {
 	font-weight: bold;
+}
+
+#sport-table {
+	font-size: 15px;
+}
+
+#accessibility-title {
+	margin-left: 5px;
+	background-color: var(--darkpurple);
+	padding: 10px 10px 5px 10px;
+	border-radius: 5px;
+}
+
+#features-title {
+	margin-left: 5px;
+	width: 75%;
+	text-align: center;
+	background-color: var(--darkpurple);
+	padding: 10px 10px 5px 10px;
+	border-radius: 5px;
+}
+
+.parallel-coord-vis-left {
+	background-color: var(--lighterpurple);
+	padding: 5px 5px 5px 20px;
+	margin-right: 0px;
+	width: 95%;
+	border-radius: 5px;
 }
 
 .sig {
