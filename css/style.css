@@ -2,10 +2,10 @@
 @import url("https://use.typekit.net/rfo7yex.css");
 
 :root {
-	--darkpurple: #0c0223;
-	--lighterpurple: #15042d;
+	--darkpurple: #050224;
+	--lighterpurple: #0A042D;
 	--yellow: #FBB22E;
-	--blue: #0286C3;
+	--blue: #3C8EFF;
 	--green: #168C39;
 	--red: #EE2F4D;
 	--gray: #868686;
@@ -487,7 +487,7 @@ h6 {
 
 .hostDashboard{
 	height: 70vh;
-	background-color:whitesmoke;
+	background-color:var(--darkpurple);
 	padding: 20px;
 	border-radius: 10px;
 	margin-top: 20px;
@@ -499,8 +499,9 @@ h6 {
 	background-color: green;
 }
 
-.hostPlotLabel .incomePlotLabel {
+text.hostPlotLabel .incomePlotLabel {
 	color: #d1cde2;
+	fill: #d1cde2;
 }
 
 .gdp-tooltip {
@@ -605,6 +606,11 @@ h6 {
 
 
 .income-plot-label {
+	font-size: 13px;
+	fill: #d1cde2;
+}
+
+.hostPlotLabel{
 	font-size: 13px;
 	fill: #d1cde2;
 }

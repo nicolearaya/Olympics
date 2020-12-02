@@ -72,7 +72,7 @@ class HostMedalsVis {
                 "translate(" + (vis.width/2) + " ," +
                 (vis.height + 40) + ")")
             .style("text-anchor", "middle")
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Olympic Games Year")
 
 
@@ -92,7 +92,7 @@ class HostMedalsVis {
         vis.chartArea.append("text")
             .attr("transform", "rotate(90)")
             .attr("y", -40)
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Number of Medals")
 
         //Add tooltip
@@ -104,7 +104,7 @@ class HostMedalsVis {
         //color scale
         vis.color = d3.scaleLinear()
             .domain([0,15])
-            .range(["#3c6dff", "#000a40"]);
+            .range(["#d2dcff", "#3c6dff"]);
 
         vis.svgLegend = d3.select("#hostVisLegend").append("svg")
             .attr("width", $("#hostVisLegend").width())
@@ -123,7 +123,7 @@ class HostMedalsVis {
             .attr("r", 4)
             .attr("cx", 10)
             .attr("cy",10)
-            .style("fill", "#3c8eff")
+            .style("fill", "#d2dcff")
             .style("stroke-width", "0.5")
             .style("stroke", "black");
 
@@ -132,7 +132,7 @@ class HostMedalsVis {
             .attr("x",25)
             .attr("y",10)
             .attr("alignment-baseline", "central")
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Host Year, Cost under 5 billion USD");
 
 
@@ -142,7 +142,7 @@ class HostMedalsVis {
             .attr("r", 4)
             .attr("cx", 10)
             .attr("cy", 35)
-            .style("fill", "#000a40")
+            .style("fill", "#3c6dff")
             .style("stroke-width", "0.5")
             .style("stroke", "black");
 
@@ -151,7 +151,7 @@ class HostMedalsVis {
             .attr("x",25)
             .attr("y",35)
             .attr("alignment-baseline", "central")
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Host Year, Cost over 5 billion USD");
 
         vis.legendLine = vis.legend.append("g")
@@ -165,7 +165,7 @@ class HostMedalsVis {
             .attr("y1", 0)
             .attr("x2", 50)
             .attr("y2", 0)
-            .attr("stroke", "black")
+            .attr("stroke", "#FBB22E")
             .attr("stroke-width", "2")
             .style("opacity", "0.5")
 
@@ -173,7 +173,7 @@ class HostMedalsVis {
             .attr("x",60)
             .attr("y",0)
             .attr("alignment-baseline", "central")
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Peak Medals During Host Year");
 
 
@@ -182,14 +182,15 @@ class HostMedalsVis {
             .attr("y1", 25)
             .attr("x2", 50)
             .attr("y2", 25)
-            .attr("stroke", "#dddddd")
+            .attr("stroke", "#EE2F4D")
             .attr("stroke-width", "2")
+            .style("opacity", "0.5");
 
         vis.legendLine.append("text")
             .attr("x",60)
             .attr("y",25)
             .attr("alignment-baseline", "central")
-            .attr("font-size", 13)
+            .attr("class", "hostPlotLabel")
             .text("Peak Medals Not During Host Year");
 
         vis.wrangleData()
@@ -228,10 +229,10 @@ class HostMedalsVis {
                 .attr("fill", "none")
                 .attr("stroke",  (d,i) => {
                     if (vis.peaks.includes(vis.countryArray[vis.i])) {
-                        return "#000000";
+                        return "#FBB22E";
                     }
                     else {
-                        return "#bbbbbb";
+                        return "#EE2F4D";
                     }
                 })
                 .attr("class", "hostVis")
@@ -265,9 +266,9 @@ class HostMedalsVis {
             })
             .attr("fill", d => {
                 if (d.cost < 5)
-                    return "#3c8eff"
+                    return "#d2dcff"
                 else {
-                    return  "#000a40"
+                    return  "#3c6dff"
                 }
             })
             .attr("stroke-width", "0.5")
@@ -314,10 +315,10 @@ class HostMedalsVis {
                 d3.select(this)
                     .attr("stroke",  (d,i) => {
                         if (vis.peaks.includes(this.id)) {
-                            return "#000000";
+                            return "#FBB22E";
                         }
                         else {
-                            return "#bbbbbb";
+                            return "#EE2F4D";
                         }
                     })
                     .attr("stroke-width", "2")
@@ -326,9 +327,9 @@ class HostMedalsVis {
                     .attr("stroke", "black")
                     .attr("fill", d => {
                         if (d.cost < 5)
-                            return "#3c8eff"
+                            return "#d2dcff"
                         else {
-                            return  "#000a40"
+                            return  "#3c6dff"
                         }
                     })
                 d3.select(this).moveToBack();
@@ -365,18 +366,19 @@ class HostMedalsVis {
                     .attr("stroke", "black")
                     .attr("fill", d => {
                         if (d.cost < 5)
-                            return "#3c8eff"
+                            return "#d2dcff"
                         else {
-                            return  "#000a40"
+                            return  "#3c6dff"
                         }
                     })
                 d3.select("#" + d.country.replace(/\s+/g, '-'))
                     .attr("stroke",  (d,i) => {
-                        if (vis.peaks.includes(vis.countryArray[vis.i])) {
-                            return "#000000";
+                        name = this.getAttribute("class");
+                        if (vis.peaks.includes(name.replace('Dot',''))) {
+                            return "#FBB22E";
                         }
                         else {
-                            return "#bbbbbb";
+                            return "#EE2F4D";
                         }
                     })
                     .attr("stroke-width", "2")
