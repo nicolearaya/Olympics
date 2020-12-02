@@ -307,7 +307,7 @@ class HostMedalsVis {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY - 40 + "px")
                     .html(`
-                            <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                            <div>
                                 <h6>Country: ${this.id.replace(/-/g, ' ')} </h6>
                             </div>`)
             })
@@ -354,7 +354,7 @@ class HostMedalsVis {
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY - 125 + "px")
                     .html(`
-                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div>
                          <h5>Country: ${d.country}<h5>
                          <h6>Host Year: ${d.year}<h6>
                          <h6>Cost of Hosting ${d.year} Games: ${d.cost} Billion USD<h6>

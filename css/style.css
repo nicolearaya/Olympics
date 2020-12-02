@@ -15,7 +15,7 @@
 
 body {
 	font-family: 'sofia-pro', sans-serif;
-	font-weight: 300;
+	font-weight: 200;
 	background-color: var(--lighterpurple);
 	color: #d1cde2;
 }
@@ -24,7 +24,7 @@ h1 {
 	font-size: 36px;
 	font-family: 'sofia-pro', sans-serif;
 	color: white;
-	font-weight: 400;
+	font-weight: 200;
 }
 
 
@@ -32,14 +32,26 @@ h2 {
 	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
 	color: var(--offwhite);
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 200;
 }
 
 h3 {
 	font-family: 'sofia-pro', Arial, Helvetica, sans-serif;
 	color: var(--offwhite);
 	font-size: 15px;
-	font-weight: 300;
+	font-weight: 200;
+}
+
+h5 {
+	font-family: 'sofia-pro', sans-serif;
+	font-size: 14px;
+	font-weight: 200;
+}
+
+h6 {
+	font-family: 'sofia-pro', sans-serif;
+	font-size: 13px;
+	font-weight: 200;
 }
 
 
@@ -309,16 +321,6 @@ th {
 	padding: 10px
 }
 
-h5 {
-	font-family: 'sofia-pro', sans-serif;
-	font-size: 14px;
-}
-
-h6 {
-	font-family: 'sofia-pro', sans-serif;
-	font-size: 13px;
-}
-
 
 .income-plot-dashboard {
 	width: 100%;
@@ -341,11 +343,11 @@ h6 {
 	width: 100%;
 }
 
-#incomeMapTooltip, #parallelTooltip {
+#incomeMapTooltip, #parallelTooltip, #incomeChartTip {
 	border: thin solid grey;
 	border-radius: 5px;
 	background: var(--darkpurple);
-	padding: 15px;
+	padding: 10px;
 }
 
 #income-map-tooltip-title {
@@ -394,6 +396,10 @@ h6 {
 
 #toggleIncomeMapLabel {
 	margin-left: 10px;
+}
+
+.font300{
+	font-weight: 300;
 }
 
 .color-key {
@@ -455,6 +461,10 @@ h6 {
 	width: 140px;
 	padding: 5px;
 	margin-left: 10px;
+	background-color: var(--lighterpurple);
+	border-radius: 2px;
+	color: var(--offwhite);
+	font-weight: 400;
 }
 
 #gdp-vis {
@@ -475,6 +485,15 @@ h6 {
 #hostVisLegend {
 	padding: 5px;
 }
+
+#hostVisSelect {
+	padding: 10px;
+	margin-left: 10px;
+	background-color: var(--lighteroverlay);
+	border-radius: 5px;
+	border: none;
+	color: var(--offwhite);
+	font-weight: 400;}
 
 .host-country-wins {
 	width: 100%;

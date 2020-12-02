@@ -170,13 +170,13 @@ class IncomePlot {
             .on("mouseover", function(event, d) {
                 d3.select(this)
                     .attr("stroke-width", "1px")
-                    .attr("stroke", "black")
+                    .attr("stroke", "white")
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div>
                          <h5>Income: $${d.bracket} per year<h3>
                          <h6>Number of Winter Athletes: ${d.winter}</h6> 
                         
@@ -213,13 +213,13 @@ class IncomePlot {
             .on("mouseover", function(event, d) {
                 d3.select(this)
                     .attr("stroke-width", "1px")
-                    .attr("stroke", "black")
+                    .attr("stroke", "white")
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div>
                          <h5>Income: $${d.bracket} per year<h3>
                          <h6>Number of Summer Athletes: ${d.summer}</h6> 
                      </div>`)
@@ -274,14 +274,14 @@ class IncomePlot {
                 d3.select(this).moveToFront();
                 d3.select(this)
                     .attr("stroke-width", "1.5")
-                    .attr("stroke", "black")
+                    .attr("stroke", "white")
                     .attr("opacity", "1")
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div>
                          <h5>Winter Athletes Above National Median Household Income:<h3>
                          <h6>179 Winter Athletes</h6>
                          <h6>Percent of Total Winter Athletes: 65%</h6>
@@ -308,14 +308,14 @@ class IncomePlot {
                 d3.select(this).moveToFront();
                 d3.select(this)
                     .attr("stroke-width", "1.5")
-                    .attr("stroke", "black")
+                    .attr("stroke", "white")
                     .attr("opacity", "1")
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                     <div class="text-dark" style="border: thin solid #d0cccc; border-radius: 5px; background: #D0CCCC; padding: 10px">
+                     <div>
                          <h5>Summer Athletes Above National Median Household Income:<h3>
                          <h6>276 Summer Athletes</h6>
                          <h6>Percent of Total Summer Athletes: 67%</h6>
