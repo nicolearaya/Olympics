@@ -109,8 +109,8 @@ class MedalGDPvis {
 
         vis.filter.append("feGaussianBlur")
             .attr("in", "SourceGraphic")
-            .attr("stdDeviation", 30)
-            .attr("result", "blur")
+            .attr("stdDeviation", 20)
+            .attr("result", "coloredBlur")
             .attr("x", -30)
             .attr("y", -40);
 
@@ -129,7 +129,7 @@ class MedalGDPvis {
             .attr("height", vis.height + 20)
             .attr("x", -30)
             .attr("y", 30)
-            .attr("fill", "#d9d9d9")
+            .attr("fill", "#050224")
             .attr("filter", "url(#edge-blur)")
             .attr("clip-path", "url(#clipMask)")
 
@@ -291,37 +291,37 @@ class MedalGDPvis {
                     return vis.radius(vis.countryData[d][year][2])
                 }
             })
-            .style("opacity", d => { if (vis.countryData[d][year]) { return .8 } else { return 0}})
+            .style("opacity", d => { if (vis.countryData[d][year]) { return .85 } else { return 0}})
             .attr("fill", d => {
                 switch(d) {
 
-                    case 'Turkey': return '#A1C181'; break;
-                    case 'India': return '#A1C181'; break
-                    case 'Pakistan': return '#A1C181'; break
-                    case 'Iran': return '#A1C181'; break;
-                    case 'Lebanon': return '#A1C181'; break
-                    case 'Syria': return '#A1C181'; break;
-                    case 'Israel': return '#A1C181'; break
-                    case 'Saudi Arabia': return '#A1C181'; break
-                    case 'Bahrain': return '#A1C181'; break
-                    case 'Iraq': return '#A1C181'; break
-                    case 'Afghanistan': return '#A1C181'; break
-                    case 'Sri Lanka': return '#A1C181'; break
-                    case 'Jordan': return '#A1C181'; break
+                    case 'Turkey': return 'var(--green)'; break;
+                    case 'India': return 'var(--green)'; break
+                    case 'Pakistan': return 'var(--green)'; break
+                    case 'Iran': return 'var(--green)'; break;
+                    case 'Lebanon': return 'var(--green)'; break
+                    case 'Syria': return 'var(--green)'; break;
+                    case 'Israel': return 'var(--green)'; break
+                    case 'Saudi A2rabia': return 'var(--green)'; break
+                    case 'Bahrain': return 'var(--green)'; break
+                    case 'Iraq': return 'var(--green)'; break
+                    case 'Afghanistan': return 'var(--green)'; break
+                    case 'Sri Lanka': return 'var(--green)'; break
+                    case 'Jordan': return 'var(--green)'; break
 
-                    case 'Russia': return "#C44D5B"; break;
-                    case 'Azerbaijan': return '#C44D5B'; break
-                    case 'Tajikistan': return '#C44D5B'; break
-                    case 'Armenia': return '#C44D5B'; break
-                    case 'Belarus': return "#C44D5B"; break;
-                    case 'Georgia': return '#C44D5B'; break
-                    case 'Kazakhstan': return '#C44D5B'; break;
-                    case 'Kyrgyzstan': return '#C44D5B'; break
-                    case 'Ukraine': return "#C44D5B"; break;
-                    case 'Uzbekistan': return '#C44D5B'; break
-                    case 'Estonia': return "#C44D5B"; break;
-                    case 'Latvia': return "#C44D5B"; break;
-                    case 'Lithuania': return "#C44D5B"; break;
+                    case 'Russia': return "var(--red)"; break;
+                    case 'Azerbaijan': return 'var(--red)'; break
+                    case 'Tajikistan': return 'var(--red)'; break
+                    case 'Armenia': return 'var(--red)'; break
+                    case 'Belarus': return "var(--red)"; break;
+                    case 'Georgia': return 'var(--red)'; break
+                    case 'Kazakhstan': return 'var(--red)'; break;
+                    case 'Kyrgyzstan': return 'var(--red)'; break
+                    case 'Ukraine': return "var(--red)"; break;
+                    case 'Uzbekistan': return 'var(--red)'; break
+                    case 'Estonia': return "var(--red)"; break;
+                    case 'Latvia': return "var(--red)"; break;
+                    case 'Lithuania': return "var(--red)"; break;
 
                     case 'China': return "#FE7F2D"; break;
                     case 'Japan': return "#FE7F2D"; break;
@@ -335,48 +335,48 @@ class MedalGDPvis {
                     case 'Malaysia': return "#FE7F2D"; break;
                     case 'North Korea': return "#FE7F2D"; break;
 
-                    case 'Argentina': return "#233D4D"; break;
-                    case 'Brazil': return "#233D4D"; break;
-                    case 'Mexico': return "#233D4D"; break;
-                    case 'Colombia': return "#233D4D"; break;
-                    case 'Cuba': return "#233D4D"; break;
-                    case 'Dominican Republic': return "#233D4D"; break;
-                    case 'Jamaica': return "#233D4D"; break;
-                    case 'Venezuela': return "#233D4D"; break;
-                    case 'Uruguay': return "#233D4D"; break;
-                    case 'Chile': return "#233D4D"; break;
-                    case 'Peru': return "#233D4D"; break;
-                    case 'Guatemala': return "#233D4D"; break;
-                    case 'Ecuador': return "#233D4D"; break;
-                    case 'Paraguay': return "#233D4D"; break;
-                    case 'Costa Rica': return "#233D4D"; break;
-                    case 'Panama': return "#233D4D"; break;
+                    case 'Argentina': return "var(--blue)"; break;
+                    case 'Brazil': return "var(--blue)"; break;
+                    case 'Mexico': return "var(--blue)"; break;
+                    case 'Colombia': return "var(--blue)"; break;
+                    case 'Cuba': return "var(--blue)"; break;
+                    case 'Dominican Republic': return "var(--blue)"; break;
+                    case 'Jamaica': return "var(--blue)"; break;
+                    case 'Venezuela': return "var(--blue)"; break;
+                    case 'Uruguay': return "var(--blue)"; break;
+                    case 'Chile': return "var(--blue)"; break;
+                    case 'Peru': return "var(--blue)"; break;
+                    case 'Guatemala': return "var(--blue)"; break;
+                    case 'Ecuador': return "var(--blue)"; break;
+                    case 'Paraguay': return "var(--blue)"; break;
+                    case 'Costa Rica': return "var(--blue)"; break;
+                    case 'Panama': return "var(--blue)"; break;
 
-                    case 'Kenya': return "#FCCA46"; break;
-                    case 'Ghana': return "#FCCA46"; break;
-                    case 'Nigeria': return "#FCCA46"; break;
-                    case 'Zimbabwe': return "#FCCA46"; break;
-                    case 'South Africa': return "#FCCA46"; break;
-                    case 'Uganda': return "#FCCA46"; break;
-                    case 'Egypt': return "#FCCA46"; break;
-                    case 'Morocco': return "#FCCA46"; break;
-                    case 'Cameroon': return "#FCCA46"; break;
-                    case 'Tunisia': return "#FCCA46"; break;
-                    case 'Zambia': return "#FCCA46"; break;
-                    case 'Tanzania': return "#FCCA46"; break;
-                    case 'Niger': return "#FCCA46"; break;
-                    case 'Algeria': return "#FCCA46"; break;
-                    case 'Mozambique': return "#FCCA46"; break;
-                    case 'Senegal': return "#FCCA46"; break;
-                    case 'Botswana': return "#FCCA46"; break;
-                    case 'Togo': return "#FCCA46"; break;
-                    case 'Namibia': return "#FCCA46"; break;
-                    case 'Mauritius': return "#FCCA46"; break;
-                    case 'Burundi': return "#FCCA46"; break;
-                    case 'Gabon': return "#FCCA46"; break;
-                    case 'Djibouti': return "#FCCA46"; break;
+                    case 'Kenya': return "var(--yellow)"; break;
+                    case 'Ghana': return "var(--yellow)"; break;
+                    case 'Nigeria': return "var(--yellow)"; break;
+                    case 'Zimbabwe': return "var(--yellow)"; break;
+                    case 'South Africa': return "var(--yellow)"; break;
+                    case 'Uganda': return "var(--yellow)"; break;
+                    case 'Egypt': return "var(--yellow)"; break;
+                    case 'Morocco': return "var(--yellow)"; break;
+                    case 'Cameroon': return "var(--yellow)"; break;
+                    case 'Tunisia': return "var(--yellow)"; break;
+                    case 'Zambia': return "var(--yellow)"; break;
+                    case 'Tanzania': return "var(--yellow)"; break;
+                    case 'Niger': return "var(--yellow)"; break;
+                    case 'Algeria': return "var(--yellow)"; break;
+                    case 'Mozambique': return "var(--yellow)"; break;
+                    case 'Senegal': return "var(--yellow)"; break;
+                    case 'Botswana': return "var(--yellow)"; break;
+                    case 'Togo': return "var(--yellow)"; break;
+                    case 'Namibia': return "var(--yellow)"; break;
+                    case 'Mauritius': return "var(--yellow)"; break;
+                    case 'Burundi': return "var(--yellow)"; break;
+                    case 'Gabon': return "var(--yellow)"; break;
+                    case 'Djibouti': return "var(--yellow)"; break;
 
-                    default: return "#b0b0b0";
+                    default: return "#262f48";
                 }
             })
 
