@@ -23,10 +23,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ageRange.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/ageRange.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/genderRatio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/genderRatio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/measure-table.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/measure-table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/measure-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/measure-vis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/countryMedalsGDP.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/countryMedalsGDP.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/popularity.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popularity.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +78,7 @@
       <workItem from="1605821253871" duration="57500000" />
       <workItem from="1606174935775" duration="15000" />
       <workItem from="1606616830263" duration="13124000" />
+      <workItem from="1607125063965" duration="9423000" />
     </task>
     <servers />
   </component>
