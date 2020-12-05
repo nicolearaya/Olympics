@@ -9,7 +9,8 @@ let measureVis,
     incomeVis,
     incomePlot,
     parallelcoordVis,
-    hostMedalsVis;
+    hostMedalsVis,
+    popularityVis;
 
 let bucketed = [];
 
@@ -146,7 +147,7 @@ function loadVis(data) {
 
     // Init vis for physical measurements
     genderRatio = new GenderRatio("gender-ratio", cleanedPhysical);
-    ageRange = new AgeRange("age-range", cleanedPhysical)
+    ageRange = new AgeRange("age-range", cleanedPhysical);
     measureVis = new MeasureVis("measure-vis", cleanedPhysical);
     measureTable = new MeasureTable("measure-table", cleanedPhysical);
 
