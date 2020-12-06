@@ -165,11 +165,20 @@
 
                 <div class="col-8 center hometown-map-left">
                     <div class="row">
-                        <span id="toggleIncomeMapLabel">Income Gradient:</span>
-                        <select id="toggleIncomeMap" onchange="incomeVis.updateVis()">
-                            <option value="On">On</option>
-                            <option value="Off">Off</option>
-                        </select>
+                        <div class="toggleIncome">
+                            <span id="toggleIncomeMapLabel">Income Gradient:</span>
+                            <select id="toggleIncomeMap" onchange="incomeVis.updateVis()">
+                                <option value="On">On</option>
+                                <option value="Off">Off</option>
+                            </select>
+                            <span id="toggleIncomeDotsLabel">Toggle Athlete Dots:</span>
+                            <select id="toggleIncomeDots" onchange="incomeVis.updateVis()">
+                                <option value="On">On</option>
+                                <option value="Off">Off</option>
+                            </select>
+                        </div>
+
+
                     </div>
                     <div id="household-income-map"></div>
                 </div>
