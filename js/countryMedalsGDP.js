@@ -86,7 +86,7 @@ class MedalGDPvis {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 100, right: 100, bottom: 100, left: 100 };
+        vis.margin = { top: 70, right: 70, bottom: 100, left: 100 };
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -99,40 +99,12 @@ class MedalGDPvis {
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // Create blur filter for edges of graph
-        vis.defs = vis.svg.append("defs");
-
-        vis.filter = vis.defs.append("filter")
-            .attr("id", "edge-blur")
-            .attr("height", "140%")
-            .attr("width", "140%");
-
-        vis.filter.append("feGaussianBlur")
-            .attr("in", "SourceGraphic")
-            .attr("stdDeviation", 20)
-            .attr("result", "coloredBlur")
-            .attr("x", -30)
-            .attr("y", -40);
-
-        vis.clipPath = vis.defs.append("clipPath")
-            .attr("id", "clipMask")
-            .style("pointer-events", "none")
-            .append("rect")
-            .attr("x", -10)
-            .attr("y", -60)
-            .attr("width", vis.width + 60)
-            .attr("height", vis.height + 70)
-
         // Background fill
-        vis.background = vis.svg.append('rect')
-            .attr("width", vis.width + 20)
-            .attr("height", vis.height + 20)
-            .attr("x", -30)
-            .attr("y", 30)
-            .attr("fill", "#050224")
-            .attr("filter", "url(#edge-blur)")
-            .attr("clip-path", "url(#clipMask)")
-
+        vis.svg.append('rect')
+            .attr("width", vis.width + 10)
+            .attr("height", vis.height + 10)
+            .attr("x", -10)
+            .style("fill", "#130e35")
 
         // Scales and axes
         vis.x = d3.scaleSymlog()
@@ -144,19 +116,108 @@ class MedalGDPvis {
             .domain([0,400]);
 
         vis.radius = d3.scaleSqrt()
-            .range([0, 20])
-            .domain([0, 400])
+            .range([0, 30])
+            .domain([0, 700])
 
+        // Create legend for radius
+        vis.legend = d3.select("#gdp-size-legend").append('svg')
+            .attr("width", $("#gdp-size-legend").width())
+            .attr("height", $("#gdp-size-legend").height())
+
+        vis.center = 50;
+
+        // Circle outline for larger athlete sendoff
+        vis.legend.append('circle')
+            .attr("cx", $("#gdp-size-legend").width() / 2)
+            .attr("cy", vis.center)
+            .attr("r", vis.radius(700))
+            .attr("stroke", "white")
+            .attr("fill", "none")
+
+        // Smaller athlete sendoff
+        vis.legend.append('circle')
+            .attr("cx", $("#gdp-size-legend").width() / 2)
+            .attr("cy", vis.center + (vis.radius(700) - vis.radius(200)))
+            .attr("r", vis.radius(200))
+            .attr("stroke", "white")
+            .attr("fill", "none")
+
+        // Line for large
+        vis.legend.append("line")
+            .attr("class", "size-legend-line")
+            .attr("x1", ($("#gdp-size-legend").width() / 2) + vis.radius(700))
+            .attr("y1", vis.center)
+            .attr("x2", $("#gdp-size-legend").width() - 40)
+            .attr("y2", vis.center)
+
+        // Line for small
+        vis.legend.append("line")
+            .attr("class", "size-legend-line")
+            .attr("x1", ($("#gdp-size-legend").width() / 2) + vis.radius(200))
+            .attr("y1", vis.center + (vis.radius(700) - vis.radius(200)))
+            .attr("x2", $("#gdp-size-legend").width() - 40)
+            .attr("y2", vis.center + (vis.radius(700) - vis.radius(200)))
+
+        // Legend text
+        vis.legend.append('text')
+            .attr("class", "size-legend-text")
+            .attr("x", $("#gdp-size-legend").width() - 35)
+            .attr("y", vis.center + 5)
+            .text("700")
+
+        // Legend text
+        vis.legend.append('text')
+            .attr("class", "size-legend-text")
+            .attr("x", $("#gdp-size-legend").width() - 35)
+            .attr("y", vis.center + 5 + (vis.radius(700) - vis.radius(200)))
+            .text("200")
+
+        // Title for legend
+        vis.legend.append('text')
+            .attr("class", "size-legend-title")
+            .attr("x", $("#gdp-size-legend").width() / 2)
+            .attr("y", 20 + 90)
+            .text(`Athletes Sent`)
+        vis.legend.append('text')
+            .attr("class", "size-legend-title")
+            .attr("x", $("#gdp-size-legend").width() / 2)
+            .attr("y", 37 + 90)
+            .text(`to Compete`)
+
+
+
+
+        // X axis
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
             .tickFormat(d3.format(","))
             .tickSize(5)
             .ticks(8);
 
+        // Y axis
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
             .tickFormat(d3.format(","))
             .tickSize(5);
+
+        // add the X gridlines
+        vis.svg.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(d3.axisBottom(vis.x)
+                .ticks(5)
+                .tickSize(-vis.height)
+                .tickFormat("")
+            )
+
+        // add the Y gridlines
+        vis.svg.append("g")
+            .attr("class", "grid")
+            .call(d3.axisLeft(vis.y)
+                .ticks(5)
+                .tickSize(-vis.width)
+                .tickFormat("")
+            )
 
         vis.svg.append("g")
             .attr("class", "x-axis axis")
@@ -169,14 +230,15 @@ class MedalGDPvis {
         // chart year
         vis.svg.append("text")
             .attr("class", "gdp-year")
-            .attr("x", vis.width / 2)
+            .attr("x", vis.width / 2 - 15)
             .attr("y", -30)
             .text("1952")
+
 
         // X axis byline
         vis.svg.append("text")
             .attr("class", "gdp-bylines")
-            .attr("x", vis.width)
+            .attr("x", vis.width - 10)
             .attr("y", vis.height)
             .attr("text-anchor", "end")
             .text("USD ($) per Person");
@@ -185,19 +247,19 @@ class MedalGDPvis {
         vis.svg.append("text")
             .attr("class", "gdp-bylines")
             .attr("transform", "rotate(90)")
-            .attr("y", 0)
+            .attr("x", 10)
             .text("Bronze, Silver, & Gold Medals");
 
         // x axis title
         vis.svg.append("text")
-            .attr("class", "gdp-titles")
+            .attr("class", "chart-titles")
             .attr("x", vis.width / 2)
             .attr("y", vis.height + 70)
             .text("Real GDP per Capita")
 
         // Y axis title
         vis.svg.append("text")
-            .attr("class", "gdp-titles")
+            .attr("class", "chart-titles")
             .attr("transform", `rotate(-90)translate(-${vis.height/2}, -50)`)
             .text("Total Medals Won")
 
@@ -261,14 +323,37 @@ class MedalGDPvis {
             .merge(vis.countries)
             .attr("class", 'gdp-country-circles')
             .on("mouseover", function(e, d) {
+                console.log(d)
+                console.log(e)
+                d3.select(this)
+                    .transition()
+                    .duration(400)
+                    .attr("stroke", "var(--highlightpurple)")
+                    .attr("stroke-width", "4")
+                    .attr("transform", `translate(${-this.cx.baseVal.value*(1.4-1)}, ${-this.cy.baseVal.value*(1.4-1)}) scale(1.4)`);
+
                 vis.tooltip.transition()
                     .duration(200)
-                    .style("opacity", .9);
-                vis.tooltip.html(d)
-                    .style("left", (e.pageX) + "px")
-                    .style("top", (e.pageY - 28) + "px");
+                    .style("opacity", 1);
+                vis.tooltip.html(`<h3>${d} <span>in ${year}</span></h3>
+                        <table class="table">
+                            <tbody>
+                                <tr><th>Medal Count</th><td>${vis.countryData[d][year][0]}</td></tr>
+                                <tr><th>GDP ($)</th><td>${(vis.countryData[d][year][1]).toLocaleString()}</td></tr>
+                                <tr><th>Athletes Sent</th><td>${vis.countryData[d][year][2]}</td></tr>
+                            </tbody>
+                        </table>`)
+                    .style("left", (e.pageX + 20) + "px")
+                    .style("top", (e.pageY - 50) + "px");
             })
-            .on("mouseout", function(d) {
+            .on("mouseout", function(e, d) {
+                d3.select(this)
+                    .transition()
+                    .duration(400)
+                    .attr("stroke", "var(--lighterpurple)")
+                    .attr("stroke-width", "1")
+                    .attr("transform", `translate(${-this.cx.baseVal.value*(1-1)}, ${-this.cy.baseVal.value*(1-1)}) scale(1)`);
+
                 vis.tooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
@@ -291,6 +376,7 @@ class MedalGDPvis {
                     return vis.radius(vis.countryData[d][year][2])
                 }
             })
+            .attr("stroke", "var(--lighterpurple)")
             .style("opacity", d => { if (vis.countryData[d][year]) { return .85 } else { return 0}})
             .attr("fill", d => {
                 switch(d) {
@@ -376,7 +462,7 @@ class MedalGDPvis {
                     case 'Gabon': return "var(--yellow)"; break;
                     case 'Djibouti': return "var(--yellow)"; break;
 
-                    default: return "#262f48";
+                    default: return "var(--blueoverlay)";
                 }
             })
 

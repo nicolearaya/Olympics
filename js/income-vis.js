@@ -32,7 +32,7 @@ class IncomeVis {
         vis.state = topojson.feature(vis.geoData, vis.geoData.objects.states).features;
 
         vis.viewpoint = {'width': 975, 'height': 610};
-        vis.zoom = (vis.width - 100) / vis.viewpoint.width;
+        vis.zoom = (vis.width) / vis.viewpoint.width;
 
         // draw counties
         vis.counties = vis.svg.append("g")
@@ -130,7 +130,7 @@ class IncomeVis {
         let athleteDataByState = Array.from(d3.group(displayData, d =>d.State), ([key, value]) => ({key, value}))
 
         // have a look
-        console.log(athleteDataByState)
+        //console.log(athleteDataByState)
 
         // init final data structure in which both data sets will be merged into
         vis.stateInfo = []
@@ -222,6 +222,17 @@ class IncomeVis {
             vis.legend.attr("display", "none");
             vis.Xaxis.attr("display", "none");
             vis.svg.select(".income-legend-label").attr("display", "none");
+        }
+
+        let toggleDots = $("#toggleIncomeDots").val();
+        console.log(toggleDots)
+        if (toggleDots === "On") {
+            d3.selectAll(".cities")
+                .attr("visibility", "visible")
+        }
+        else {
+            d3.selectAll(".cities")
+                .attr("visibility", "hidden")
         }
 
         // get name of top sports

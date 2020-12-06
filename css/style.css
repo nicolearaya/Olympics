@@ -4,6 +4,9 @@
 :root {
 	--darkpurple: #050224;
 	--lighterpurple: #0A042D;
+	--highlightpurple: #6640a0;
+	--purplewhite: #d1b4ea;
+	--blueoverlay: #181c49;
 	--yellow: #FBB22E;
 	--blue: #3C8EFF;
 	--green: #168C39;
@@ -61,7 +64,7 @@ h6 {
 	width: 100vw;
 	height: 100vh;
 	min-height: 712px;
-	padding: 8%;
+	padding: 8% 8% 8% 8%;
 }
 
 .padding-bottom{
@@ -161,7 +164,7 @@ h6 {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	height: 80vh;
+	height: 70vh;
 	border-radius: 7px;
 	margin-top: 20px;
 }
@@ -390,8 +393,12 @@ input:focus {
 
 .income-plot-dashboard {
 	width: 100%;
-	height: 70vh;
+	height: 60vh;
 	border-radius: 10px;
+}
+
+.hometown-column {
+	height: 70vh;
 }
 
 /*Slide 5: Athlete hometown map*/
@@ -418,6 +425,8 @@ input:focus {
 
 #income-map-tooltip-title {
 	color: #ee2f4d;
+	font-weight: 300;
+	font-size: 15px;
 }
 
 .text-light {
@@ -452,17 +461,6 @@ input:focus {
 	background-color: var(--lighteroverlay);
 }
 
-#toggleIncomeMap {
-	padding: 5px;
-	width: 10%;
-	height:90%;
-	vertical-align: middle;
-	margin-left: 10px;
-}
-
-#toggleIncomeMapLabel {
-	margin-left: 10px;
-}
 
 .font300{
 	font-weight: 300;
@@ -518,6 +516,34 @@ input:focus {
 	font-weight: 300;
 }
 
+.toggleIncome {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex: 1;
+}
+
+#toggleIncomeMap, #toggleIncomeDots {
+	padding: 10px;
+	margin-left: 10px;
+	background-color: var(--lighteroverlay);
+	border-radius: 5px;
+	border: none;
+	color: var(--offwhite);
+	font-weight: 400;
+}
+
+#toggleIncomeMapLabel {
+	margin-left: 10px;
+	padding: 5px;
+}
+
+#toggleIncomeDotsLabel {
+	padding: 5px;
+	margin-left: 40px;
+}
+
+
 #toggleIncomePlotLabel {
 	padding: 5px;
 	float: right;
@@ -535,9 +561,19 @@ input:focus {
 
 #gdp-vis {
 	width: 100%;
-	height: 80vh;
-	background-color: var(--lighterpurple);
-	border-radius: 10px;
+	height: 70vh;
+	background-color: var(--blueoverlay);
+	border-radius: 7px;
+}
+
+.grid line {
+	stroke: var(--darkpurple);
+	stroke-opacity: 0.7;
+	shape-rendering: crispEdges;
+}
+
+.grid path {
+	stroke-width: 0;
 }
 
 .hostLegend {
@@ -592,14 +628,45 @@ text.hostPlotLabel .incomePlotLabel {
 .gdp-tooltip {
 	position: absolute;
 	text-align: center;
-	width: 60px;
-	height: 28px;
-	padding: 2px;
+	padding: 20px;
 	font: 12px sans-serif;
-	background: lightsteelblue;
-	border: 0px;
-	border-radius: 8px;
+	background: var(--blueoverlay);
+	border: 3px solid var(--highlightpurple);
+	border-radius: 7px;
 	pointer-events: none;
+}
+
+.gdp-tooltip table {
+	min-width: 150px;
+	margin-bottom: 0;
+}
+
+.gdp-tooltip h3 {
+	font-size: 20px;
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+
+.gdp-tooltip h3 span {
+	font-weight: 200;
+	color: rgba(255,255,255,.7)
+}
+
+
+.gdp-tooltip table th {
+	background-color: transparent;
+	text-align: right;
+	width: 50%;
+	padding-top: 10px;
+	border-top:1px solid var(--darkpurple);
+
+}
+
+.gdp-tooltip table td {
+	width: 50%;
+	padding-top: 10px;
+	border-top:1px solid var(--darkpurple);
+
 }
 
 .popularity-tooltip {
@@ -675,26 +742,30 @@ text.hostPlotLabel .incomePlotLabel {
 }
 
 .gdp-bylines {
-	fill: #6d6d6d;
+	fill: rgba(255,255,255,.7);
 	font-size: 13px;
 	font-style: italic;
 }
 
-.gdp-titles {
-	fill: #6d6d6d;
-	font-size: 17px;
+.chart-titles {
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	font-size: 15px;
 	font-weight: 300;
 	text-anchor: middle;
+	fill: rgba(255,255,255,.7);
 }
 
+
 .gdp-year {
-	fill: #6d6d6d;
+	fill: rgba(255,255,255,.7);
 	background-color: white;
 	border-radius: 10px;
 	font-size: 20px;
 	font-weight: 300;
 	text-anchor: middle;
 }
+
 
 .padding-bottom-thin{
 	padding-bottom: 20px;
@@ -723,8 +794,41 @@ text.hostPlotLabel .incomePlotLabel {
 	margin-right: 10px;
 }
 
+.gdp-key {
+	width: 50%;
+
+}
+
+
+.gdp-legend {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+#gdp-size-legend {
+	width: 50%;
+	height: 150px;
+}
+
+.size-legend-line {
+	stroke: rgba(255,255,255,.5);
+	stroke-dasharray: 3,3;
+}
+
+.size-legend-text {
+	fill: rgba(255,255,255,.8);
+	font-size: 12px;
+}
+
+.size-legend-title {
+	fill: rgba(255,255,255,.8);
+	text-anchor: middle;
+	font-size:14px;
+}
+
 .western {
-	background-color: #262f48;
+	background-color: var(--blueoverlay);
 }
 
 .russia {
@@ -750,9 +854,9 @@ text.hostPlotLabel .incomePlotLabel {
 #play-button {
 	border: none;
 	border-radius: 5px;
-	background-color: #dbdbdb;
+	background-color: var(--highlightpurple);
 	padding: 10px 20px;
-	color: #676767;
+	color: white;
 	font-weight: 300;
 }
 
@@ -767,6 +871,9 @@ text.hostPlotLabel .incomePlotLabel {
 	width: 100%;
 	align-items: center;
 	margin-top: 30px;
+	background-color: var(--blueoverlay);
+	border-radius: 7px;
+	padding: 10px 15px;
 }
 
 .slider-toggle {
@@ -776,14 +883,178 @@ text.hostPlotLabel .incomePlotLabel {
 	justify-content: flex-end;
 }
 
+.slider-range-value {
+	line-height: 1.2em;
+}
+
 #slider {
 	width: 70%;
 	margin-right: 20px;
+	background: var(--blueoverlay);
+	margin-top: 2px;
 }
 
 
 #popularity-vis {
 	height: 70vh;
 	width: 100%;
+	background-color: var(--blueoverlay);
+	border-radius: 7px
 }
 
+.slide-heading {
+	width: 100%;
+	height: 15vh;
+	position: absolute;
+	margin-left: -8vw;
+	margin-top: -15vh;
+	text-align: left;
+	border-bottom: 1px solid #533f72;
+	z-index: 1000;
+	padding: 0px 40px;
+}
+
+.slide-heading-text {
+	display: flex;
+	flex-direction: column;
+	height: 15vh;
+	justify-content: flex-end;
+	padding: 25px;
+}
+
+.bottom-border {
+	border-bottom: 3px solid #6640a0;
+	position: absolute;
+	left: 0;
+	right: 40%;
+	bottom: 0;
+}
+
+.bottom-border:after {
+	position: absolute;
+	bottom: -7px;
+	right: 0;
+	left: auto;
+	height: 10px;
+	width: 10px;
+	background: #6640a0;
+	content: "";
+	border-radius: 5px;
+}
+
+.slide-heading h1 {
+	font-weight: 600;
+	font-size: 2vw;
+	color: rgb(255, 255, 255);
+	top: 10px;
+	text-transform: uppercase;
+	letter-spacing: .10em;
+	margin-bottom: 0px;
+	line-height: 1em;
+
+}
+
+.slide-heading h2 {
+	font-weight: 200;
+	font-size: 1.5vw;
+	color: #6640a0;
+	margin-top: 0px;
+	line-height: 1em;
+	letter-spacing: .05em;
+
+}
+
+.slide-text {
+	text-align: left;
+}
+
+.slide-text h1 {
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	text-align: left;
+	font-size: 15px;
+	color: #9e72e3;
+	margin: 25px 0 5px 0;
+}
+
+a {
+	color: rgba(255,255,255,.8);
+	text-decoration: underline;
+}
+
+.note {
+	background-color: var(--lighteroverlay);
+	padding: 15px;
+	margin: 20px auto;
+	color: rgba(255,255,255,.7);
+}
+
+.findings {
+	position: relative;
+	background-color: var(--highlightpurple);
+	padding: 20px;
+	border-radius: 5px;
+	margin: 40px 0;
+
+}
+
+.findings h1 {
+	margin: 5px 0 5px 0;
+	color: rgba(255,255,255,.5);
+}
+
+.emphasis {
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 1.2em;
+}
+
+.triangle {
+	display: block;
+	height: 20px;
+	width: 20px;
+	background-color: inherit;
+	border: inherit;
+	position: absolute;
+	left: -10px;
+	bottom: calc(50% - 10px);
+	clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+	transform: rotate(-315deg);
+	border-radius: 0 0 0 0.25em;
+}
+
+.triangle-right {
+	display: block;
+	height: 20px;
+	width: 20px;
+	background-color: inherit;
+	border: inherit;
+	position: absolute;
+	right: -10px;
+	bottom: calc(50% - 10px);
+	clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+	transform: rotate(-135deg);
+	border-radius: 0 0 0 0.25em;
+}
+
+
+.slide-text {
+	margin: auto 0;
+}
+
+.slide-text .gdp {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.slide-text-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.row {
+	margin-top: 4vh;
+}
