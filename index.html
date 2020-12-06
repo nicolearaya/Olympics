@@ -79,9 +79,9 @@
                             <div class="form-group row">
                                 <label for="userHeightFt" class="col-sm-4 col-form-label">Height</label>
                                 <div class="col-sm-8" style="display: flex; height: 100%">
-                                    <input type="text" class="userInput" id="userHeightFt" placeholder="e.g. 5" style="width:25%">
+                                    <input type="text" class="userInput" id="userHeightFt" placeholder="e.g. 5">
                                     <label for="userHeightFt" style="width:10%">ft</label>
-                                    <input type="text" class="userInput" id="userHeightIn" placeholder="e.g. 10" style="width:25%">
+                                    <input type="text" class="userInput" id="userHeightIn" placeholder="e.g. 10">
                                     <label for="userHeightIn" style="width:10%">in</label>
                                 </div>
                             </div>
@@ -95,18 +95,22 @@
                             <button type="button" class="btn btn-primary" id="btn-physical" onclick="physicalUpdate()">Find</button>
                         </form>
                     </div>
+                    <div>
+                        <h5 class="center padding-top-thin">We are able to guess which sport you’d play based on the fact that each sport advantages a different physique, gender, or age. We can see how certain sports are more inclusive and diverse than others in terms of these physical attributes.</h5>
+                    </div>
                 </div>
                 <div class="col-7 user-physical-trait">
                     <div class="user-input-header">
-                        <h2>2016 US Olympic athletes' traits: </h2>
+                        <h2 id="physical-right-header1">2016 US Olympic athletes' traits: </h2>
+                        <h2 id="physical-right-header2" style="display:none">Your match: </h2>
                     </div>
                     <div id="user-physical-trait-vis" style="height: 100%">
-                        <div id="hover-instruct" style="display: none">Hover over the circle to find out!</div>
+                        <div class="center" id="user-sport" style="display:none"></div>
+                        <div id="physical-vis-table"></div>
                     </div>
                 </div>
             </div>
-            <h5 class="center padding-top-thin">We are able to guess which sport you’d play based on the fact that each sport advantages a different physique, gender, or age. We can see how certain sports are more inclusive and diverse than others in terms of these physical attributes.</h5>
-        </div>
+            </div>
     </div>
 
     <div id="slide4" class="section slideDiv">
@@ -158,7 +162,7 @@
     <div id="slide5" class="section slideDiv background-grey">
         <div class="container-fluid justify-content-center align-self-center">
             <h1 class="center slide-title padding-bottom">US Olympic Athlete Hometowns</h1>
-            <h2>How many athletes are from your home state?</h2>
+            <h2>Where are US athletes from?</h2>
 
             <div class="row hometown-map-dashboard">
                 <!-- LEFT -->

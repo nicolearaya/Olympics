@@ -70,6 +70,8 @@ class ParallelCoordVisVis {
             vis.sports.push(sport[0])
         })
 
+        console.log(vis.sportInfo)
+
         // group number of gold medals by each country for each of the 51 summer and winter sports
         vis.goldCountByCountry = d3.rollups(vis.goldData, v => v.length, d => d.Sport, d=> d.NOC)
 
@@ -125,7 +127,7 @@ class ParallelCoordVisVis {
                     .domain([propMin, propMax])
                     .range([vis.height, 0])
             } else if (dimension === "Gender") {
-                vis.y[dimension] = d3.scaleSymlog()
+                vis.y[dimension] = d3.scaleSqrt()
                     .domain([0, 0.5])
                     .range([vis.height, 0])
             } else if (dimension === "Athlete Count") {
@@ -304,7 +306,7 @@ class ParallelCoordVisVis {
             let tableData = [{"label": "Sport", "data": d[0]},
                 {"label": "Winner Diversity", "data": d.DistinctWinnerCount + " Different Countries Won (" + Object.keys(d.Winners)[0] + " won " + d3.format(".0%")(Object.values(d.Winners)[0]) +" of the time)"},
                 {"label": "Athlete Count", "data": d[1].AthleteCount},
-                {"label": "Gender Ratio", "data": d3.format(".0%")(d[1].Gender) + " Female"},
+                {"label": "Gender Ratio", "data": `${d3.format(".0%")(1 - d[1].FemProp)} M, ${d3.format(".0%")(d[1].FemProp)} F`},
                 {"label": "Age Range", "data": d[1].AgeMin + " - " + d[1].AgeMax},
                 {"label": "Height Range", "data": displayHeight(d[1].HeightMin) + " - " + displayHeight(d[1].HeightMax)},
                 {"label": "Weight Range", "data": d[1].WeightMin.toFixed(0) + " - " + d[1].WeightMax.toFixed(0) + " lbs"}];

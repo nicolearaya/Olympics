@@ -293,12 +293,41 @@ th {
 	margin-bottom: .5rem;
 }
 
-#userGender {
-	height: 30px;
-	color: #666e76;
+#userAge, #userGender,#userWeight {
+	background-color: var(--lighterpurple);
+	border: 1px solid var(--offwhite);
+	border-radius: 2px;
+	color: var(--offwhite);
+	font-weight: 400;
+	outline: none;
 }
 
-#user-physical-trait-vis {
+input:focus {
+	background-color: var(--lighterpurple);
+}
+
+#userHeightFt, #userHeightIn {
+	background-color: var(--lighterpurple);
+	border: 1px solid var(--offwhite);
+	border-radius: 2px;
+	color: var(--offwhite);
+	font-weight: 400;
+	outline: none;
+	width: 25%;
+}
+
+::placeholder {
+	color: var(--offwhite);
+}
+#userGender {
+	height: 30px;
+	border: 1px solid var(--offwhite);
+	color: var(--offwhite);
+	background-color: var(--lighterpurple);
+	outline: var(--lighterpurple);
+}
+
+#user-physical-trait {
 	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
@@ -307,10 +336,18 @@ th {
 	background-color: var(--lighteroverlay);
 }
 
-.btn-physical {
-	background-color: var(--blue);
-	border: none;
+#btn-physical {
+	background-color: var(--offwhite);
+	color: var(--lighterpurple);
+	border-radius: 2px;;
+	border: 1px solid var(--lighterpurple);
 	font-family: 'sofia-pro', sans-serif;
+}
+
+#btn-physical:hover {
+	background-color: var(--offwhite);
+	/*outline:none;*/
+	/*box-shadow:0 0 0 0px var(--offwhite), 0 0 0 2px var(--lighterpurple);*/
 }
 
 .node-labels {
@@ -325,6 +362,30 @@ th {
 	background: #D0CCCC;
 	padding: 10px
 }
+
+/*.bubble-legend {*/
+/*	width: 50px;*/
+/*	height: 50px;*/
+/*}*/
+
+/*.circle-legend path,*/
+/*.circle-legend line {*/
+/*	fill: none;*/
+/*	stroke: #D0CCCC;*/
+/*	shape-rendering: crispEdges;*/
+/*	opacity: 1;*/
+/*}*/
+
+/*.circle-legend line {*/
+/*	stroke: #D0CCCC;*/
+/*	shape-rendering: crispEdges;*/
+/*}*/
+
+/*.circle-legend circle {*/
+/*	stroke: var(--darkpurple);*/
+/*	stroke-dasharray: 4, 2;*/
+/*	fill: none;*/
+/*}*/
 
 
 .income-plot-dashboard {

@@ -3,7 +3,6 @@
 let measureVis,
     measureTable,
     physicalVis,
-    hovertext,
     genderRatio,
     ageRange,
     incomeVis,
@@ -158,8 +157,6 @@ function loadVis(data) {
     popularityVis = new PopularityVis("popularity-vis", popularityData)
 };
 
-
-hovertext = document.getElementById("hover-instruct");
 function physicalUpdate(){
     physicalVis.wrangleData();
 }
