@@ -359,6 +359,8 @@ th {
 
 #income-map-tooltip-title {
 	color: #ee2f4d;
+	font-weight: 300;
+	font-size: 15px;
 }
 
 .text-light {
@@ -393,17 +395,6 @@ th {
 	background-color: var(--lighteroverlay);
 }
 
-#toggleIncomeMap {
-	padding: 5px;
-	width: 10%;
-	height:90%;
-	vertical-align: middle;
-	margin-left: 10px;
-}
-
-#toggleIncomeMapLabel {
-	margin-left: 10px;
-}
 
 .font300{
 	font-weight: 300;
@@ -458,6 +449,34 @@ th {
 	fill: rgba(255,255,255,.4);
 	font-weight: 300;
 }
+
+.toggleIncome {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex: 1;
+}
+
+#toggleIncomeMap, #toggleIncomeDots {
+	padding: 10px;
+	margin-left: 10px;
+	background-color: var(--lighteroverlay);
+	border-radius: 5px;
+	border: none;
+	color: var(--offwhite);
+	font-weight: 400;
+}
+
+#toggleIncomeMapLabel {
+	margin-left: 10px;
+	padding: 5px;
+}
+
+#toggleIncomeDotsLabel {
+	padding: 5px;
+	margin-left: 40px;
+}
+
 
 #toggleIncomePlotLabel {
 	padding: 5px;
