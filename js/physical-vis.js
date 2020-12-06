@@ -155,150 +155,39 @@ class PhysicalVis {
             .range([10,75]);
 
         vis.legendCircle = vis.svg.append("g")
-            .attr("class", "bubble-legend")
-            .attr("transform", `translate(${vis.width*.5}, ${vis.height-40}`);
+            .attr("class", "bubble-legend");
 
-        // vis.legendCircle = circleLegend()
-        //     .scale(vis.legendScale)
-        //     .tickExtend(15)
-        //     // .orient("right")
+        vis.bubbleLegendSizes = [d3.quantile(vis.legendScale.domain(), .25),
+            d3.quantile(vis.legendScale.domain(), .60),
+            d3.quantile(vis.legendScale.domain(), 1)]
 
-        // function circleLegend() {
-        //     'use strict';
-        //
-        //     var scale,
-        //         orient = 'left',
-        //         tickPadding = 3,
-        //         tickExtend = 5,
-        //         tickArguments_ = [10],
-        //         tickValues = null,
-        //         tickFormat_,
-        //         ε = 1e-6;
-        //
-        //     function key(selection) {
-        //         selection.each(function() {
-        //             var g = d3.select(this);
-        //
-        //             g.attr('class', 'circle-legend');
-        //
-        //             // Stash a snapshot of the new scale, and retrieve the old snapshot.
-        //             var scale0 = this.__chart__ || vis.legendScale,
-        //                 scale1 = this.__chart__ = vis.legendScale.copy();
-        //
-        //             // Ticks, or domain values for ordinal scales.
-        //             var ticks = tickValues == null ? (vis.legendScale.ticks ? vis.legendScale.ticks.apply(vis.legendScale, tickArguments_) : vis.legendScale.domain()) : tickValues,
-        //                 ticks = ticks.slice().filter(function(d) { return d > 0 }).sort(d3.descending),
-        //                 tickFormat = tickFormat_ == null ? (vis.legendScale.tickFormat ? vis.legendScale.tickFormat.apply(vis.legendScale, tickArguments_) : String) : tickFormat_,
-        //                 tick = vis.svg.selectAll('.tick').data(ticks, scale1),
-        //                 tickEnter = tick.enter().insert('g', '.tick').attr('class', 'tick').style('opacity', ε),
-        //                 tickExit = d3.transition(tick.exit()).style('opacity', ε).remove(),
-        //                 tickUpdate = d3.transition(tick.order()).style('opacity', 1),
-        //                 tickTransform;
-        //
-        //             tickEnter.each(function(tick) {
-        //                 var gg = d3.select(this);
-        //
-        //                 var tickText = tickFormat(tick);
-        //
-        //                 if (!tickText) return;
-        //
-        //                 gg.append('circle')
-        //                     .attr('cx', 0)
-        //                     .attr('cy', 0)
-        //                     .attr('r', vis.legendScale(tick));
-        //
-        //                 gg.append('line')
-        //                     .attr('y1', 0)
-        //                     .attr('y2', 0)
-        //                     .attr('stroke', '#000')
-        //                     .text(tick);
-        //
-        //                 gg.append('text')
-        //                     .attr('dy', '.35em')
-        //                     .style('text-anchor', 'left' == orient ? 'end' : 'start')
-        //                     .text(tickText);
-        //
-        //             });
-        //             tickEnter.call(d3_svg_legend, scale0);
-        //             tickUpdate.call(d3_svg_legend, scale1);
-        //             tickExit.call(d3_svg_legend, scale1);
-        //
-        //             function d3_svg_legend(selection, scale) {
-        //                 selection.select('circle')
-        //                     .attr('r', scale);
-        //
-        //                 var x2 = scale(ticks[0]) + tickExtend;
-        //                 var sign = 'left' == orient ? -1 : 1;
-        //
-        //                 selection.select('text')
-        //                     .attr('transform', 'translate(' + (x2 + tickPadding) * sign + ', 0)');
-        //
-        //                 selection.select('line')
-        //                     .attr('x1', function(d) { return scale(d) * sign })
-        //                     .attr('x2', x2 * sign);
-        //
-        //                 selection.attr('transform', function(d) { return 'translate(0,' + -scale(d) + ')'; });
-        //             }
-        //
-        //         });
-        //     }
-        //
-        //     key.scale = function(value) {
-        //         if (!arguments.length) return vis.legendScale;
-        //         vis.legendScale = value;
-        //         return key;
-        //     };
-        //
-        //     key.orient = function(value) {
-        //         if (!arguments.length) return orient;
-        //         orient = value;
-        //         return key;
-        //     };
-        //
-        //     key.ticks = function() {
-        //         if (!arguments.length) return tickArguments_;
-        //         tickArguments_ = arguments;
-        //         return key;
-        //     };
-        //
-        //     key.tickFormat = function(x) {
-        //         if (!arguments.length) return tickFormat_;
-        //         tickFormat_ = x;
-        //         return key;
-        //     };
-        //
-        //     key.tickValues = function(x) {
-        //         if (!arguments.length) return tickValues;
-        //         tickValues = x;
-        //         return key;
-        //     };
-        //
-        //     key.tickPadding = function(x) {
-        //         if (!arguments.length) return tickPadding;
-        //         tickPadding = +x;
-        //         return key;
-        //     };
-        //
-        //     key.tickExtend = function(x) {
-        //         if (!arguments.length) return tickExtend;
-        //         tickExtend = +x;
-        //         return key;
-        //     };
-        //
-        //     key.width = function(value) {
-        //         if (!arguments.length) return vis.width;
-        //         vis.width = value;
-        //         return key;
-        //     };
-        //
-        //     key.height = function(value) {
-        //         if (!arguments.length) return vis.height;
-        //         vis.height = value;
-        //         return key;
-        //     };
-        //
-        //     return key;
-        // }
+        vis.xCircle = vis.width*0.88;
+        vis.yCircle = vis.height-25;
+        vis.xLabel = (vis.width*0.75);
+
+        // Make bubbles for legend
+        vis.legendCircle.selectAll(".bubble-legend-circles").data(vis.bubbleLegendSizes).enter()
+            .append('circle')
+            .attr("class", "bubble-legend-circles")
+            .attr("cx", vis.xCircle)
+            .attr("cy", d => vis.yCircle - vis.legendScale(d))
+            .attr("r", d => vis.legendScale(d));
+
+        // Make bubble label lines
+        vis.legendCircle.selectAll(".bubble-legend-lines").data(vis.bubbleLegendSizes).enter()
+            .append("line")
+            .attr("class", "bubble-legend-lines")
+            .attr('x1', d => vis.xCircle + vis.legendScale(d) )
+            .attr('x2', vis.xLabel)
+            .attr('y1', d => vis.yCircle - vis.legendScale(d) )
+            .attr('y2', d => vis.yCircle - vis.legendScale(d) );
+
+        vis.legendCircle.selectAll(".bubble-legend-labels").data(vis.bubbleLegendSizes).enter()
+            .append("text")
+            .attr("class", "bubble-legend-labels")
+            .attr('x', vis.xLabel)
+            .attr('y', d => vis.yCircle - vis.legendScale(d) )
+            .text(d => Math.round(d));
 
     }
 
@@ -419,47 +308,6 @@ class PhysicalVis {
 
         rows.append("td")
             .text(d => d.data);
-
-        // legend
-        vis.bubbleLegendSizes = [d3.quantile(vis.legendScale.domain(), .25),
-            d3.quantile(vis.legendScale.domain(), .60),
-            d3.quantile(vis.legendScale.domain(), 1)]
-
-        vis.xCircle = 100;
-        vis.yCircle = 100;
-        vis.xLabel = 200;
-
-        // Make bubbles for legend
-        vis.legendCircle.selectAll(".bubble-legend-circles").remove()
-        vis.legendCircle.selectAll(".bubble-legend-circles").data(vis.bubbleLegendSizes).enter()
-            .append('circle')
-            .attr("class", "bubble-legend-circles")
-            .attr("cx", vis.xCircle)
-            .attr("cy", d => vis.yCircle - vis.legendScale(d))
-            .attr("r", d => vis.legendScale(d))
-            .attr("fill", "none")
-            .attr("stroke", "white")
-
-        // Make bubble label lines
-        vis.legendCircle.selectAll(".bubble-legend-lines").remove()
-        vis.legendCircle.selectAll(".bubble-legend-lines").data(vis.bubbleLegendSizes).enter()
-            .append("line")
-            .attr("class", "bubble-legend-lines")
-            .attr('x1', d => vis.xCircle + vis.legendScale(d) )
-            .attr('x2', vis.xLabel)
-            .attr('y1', d => vis.yCircle - vis.legendScale(d) )
-            .attr('y2', d => vis.yCircle - vis.legendScale(d) )
-            .attr('stroke', 'black')
-            .style('stroke-dasharray', ('2,2'))
-
-        vis.legendCircle.selectAll(".bubble-legend-labels").remove()
-        vis.legendCircle.selectAll(".bubble-legend-labels").data(vis.bubbleLegendSizes).enter()
-            .append("text")
-            .attr("class", "bubble-legend-labels")
-            .attr('x', vis.xLabel)
-            .attr('y', d => vis.yCircle - vis.legendScale(d) )
-            .text(d => Math.round(d))
-            .style("font-size", 8)
 
         vis.updateAgain()
     }
