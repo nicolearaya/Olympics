@@ -165,11 +165,18 @@
 
                 <div class="col-8 center hometown-map-left">
                     <div class="row">
-                        <span id="toggleIncomeMapLabel">Income Gradient:</span>
-                        <select id="toggleIncomeMap" onchange="incomeVis.updateVis()">
-                            <option value="On">On</option>
-                            <option value="Off">Off</option>
-                        </select>
+                        <div class="toggleIncome">
+                            <span id="toggleIncomeMapLabel">Income Gradient:</span>
+                            <select id="toggleIncomeMap" onchange="incomeVis.updateVis()">
+                                <option value="On">On</option>
+                                <option value="Off">Off</option>
+                            </select>
+                            <span id="toggleIncomeDotsLabel">Toggle Athlete Dots:</span>
+                            <select id="toggleIncomeDots" onchange="incomeVis.updateVis()">
+                                <option value="On">On</option>
+                                <option value="Off">Off</option>
+                            </select>
+                        </div>
                     </div>
                     <div id="household-income-map"></div>
                 </div>
@@ -217,27 +224,28 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-4">
-                    <div class=""></div>
-                    <h1 class="padding-bottom">Country Wins VS GDP</h1>
-                    <h2>How does a country's wealth affect the probability of winning medals?</h2>
-                    <div>This does seem to be a wider trend. <strong>As countries increase their GDP, the number of medals they win increases.</strong></div>
-                    <br/>
-
-                    <div class="gdp-key">
-                        <div><div class="western"></div>EU & NATO</div>
-                        <div><div class="russia"></div>Former USSR</div>
-                        <div><div class="east-asia"></div>East Asia</div>
-                        <div><div class="central-asia"></div>Central & West Asia</div>
-                        <div><div class="latin-america"></div>Latin America</div>
-                        <div><div class="africa"></div>Africa</div>
-                    </div>
-                    <div class="animation-toggle">
-                        <button id="play-button">&#9654; Play</button>
-                        <div class="slider-toggle">
-                            <div id="slider"></div>
-                            <div id="slider-range-value"></div>
+                <div class="col-4 slide-text-container">
+                    <div class="slide-text">
+                        <div class="animation-toggle">
+                            <button id="play-button">&#9654; Play</button>
+                            <div class="slider-toggle">
+                                <div id="slider"></div>
+                                <div id="slider-range-value"></div>
+                            </div>
                         </div>
+                        <h2>How does a country's wealth affect the probability of winning medals?</h2>
+                        <div>This does seem to be a wider trend. <strong>As countries increase their GDP, the number of medals they win increases.</strong></div>
+                        <br/>
+
+                        <div class="gdp-key">
+                            <div><div class="western"></div>EU & NATO</div>
+                            <div><div class="russia"></div>Former USSR</div>
+                            <div><div class="east-asia"></div>East Asia</div>
+                            <div><div class="central-asia"></div>Central & West Asia</div>
+                            <div><div class="latin-america"></div>Latin America</div>
+                            <div><div class="africa"></div>Africa</div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-8 center">
