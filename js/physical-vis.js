@@ -161,9 +161,9 @@ class PhysicalVis {
             d3.quantile(vis.legendScale.domain(), .60),
             d3.quantile(vis.legendScale.domain(), 1)]
 
-        vis.xCircle = vis.width*0.88;
-        vis.yCircle = vis.height*0.47;
-        vis.xLabel = vis.width + 20;
+        vis.xCircle = vis.width*0.89;
+        vis.yCircle = vis.height*0.95;
+        vis.xLabel = vis.width + 30;
 
         // Make bubbles for legend
         vis.legendCircle.selectAll(".bubble-legend-circles").data(vis.bubbleLegendSizes).enter()
@@ -188,6 +188,13 @@ class PhysicalVis {
             .attr('x', vis.xLabel)
             .attr('y', d => vis.yCircle - vis.legendScale(d) )
             .text(d => Math.round(d));
+
+        // Title for legend
+        vis.svg.append('text')
+            .attr("class", "size-legend-title")
+            .attr("x", vis.xCircle)
+            .attr("y", vis.yCircle + 20)
+            .text(`Number of Athletes`);
 
     }
 
