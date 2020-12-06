@@ -6,6 +6,7 @@
 	--lighterpurple: #0A042D;
 	--highlightpurple: #6640a0;
 	--purplewhite: #d1b4ea;
+	--blueoverlay: #181c49;
 	--yellow: #FBB22E;
 	--blue: #3C8EFF;
 	--green: #168C39;
@@ -163,7 +164,7 @@ h6 {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	height: 80vh;
+	height: 70vh;
 	border-radius: 7px;
 	margin-top: 20px;
 }
@@ -331,8 +332,12 @@ th {
 
 .income-plot-dashboard {
 	width: 100%;
-	height: 70vh;
+	height: 60vh;
 	border-radius: 10px;
+}
+
+.hometown-column {
+	height: 70vh;
 }
 
 /*Slide 5: Athlete hometown map*/
@@ -496,8 +501,18 @@ th {
 #gdp-vis {
 	width: 100%;
 	height: 70vh;
-	background-color: #181c49;
+	background-color: var(--blueoverlay);
 	border-radius: 7px;
+}
+
+.grid line {
+	stroke: var(--darkpurple);
+	stroke-opacity: 0.7;
+	shape-rendering: crispEdges;
+}
+
+.grid path {
+	stroke-width: 0;
 }
 
 .hostLegend {
@@ -552,14 +567,45 @@ text.hostPlotLabel .incomePlotLabel {
 .gdp-tooltip {
 	position: absolute;
 	text-align: center;
-	width: 60px;
-	height: 28px;
-	padding: 2px;
+	padding: 20px;
 	font: 12px sans-serif;
-	background: lightsteelblue;
-	border: 0px;
-	border-radius: 8px;
+	background: var(--blueoverlay);
+	border: 3px solid var(--highlightpurple);
+	border-radius: 7px;
 	pointer-events: none;
+}
+
+.gdp-tooltip table {
+	min-width: 150px;
+	margin-bottom: 0;
+}
+
+.gdp-tooltip h3 {
+	font-size: 20px;
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+
+.gdp-tooltip h3 span {
+	font-weight: 200;
+	color: rgba(255,255,255,.7)
+}
+
+
+.gdp-tooltip table th {
+	background-color: transparent;
+	text-align: right;
+	width: 50%;
+	padding-top: 10px;
+	border-top:1px solid var(--darkpurple);
+
+}
+
+.gdp-tooltip table td {
+	width: 50%;
+	padding-top: 10px;
+	border-top:1px solid var(--darkpurple);
+
 }
 
 .popularity-tooltip {
@@ -635,7 +681,7 @@ text.hostPlotLabel .incomePlotLabel {
 }
 
 .gdp-bylines {
-	fill: #6d6d6d;
+	fill: rgba(255,255,255,.7);
 	font-size: 13px;
 	font-style: italic;
 }
@@ -651,13 +697,14 @@ text.hostPlotLabel .incomePlotLabel {
 
 
 .gdp-year {
-	fill: #6d6d6d;
+	fill: rgba(255,255,255,.7);
 	background-color: white;
 	border-radius: 10px;
 	font-size: 20px;
 	font-weight: 300;
 	text-anchor: middle;
 }
+
 
 .padding-bottom-thin{
 	padding-bottom: 20px;
@@ -686,8 +733,41 @@ text.hostPlotLabel .incomePlotLabel {
 	margin-right: 10px;
 }
 
+.gdp-key {
+	width: 50%;
+
+}
+
+
+.gdp-legend {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+#gdp-size-legend {
+	width: 50%;
+	height: 150px;
+}
+
+.size-legend-line {
+	stroke: rgba(255,255,255,.5);
+	stroke-dasharray: 3,3;
+}
+
+.size-legend-text {
+	fill: rgba(255,255,255,.8);
+	font-size: 12px;
+}
+
+.size-legend-title {
+	fill: rgba(255,255,255,.8);
+	text-anchor: middle;
+	font-size:14px;
+}
+
 .western {
-	background-color: #262f48;
+	background-color: var(--blueoverlay);
 }
 
 .russia {
@@ -713,9 +793,9 @@ text.hostPlotLabel .incomePlotLabel {
 #play-button {
 	border: none;
 	border-radius: 5px;
-	background-color: #dbdbdb;
+	background-color: var(--highlightpurple);
 	padding: 10px 20px;
-	color: #676767;
+	color: white;
 	font-weight: 300;
 }
 
@@ -730,6 +810,9 @@ text.hostPlotLabel .incomePlotLabel {
 	width: 100%;
 	align-items: center;
 	margin-top: 30px;
+	background-color: var(--blueoverlay);
+	border-radius: 7px;
+	padding: 10px 15px;
 }
 
 .slider-toggle {
@@ -739,16 +822,22 @@ text.hostPlotLabel .incomePlotLabel {
 	justify-content: flex-end;
 }
 
+.slider-range-value {
+	line-height: 1.2em;
+}
+
 #slider {
 	width: 70%;
 	margin-right: 20px;
+	background: var(--blueoverlay);
+	margin-top: 2px;
 }
 
 
 #popularity-vis {
 	height: 70vh;
 	width: 100%;
-	background-color: #181c49;
+	background-color: var(--blueoverlay);
 	border-radius: 7px
 }
 
@@ -873,8 +962,30 @@ a {
 	border-radius: 0 0 0 0.25em;
 }
 
+.triangle-right {
+	display: block;
+	height: 20px;
+	width: 20px;
+	background-color: inherit;
+	border: inherit;
+	position: absolute;
+	right: -10px;
+	bottom: calc(50% - 10px);
+	clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+	transform: rotate(-135deg);
+	border-radius: 0 0 0 0.25em;
+}
+
+
 .slide-text {
 	margin: auto 0;
+}
+
+.slide-text .gdp {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .slide-text-container {

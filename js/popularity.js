@@ -73,7 +73,7 @@ class PopularityVis {
 
         // Create tooltip
         vis.tooltip = d3.select("body").append("div")
-            .attr("class", "popularity-tooltip")
+            .attr("class", "gdp-tooltip")
             .style("opacity", 0)
 
         // Reformat the data: d3.hexbin() needs a specific format

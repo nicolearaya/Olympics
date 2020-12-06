@@ -115,8 +115,14 @@
     </div>
 
     <div id="slide4" class="section slideDiv">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>2016 & 2018 Athletes Worldwide</h2>
+                <h1>Physical Distribution of Olympic Athletes</h1>
+            </div>
+            <div class="bottom-border" style="right: 80%"></div>
+        </div>
         <div class="container-fluid justify-content-center align-self-center">
-            <h1 class="center ">Worldwide Physical Distribution of 2014 & 2016 Athletes</h1>
                     <div class="athlete-weight-height">
                         <div class="col-6 measures-left">
                             <div class="toggle">
@@ -161,10 +167,14 @@
         </div>
     </div>
     <div id="slide5" class="section slideDiv background-grey">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>USA 2016 & 2018 Athletes</h2>
+                <h1>Olympic Athlete Hometowns</h1>
+            </div>
+            <div class="bottom-border" style="right: 70%"></div>
+        </div>
         <div class="container-fluid justify-content-center align-self-center">
-            <h1 class="center slide-title padding-bottom">US Olympic Athlete Hometowns</h1>
-            <h2>How many athletes are from your home state?</h2>
-
             <div class="row hometown-map-dashboard">
                 <!-- LEFT -->
 
@@ -188,6 +198,8 @@
 
                 <!-- RIGHT -->
                 <div class="col-4">
+                    <h2>How many athletes are from your home state?</h2>
+
                     <div id="income-map-text">We can also think about inclusivity and access in terms of geographic representation. Let’s first take a look at the U.S. Where do U.S. Olympic athletes come from?</div>
                     <br>
                     <div>The colors on the map show the median household incomes of US counties and each red dot indicates the hometown of a US Olympic athlete. </div>
@@ -197,6 +209,13 @@
         </div>
     </div>
     <div id="slide6" class="section slideDiv">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>USA 2016 & 2018 Athletes</h2>
+                <h1>Athlete Hometowns vs Median Income</h1>
+            </div>
+            <div class="bottom-border" style="right: 60%"></div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
@@ -205,7 +224,7 @@
                     <br><div>Perhaps participating in the Olympics is not just determined by natural talent, but by the ability to access resources that hone, train, and build that talent. Is this trend also represented globally?</div>
 
                 </div>
-                <div class="col-8">
+                <div class="col-8 hometown-column">
                     <h2 class="center padding-bottom-thin">Median Household Income of US Olympic Athletes (2016 Summer and 2018 Winter)</h2>
                     <select id="toggleIncomePlot" class="float-right" onchange="incomePlot.updateVis()">
                         <option value="Both">Both</option>
@@ -228,33 +247,38 @@
                 <h2>Olympic games since 1952</h2>
                 <h1>Country Wins vs GDP</h1>
             </div>
-            <div class="bottom-border"></div>
+            <div class="bottom-border" style="right: 50%"></div>
         </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4 slide-text-container">
-                    <div class="slide-text">
-                        <div class="note">
+                    <div class="slide-text gdp">
                             <div class="animation-toggle">
                                 <button id="play-button">&#9654; Play</button>
                                 <div class="slider-toggle">
                                     <div id="slider"></div>
                                     <div id="slider-range-value"></div>
                                 </div>
+                             </div>
+
+                        <div class="note gdp-legend">
+                            <div class="gdp-key">
+                                <div><div class="western"></div>EU & NATO</div>
+                                <div><div class="russia"></div>Former USSR</div>
+                                <div><div class="east-asia"></div>East Asia</div>
+                                <div><div class="central-asia"></div>Central & West Asia</div>
+                                <div><div class="latin-america"></div>Latin America</div>
+                                <div><div class="africa"></div>Africa</div>
                             </div>
+                            <div id="gdp-size-legend"></div>
                         </div>
 
-                        <div>As countries increase their GDP, the number of medals they win increases.</div>
-                        <br>
-
-                        <div class="gdp-key">
-                            <div><div class="western"></div>EU & NATO</div>
-                            <div><div class="russia"></div>Former USSR</div>
-                            <div><div class="east-asia"></div>East Asia</div>
-                            <div><div class="central-asia"></div>Central & West Asia</div>
-                            <div><div class="latin-america"></div>Latin America</div>
-                            <div><div class="africa"></div>Africa</div>
+                        <div class="findings">
+                            <h1>Our Findings</h1>
+                            <div class="emphasis">As non-Western countries grow in GDP, they become strikingly competitive.</div>
+                            <div class="triangle-right"></div>
                         </div>
+
 
                     </div>
                 </div>
@@ -267,11 +291,16 @@
         </div>
     </div>
     <div id="slide8" class="section slideDiv padding-top-thin">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>Summer Olympic games since 1964</h2>
+                <h1>Host Country vs Medals Won</h1>
+            </div>
+            <div class="bottom-border" style="right: 40%"></div>
+        </div>
         <div class="container-fluid">
-            <h1 class="center padding-bottom-thin">How does hosting the Olympics affect a country's chances of winning medals?</h1>
             <div class="row" style="height: 100%; width:100%;">
                 <div class="col-8">
-                    <h2>Medal Wins of Summer Olympics Host Countries</h2>
                     <div class="hostDashboard">
                         <div>
                             <span>Filter by Country: </span>
@@ -302,11 +331,16 @@
         </div>
     </div>
     <div id="slide9" class="section slideDiv background-grey padding-top-thin">
+       <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>Olympic Games since 1952</h2>
+                <h1>Accessibility Ranking by Sport</h1>
+            </div>
+            <div class="bottom-border" style="right: 30%"></div>
+        </div>
         <div class="container-fluid">
-            <h1 class="center padding-bottom">Which sports are the most truly accessible and meritocratic?</h1>
             <div class="row">
                 <div class="col-8">
-                    <h2>Trends of Accessibility</h2>
                     <div class="parallel-coord-vis-left">
                         <div class="row parallel-coord-titles">
                             <div id="accessibility-title"><h6>Accessibility</h6></div>
@@ -334,7 +368,7 @@
                 <h2>Summer Olympics Games</h2>
                 <h1>Popularity vs Accessibility</h1>
             </div>
-            <div class="bottom-border"></div>
+            <div class="bottom-border" style="right: 20%"></div>
         </div>
         <div class="container-fluid">
             <div class="row">
