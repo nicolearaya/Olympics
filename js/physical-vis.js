@@ -21,7 +21,7 @@ class PhysicalVis {
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+            .attr("transform", "translate(" + vis.margin.left - 10 + "," + vis.margin.top + ")");
 
         vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
 
@@ -162,8 +162,8 @@ class PhysicalVis {
             d3.quantile(vis.legendScale.domain(), 1)]
 
         vis.xCircle = vis.width*0.88;
-        vis.yCircle = vis.height-25;
-        vis.xLabel = (vis.width*0.75);
+        vis.yCircle = vis.height*0.47;
+        vis.xLabel = vis.width + 20;
 
         // Make bubbles for legend
         vis.legendCircle.selectAll(".bubble-legend-circles").data(vis.bubbleLegendSizes).enter()
