@@ -208,6 +208,13 @@
         </div>
     </div>
     <div id="slide7" class="section slideDiv background-grey">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>Olympic games since 1952</h2>
+                <h1>Country Wins vs GDP</h1>
+            </div>
+            <div class="bottom-border"></div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
@@ -306,6 +313,38 @@
         </div>
     </div>
     <div id="slide10" class="section center slideDiv padding-top-thin">
+        <div class="slide-heading">
+            <div class="slide-heading-text">
+                <h2>Summer Olympics Games</h2>
+                <h1>Popularity vs Accessibility</h1>
+            </div>
+            <div class="bottom-border"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-7"><div id="popularity-vis"></div></div>
+                <div class="col-5 slide-text-container">
+                    <div class="slide-text">
+                        <h1>Popularity Data</h1>
+                        In 2016, the polling organization FiveThirtyEight surveyed thousands of people to find the most popular summer Olympic sports <a href="https://fivethirtyeight.com/features/best-worst-olympic-sports-survey-ranked/">in order of relative favorability.</a>
+                        <div class="note">For example, Volleyball's score of 7 means that Volleyball was chosen 70% of the time when pitted against another sport.</div>
+
+                        <h1>Accessibility Data</h1>
+                        The accessibility data, elaborated in the previous slide, aggregates athlete count, gender, size, age, and winner diversity.
+
+                        <div class="findings">
+                            <h1>Our Findings</h1>
+                            <div class="emphasis">Based on our metrics of accessibility,<br/>
+                            more accessible games are more popular.</div>
+                            <div class="triangle"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="slide11" class="section slideDiv background-grey padding-top-thin">
         <div class="container-fluid justify-content-center align-self-center">
             <div class="row">
                 <div class="col-3"></div>
@@ -322,15 +361,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-    <div id="slide11" class="section slideDiv background-grey padding-top-thin">
-        <div class="container-fluid">
-            <h1 class="center padding-bottom">Popularity of Each Sport</h1>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-9"><div id="popularity-vis"></div></div>
-            </div>
         </div>
     </div>
 
@@ -368,7 +398,7 @@
             //Navigation
             menu: '#menu',
             lockAnchors: false,
-            anchors:['firstPage', 'secondPage'],
+            anchors:['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
             navigation: true,
             navigationPosition: 'right',
             navigationTooltips: ['', ''],
@@ -414,7 +444,7 @@
             verticalCentered: true,
             sectionsColor : ['#050224', '#0A042D'],
             paddingTop: '0px',
-            paddingBottom: '10px',
+            paddingBottom: '0px',
             fixedElements: '#header, .footer',
             responsiveWidth: 0,
             responsiveHeight: 0,

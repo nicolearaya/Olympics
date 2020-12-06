@@ -19,10 +19,7 @@ class PopularityVis {
             }
         })
 
-
-        console.log(vis.displayData)
-
-        vis.margin = { top: 100, right: 100, bottom: 100, left: 100 };
+        vis.margin = { top: 75, right: 75, bottom: 100, left: 100 };
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -35,16 +32,19 @@ class PopularityVis {
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+        vis.svg.append('rect').attr("width", vis.width).attr("height", vis.height)
+            .style("fill", "#130e35")
+
         // Scales and axes
         // Scale for accessibility score
         vis.x = d3.scaleLinear()
             .range([0, vis.width])
-            .domain(d3.extent(vis.displayData.map(x => x[2])));
+            .domain([-.25,8]);
 
         // Scale for popularity
         vis.y = d3.scaleLinear()
             .range([vis.height,0])
-            .domain(d3.extent(vis.displayData.map(x => +x[1])));
+            .domain([1.5,7.5]);
 
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
@@ -57,21 +57,19 @@ class PopularityVis {
             .tickFormat(d3.format(","))
             .tickSize(5);
 
-        vis.svg.append("g")
-            .attr("class", "x-axis axis")
-            .attr("transform", "translate(0," + (vis.height + 10) + ")");
 
-        vis.svg.append("g")
-            .attr("class", "y-axis axis")
-            .attr("transform", "translate(-10, 0)");
+        // x axis title
+        vis.svg.append("text")
+            .attr("class", "chart-titles")
+            .attr("x", vis.width / 2)
+            .attr("y", vis.height + 70)
+            .text("Accessibility Score")
 
-        // Call axis function
-        vis.svg.select(".x-axis").call(vis.xAxis)
-            .selectAll("text")
-            .attr("transform", "rotate(-45)")
-            .attr("x", -20)
-            .attr("y", 5);
-        vis.svg.select(".y-axis").call(vis.yAxis);
+        // Y axis title
+        vis.svg.append("text")
+            .attr("class", "chart-titles")
+            .attr("transform", `rotate(-90)translate(-${vis.height/2}, -50)`)
+            .text("Popularity Score")
 
         // Create tooltip
         vis.tooltip = d3.select("body").append("div")
@@ -101,13 +99,13 @@ class PopularityVis {
         vis.svg.append("svg:path")
             .attr("clip-path", "url(#clip)")
             .attr("d", hexbin.mesh())
-            .style("stroke-width", 3)
-            .style("stroke", "var(--lighterpurple)")
+            .style("stroke-width", 1)
+            .style("stroke", "var(--darkpurple)")
             .style("fill", "none");
 
         vis.color = d3.scaleLinear()
-            .range(["#050224", "#110554"])
-            .domain([0, 6])
+            .range(["#130e35", "#3C8EFF"])
+            .domain([0, 10])
 
         // Plot the hexbins
         vis.svg.append("clipPath")
@@ -124,13 +122,14 @@ class PopularityVis {
             .attr("d", hexbin.hexagon())
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .attr("fill", d => vis.color(d.length))
-            .style("stroke-width", 3)
-            .style("stroke", "var(--lighterpurple)")
+            .style("stroke-width", 1)
+            .style("stroke", "var(--darkpurple)")
 
         // Regression line
         vis.linearRegression = d3.regressionLinear()
             .x(d => d.x)
             .y(d => d.y)
+            .domain([-.25, 8])
 
         vis.regressionLine = [vis.linearRegression(vis.hexData)[0], vis.linearRegression(vis.hexData)[1]]
 
@@ -143,7 +142,8 @@ class PopularityVis {
             .datum(vis.regressionLine)
             .attr('d', vis.line)
             .style("stroke-dasharray", ("5, 5"))
-            .attr("stroke", "white");
+            .attr("stroke-width", 1)
+            .attr("stroke", "var(--purplewhite)");
 
         // Create dots for sports
         vis.sport = vis.svg.selectAll(".popularity-dot")
@@ -157,7 +157,7 @@ class PopularityVis {
                     .transition()
                     .duration(400)
                     .attr("r", 12)
-                    .attr("stroke", "#5923fc")
+                    .attr("stroke", "var(--highlightpurple)")
                     .attr("stroke-width", "3")
                 vis.tooltip.transition()
                     .transition()
@@ -176,15 +176,28 @@ class PopularityVis {
                     .transition()
                     .duration(400)
                     .attr("r", 6)
-                    .attr("stroke", "#530e0e")
+                    .attr("stroke", "var(--lighterpurple)")
                     .attr("stroke-width", "1")
             })
             .attr("cx", d => vis.x(d[2]))
             .attr("cy", d => vis.y(+d[1]))
-            .attr("stroke", "#530e0e")
+            .attr("stroke", "var(--lighterpurple)")
             .attr("r", 6)
-            .attr("fill", "var(--red)")
+            .attr("fill", "var(--blue)")
 
         vis.sport.exit().remove();
+
+        vis.svg.append("g")
+            .attr("class", "x-axis axis")
+            .attr("transform", "translate(0," + (vis.height) + ")");
+
+        vis.svg.append("g")
+            .attr("class", "y-axis axis")
+            .attr("transform", "translate(0, 0)");
+
+        // Call axis function
+        vis.svg.select(".x-axis").call(vis.xAxis);
+
+        vis.svg.select(".y-axis").call(vis.yAxis);
     }
 }

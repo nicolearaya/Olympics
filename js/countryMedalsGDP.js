@@ -190,14 +190,14 @@ class MedalGDPvis {
 
         // x axis title
         vis.svg.append("text")
-            .attr("class", "gdp-titles")
+            .attr("class", "chart-titles")
             .attr("x", vis.width / 2)
             .attr("y", vis.height + 70)
             .text("Real GDP per Capita")
 
         // Y axis title
         vis.svg.append("text")
-            .attr("class", "gdp-titles")
+            .attr("class", "chart-titles")
             .attr("transform", `rotate(-90)translate(-${vis.height/2}, -50)`)
             .text("Total Medals Won")
 
