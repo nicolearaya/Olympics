@@ -99,40 +99,9 @@ class MedalGDPvis {
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // Create blur filter for edges of graph
-        vis.defs = vis.svg.append("defs");
-
-        vis.filter = vis.defs.append("filter")
-            .attr("id", "edge-blur")
-            .attr("height", "140%")
-            .attr("width", "140%");
-
-        vis.filter.append("feGaussianBlur")
-            .attr("in", "SourceGraphic")
-            .attr("stdDeviation", 20)
-            .attr("result", "coloredBlur")
-            .attr("x", -30)
-            .attr("y", -40);
-
-        vis.clipPath = vis.defs.append("clipPath")
-            .attr("id", "clipMask")
-            .style("pointer-events", "none")
-            .append("rect")
-            .attr("x", -10)
-            .attr("y", -60)
-            .attr("width", vis.width + 60)
-            .attr("height", vis.height + 70)
-
         // Background fill
-        vis.background = vis.svg.append('rect')
-            .attr("width", vis.width + 20)
-            .attr("height", vis.height + 20)
-            .attr("x", -30)
-            .attr("y", 30)
-            .attr("fill", "#050224")
-            .attr("filter", "url(#edge-blur)")
-            .attr("clip-path", "url(#clipMask)")
-
+        vis.svg.append('rect').attr("width", vis.width).attr("height", vis.height)
+            .style("fill", "#130e35")
 
         // Scales and axes
         vis.x = d3.scaleSymlog()

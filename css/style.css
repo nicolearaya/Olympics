@@ -496,8 +496,8 @@ th {
 #gdp-vis {
 	width: 100%;
 	height: 70vh;
-	background-color: var(--lighterpurple);
-	border-radius: 10px;
+	background-color: #181c49;
+	border-radius: 7px;
 }
 
 .hostLegend {
