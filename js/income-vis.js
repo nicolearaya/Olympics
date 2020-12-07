@@ -23,7 +23,7 @@ class IncomeVis {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate(${vis.margin.left/2}, 0)`);
+            .attr('transform', `translate(${vis.margin.left / 2}, 0)`);
 
         vis.projection = d3.geoAlbersUsa();
         vis.path = d3.geoPath().projection(vis.projection);
@@ -46,7 +46,9 @@ class IncomeVis {
 
         // draw borders
         vis.svg.append("path")
-            .datum(topojson.mesh(vis.geoData, vis.geoData.objects.states, function(a, b) { return a !== b; }))
+            .datum(topojson.mesh(vis.geoData, vis.geoData.objects.states, function (a, b) {
+                return a !== b;
+            }))
             .attr("class", "county-borders")
             .style("stroke", "white")
             .style("fill", "transparent")
@@ -59,15 +61,14 @@ class IncomeVis {
             .enter()
             .append("circle")
             .attr("class", "cities")
-            .attr("cx", d=> vis.projection(d.geometry.coordinates)[0])
-            .attr("cy", d=> vis.projection(d.geometry.coordinates)[1])
+            .attr("cx", d => vis.projection(d.geometry.coordinates)[0])
+            .attr("cy", d => vis.projection(d.geometry.coordinates)[1])
             .attr("r", 3)
             .attr("fill", d => {
                 console.log(d.properties.Season)
-                if (d.properties.Season == "Summer"){
+                if (d.properties.Season == "Summer") {
                     return "#ee2f4d"
-                }
-                else {
+                } else {
                     return "#000000"
                 }
             })
@@ -93,11 +94,11 @@ class IncomeVis {
 
         vis.legend = d3.select(".counties").append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width /1.5}, ${vis.height - 40})`)
+            .attr('transform', `translate(${vis.width / 1.5}, ${vis.height - 40})`)
 
         vis.svg.append("text")
             .attr("class", "income-legend-label")
-            .attr("transform", `translate(${vis.width /1.5 - 20}, ${vis.height - 50})`)
+            .attr("transform", `translate(${vis.width / 1.5 - 20}, ${vis.height - 50})`)
             .text("2018 US median household income")
 
         vis.linearGradient = vis.legend.append("linearGradient")
@@ -106,12 +107,12 @@ class IncomeVis {
         vis.linearGradient.append('stop')
             .attr('class', 'stop-left')
             .attr('offset', '0')
-            .attr('stop-color','#C7DFFF');
+            .attr('stop-color', '#C7DFFF');
 
         vis.linearGradient.append('stop')
             .attr('class', 'stop-right')
             .attr('offset', '1')
-            .attr('stop-color','#003ea0');
+            .attr('stop-color', '#003ea0');
 
         vis.legend.append("rect")
             .attr("x", 0)
@@ -128,7 +129,7 @@ class IncomeVis {
 
         vis.circleLegend.append("rect")
             .attr("x", 20)
-            .attr("y", vis.height-50)
+            .attr("y", vis.height - 50)
             .attr("width", 300)
             .attr("height", 40)
             .attr("rx", "5")
@@ -137,7 +138,7 @@ class IncomeVis {
         vis.circleLegend.append("circle")
             .attr("r", 3)
             .attr("cx", 50)
-            .attr("cy", vis.height-30)
+            .attr("cy", vis.height - 30)
             .attr("fill", "#ee2f4d")
 
         vis.circleLegend.append("text")
@@ -150,7 +151,7 @@ class IncomeVis {
         vis.circleLegend.append("circle")
             .attr("r", 3)
             .attr("cx", 200)
-            .attr("cy", vis.height-30)
+            .attr("cy", vis.height - 30)
             .attr("fill", "#000000")
 
         vis.circleLegend.append("text")
@@ -163,30 +164,30 @@ class IncomeVis {
         vis.wrangleData()
     }
 
-    wrangleData(){
+    wrangleData() {
         let vis = this;
 
         vis.color = d3.scaleLinear()
-            .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
+            .domain(d3.extent(vis.incomeData, d => d.ESTIMATE))
             .range(["#C7DFFF", "#003ea0"]);
 
         let displayData = vis.homeData;
 
         // prepare hometown data by grouping all rows by state
-        let athleteDataByState = Array.from(d3.group(displayData, d =>d.State), ([key, value]) => ({key, value}))
+        let athleteDataByState = Array.from(d3.group(displayData, d => d.State), ([key, value]) => ({key, value}))
 
         // init final data structure in which both data sets will be merged into
         vis.stateInfo = []
 
         // merge
-        vis.geoData.objects.states.geometries.forEach( d => {
+        vis.geoData.objects.states.geometries.forEach(d => {
 
             //init counters
             let stateName = d.properties["name"];
             let athleteCount = 0;
             let sports = {}
 
-            athleteDataByState.forEach( state => {
+            athleteDataByState.forEach(state => {
 
                 if (nameConverter.getFullName(state.key) === stateName) {
                     // sum up number of athletes for each state
@@ -203,13 +204,13 @@ class IncomeVis {
             })
 
             // sort the sports for each state by most popular based on number of athletes of each sport
-            let topSports = Object.entries(sports).sort(([,a],[,b]) => b- a);
+            let topSports = Object.entries(sports).sort(([, a], [, b]) => b - a);
 
             // populate the final data structure
             vis.stateInfo[stateName] = {
                 state: stateName,
                 athleteCount: athleteCount,
-                topSports: topSports.slice(0,5)
+                topSports: topSports.slice(0, 5)
             }
 
         })
@@ -219,7 +220,7 @@ class IncomeVis {
     }
 
 
-    updateVis(){
+    updateVis() {
         let vis = this;
 
         let selected = $("#toggleIncomeMap").val();
@@ -231,14 +232,13 @@ class IncomeVis {
             vis.svg.select(".income-legend-label").attr("display", "null");
 
             vis.counties
-                .attr("fill", function(d) {
+                .attr("fill", function (d) {
                     let result = vis.incomeData.find(obj => {
                         return obj.GEOID === d.id
                     })
-                    if (result){
+                    if (result) {
                         return vis.color(result.ESTIMATE)
-                    }
-                    else {
+                    } else {
                         return "#CCCCCC"
                     }
                 })
@@ -246,14 +246,16 @@ class IncomeVis {
 
             //update legend scale
             vis.legendScale = d3.scaleLinear()
-                .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
-                .range([0,160])
+                .domain(d3.extent(vis.incomeData, d => d.ESTIMATE))
+                .range([0, 160])
 
             //update legend axis
             vis.axis
                 .scale(vis.legendScale)
-                .tickValues([d3.min(vis.incomeData, d=>d.ESTIMATE), d3.max(vis.incomeData, d=>d.ESTIMATE)])
-                .tickFormat(x => {return "$" + d3.format(",.0f")(x)});
+                .tickValues([d3.min(vis.incomeData, d => d.ESTIMATE), d3.max(vis.incomeData, d => d.ESTIMATE)])
+                .tickFormat(x => {
+                    return "$" + d3.format(",.0f")(x)
+                });
 
             vis.Xaxis.call(vis.axis)
         } else {
@@ -269,75 +271,72 @@ class IncomeVis {
 
         let toggleDots = $("#toggleIncomeDots").val();
         if (toggleDots === "On") {
-        let toggleSeason = $("#toggleIncomeSeason").val();
-        console.log(toggleSeason)
-        if (toggleSeason === "Both") {
-            d3.selectAll(".cities")
-                .attr("visibility", "visible")
-        }
-        else if (toggleSeason === "Summer") {
-            d3.selectAll(".cities")
-                .attr("visibility", d => {
-                    console.log(d)
-                    if (d.properties.Season == "Summer") {
-                        return "visible"
+            let toggleSeason = $("#toggleIncomeSeason").val();
+            console.log(toggleSeason)
+            if (toggleSeason === "Both") {
+                d3.selectAll(".cities")
+                    .attr("visibility", "visible")
+            } else if (toggleSeason === "Summer") {
+                d3.selectAll(".cities")
+                    .attr("visibility", d => {
+                        console.log(d)
+                        if (d.properties.Season == "Summer") {
+                            return "visible"
+                        } else {
+                            return "hidden"
+                        }
+                    })
+            } else if (toggleSeason === "Winter") {
+                d3.selectAll(".cities")
+                    .attr("visibility", d => {
+                        console.log(d)
+                        if (d.properties.Season == "Winter") {
+                            return "visible"
+                        } else {
+                            return "hidden"
+                        }
+                    })
+            } else {
+                d3.selectAll(".cities")
+                    .attr("visibility", "hidden")
+            }
+
+            // get name of top sports
+            function insertSport(d) {
+                let output = ``;
+                let unit = "athletes";
+                vis.stateInfo[d.properties.name].topSports.forEach(sport => {
+                    if (sport[1] === 1) {
+                        unit = "athlete"
                     }
-                    else {
-                        return "hidden"
-                    }
+                    output += `<h6>${sport[0]}: ${sport[1]} ${unit}</h6>`
                 })
-        }
-        else if (toggleSeason === "Winter"){
-            d3.selectAll(".cities")
-                .attr("visibility", d => {
-                    console.log(d)
-                    if (d.properties.Season == "Winter") {
-                        return "visible"
-                    } else {
-                        return "hidden"
-                    }
-                })
-        }
-        else {
-            d3.selectAll(".cities")
-                .attr("visibility", "hidden")
-        }
+                return output
+            }
 
-        // get name of top sports
-        function insertSport (d) {
-            let output = ``;
-            let unit = "athletes";
-            vis.stateInfo[d.properties.name].topSports.forEach(sport => {
-                if (sport[1] === 1) {
-                    unit = "athlete"
-                }
-                output += `<h6>${sport[0]}: ${sport[1]} ${unit}</h6>`
-            })
-            return output
-        }
+            vis.states
+                .on("mouseover", function (event, d) {
 
-        vis.states
-            .on("mouseover", function(event, d) {
-
-                vis.tooltip
-                    .style("opacity", 1)
-                    .style("left", event.pageX + 20 + "px")
-                    .style("top", event.pageY + "px")
-                    .html(`
+                    vis.tooltip
+                        .style("opacity", 1)
+                        .style("left", event.pageX + 20 + "px")
+                        .style("top", event.pageY + "px")
+                        .html(`
                      <div class="text-light">
                          <h5 id="income-map-tooltip-title">${d.properties.name}<h3>
                          <h6>Total number of athletes: ${vis.stateInfo[d.properties.name].athleteCount}</h6>
                          <h6><u>Top Sports:</u></h6>
                          ${insertSport(d)}
                      </div>`)
-            })
-            .on("mouseout", function(event, d){
+                })
+                .on("mouseout", function (event, d) {
 
-                vis.tooltip
-                    .style("opacity", 0)
-                    .style("left", 0)
-                    .style("top", 0)
-                    .html(``);
-            });
+                    vis.tooltip
+                        .style("opacity", 0)
+                        .style("left", 0)
+                        .style("top", 0)
+                        .html(``);
+                });
+        }
     }
 }
