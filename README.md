@@ -2,7 +2,7 @@
 #### Team Members: Marie Konopacki, Nicole Araya, Miu Kumakura
 
 - URL to website: https://nicolearaya.github.io/Olympics/#1
-- URL to video:
+- URL to video: https://youtu.be/1T7x7om1k0k
 
 ## Project Structure
 - ```css/```: contains library CSS files as well as our custom style.css
