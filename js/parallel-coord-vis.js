@@ -170,7 +170,6 @@ class ParallelCoordVisVis {
         Object.keys(bucketed).forEach(sport => {
             bucketed[sport].total = bucketed[sport].total/3;
         })
-        console.log(bucketed)
 
         // assign sports medals based on score
         // highest value is 7.6 out of 10 and sports that receive a 5 or above will have a passing grade (green) and those below a failing grade (red)

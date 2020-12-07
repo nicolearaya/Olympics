@@ -1,0 +1,14 @@
+{
+  "name": "@mbostock/owls-to-the-max",
+  "main": "animation.js",
+  "version": "401.0.0",
+  "homepage": "https://observablehq.com/@mbostock/owls-to-the-max",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "https://observablehq.com/@mbostock"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}
