@@ -445,6 +445,12 @@ input:focus {
 	outline: var(--lighterpurple);
 }
 
+.user-physical-trait {
+	display: flex;
+	flex-direction: column;
+	height: 70vh;
+}
+
 #user-physical-trait-vis {
 	border-radius: 5px;
 	display: flex;
@@ -456,6 +462,7 @@ input:focus {
 
 .user-input {
 	display: flex;
+	height: 70vh;
 	flex-direction: column;
 	justify-content: space-between;
 }
@@ -482,6 +489,7 @@ input:focus {
 	background-color: var(--highlightpurple);
 	color: white;
 	font-weight: 200;
+	margin-bottom: 20px;
 	padding: 5px 15px;
 	border-radius: 3px;
 	border: 1px solid var(--lighterpurple);
@@ -507,6 +515,8 @@ input:focus {
 
 #physical-vis-table {
 	padding:10px;
+	width: 80%;
+	margin: 0px auto;
 }
 
 .bubble-legend-circles {
