@@ -57,17 +57,17 @@ class IncomePlot {
                 "translate(" + (vis.width/2) + " ," +
                 (vis.height+35) + ")")
             .style("text-anchor", "middle")
-            .attr("class", "income-plot-label")
-            .text("Athlete Hometown County Median Household Income");
+            .attr("class", "chart-titles")
+            .text("Athlete County Median Household Income");
 
         vis.yAxisg = vis.visArea.append("g")
             .attr("transform",
                 "translate(" + 10 + " ," +
-                (0) + ")")
+                (100) + ")")
 
         vis.yAxisg.append("text")
             .attr("transform", "rotate(90)")
-            .attr("class", "income-plot-label")
+            .attr("class", "chart-titles")
             .text("Number of Athletes");
 
         //move to front
@@ -391,14 +391,14 @@ class IncomePlot {
             .attr("y",20)
             .attr("alignment-baseline", "central")
             .attr("class", "income-plot-label")
-            .text("Summer");
+            .text("Summer 2016");
 
         vis.legend.append("text")
             .attr("x",35)
             .attr("y",60)
             .attr("alignment-baseline", "central")
             .attr("class", "income-plot-label")
-            .text("Winter");
+            .text("Winter 2018");
 
         //legend text
         vis.legend.append("text")
