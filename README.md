@@ -1,12 +1,10 @@
 # Visualizing the Olympics
-#### CS171 Data Visualization 2020 Final Project
 #### Team Members: Marie Konopacki, Nicole Araya, Miu Kumakura
 
 - URL to website: https://nicolearaya.github.io/Olympics/#1
 - URL to video:
 
-##Project Structure
--------
+## Project Structure
 - ```css/```: contains library CSS files as well as our custom style.css
 - ```data/```:
     * Data on athletes' physical traits: ```athlete_events.csv```
