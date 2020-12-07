@@ -93,10 +93,9 @@
         <div class="container-fluid justify-content-center align-self-center">
             <div class="row center user-sports-guess-dashboard padding-top-thin">
                 <div class="col-5 user-input">
-                    <div class="user-input-header">
-                        <h2>Your traits: </h2>
-                    </div>
                     <div class="user-input-values">
+                            <div class="small-title">Your traits</div>
+
                         <form>
                             <div class="form-group row">
                                 <label for="userAge" class="col-sm-4 col-form-label">Age</label>
@@ -133,14 +132,14 @@
                             <button type="button" class="btn btn-primary" id="btn-physical" onclick="physicalUpdate()">Find</button>
                         </form>
                     </div>
-                    <div>
-                        <h5 class="center padding-top-thin">We are able to guess which sport you’d play based on the fact that each sport advantages a different physique, gender, or age. We can see how certain sports are more inclusive and diverse than others in terms of these physical attributes.</h5>
+                    <div class="note">
+                        <h5 class="padding-top-thin">We are able to guess which sport you’d play based on the fact that each sport advantages a different physique, gender, or age. We can see how certain sports are more inclusive and diverse than others in terms of these physical attributes.</h5>
                     </div>
                 </div>
                 <div class="col-7 user-physical-trait">
                     <div class="user-input-header">
-                        <h2 id="physical-right-header1">2016 US Olympic athletes' traits: </h2>
-                        <h2 id="physical-right-header2" style="display:none">Your match: </h2>
+                        <div id="physical-right-header1">2016 US Olympic athletes' traits </div>
+                        <div id="physical-right-header2" style="display:none">Your match </div>
                     </div>
                     <div id="user-physical-trait-vis" style="height: 90%">
                         <div class="center" id="user-sport" style="display:none"></div>
@@ -215,7 +214,7 @@
             <div class="row hometown-map-dashboard">
                 <!-- LEFT -->
 
-                <div class="col-8 center hometown-map-left">
+                <div class="col-8 hometown-map-left">
                     <div>
                         <div class="toggleIncome">
                             <span id="toggleIncomeMapLabel">Income Gradient:</span>
@@ -236,12 +235,15 @@
                 </div>
 
                 <!-- RIGHT -->
-                <div class="col-4">
-                    <h2>Where are US athletes from?</h2>
-                    <br>
-                    <div>We can also think about inclusivity and access in terms of geographic representation.</div>
-                    <br><div> We see that winter athletes are more likely to come from northern areas and summer athletes are more likely to come from southern areas.</div>
-                    <br><div>Additionally, athletes are clustered around counties with higher median household incomes. This is interesting… might income be an indicator for one’s potential to become an olympic athlete?</div>
+                <div class="col-4 slide-text-container">
+                    <div class="slide-text">
+                        <h1>Where are US athletes from?</h1>
+                        <br>
+                        <div>We can also think about inclusivity and access in terms of geographic representation.</div>
+                        <br><div> We see that winter athletes are more likely to come from northern areas and summer athletes are more likely to come from southern areas.</div>
+                        <br><div class="note">Additionally, athletes are clustered around counties with higher median household incomes. This is interesting… might income be an indicator for one’s potential to become an olympic athlete?</div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -369,7 +371,7 @@
                     <br/><br/><span>Countries spend billions of dollars for the opportunity to host the Olympic Games. Not only do they reap the benefits of international tourism, but they also gain an edge when it comes to medal wins. <br/><br/>When only a few select countries can afford this expense, have the Olympics inadvertently introduced a Pay-to-Win model?</span>
                     <div class="findings">
                         <h1>Our Findings</h1>
-                        <div class="emphasis">Countries tend to win more medals<br/>
+                        <div class="emphasis">Countries tend to win more medals
                              the year that they host the Olympics.</div>
                         <div class="triangle"></div>
                     </div>

@@ -21,20 +21,25 @@ class PhysicalVis {
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + vis.margin.left - 10 + "," + vis.margin.top + ")");
+            .attr("transform", "translate(" + (vis.margin.left - 10) + "," + vis.margin.top + ")");
 
         vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
 
         // Draw circles
-        vis.rScale = d3.scaleLinear()
+        vis.rScale = d3.scaleSqrt()
             .domain([d3.min(vis.sportInfo, d => d[1]["NumAthletes"]), d3.max(vis.sportInfo, d => d[1]["NumAthletes"])])
             .range([10,75]);
 
         // Generate colors (Source: http://jnnnnn.github.io/category-colors-constrained.html)
-        vis.colors = ["#3957ff", "#d3fe14", "#c9080a", "#fec7f8", "#0b7b3e", "#0bf0e9", "#c203c8", "#fd9b39",
-                      "#888593", "#906407", "#98ba7f", "#fe6794", "#10b0ff", "#ac7bff", "#fee7c0", "#964c63",
-                      "#1da49c", "#0ad811", "#bbd9fd", "#fe6cfe", "#297192", "#d1a09c", "#78579e", "#81ffad",
-                      "#739400", "#ca6949", "#d9bf01", "#646a58", "#d5097e", "#bb73a9", "#ccf6e9", "#9cb4b6"];
+        vis.colors = ["var(--blue)", "#d7ec6d", "var(--red)", "#3b63cd",
+                      "#116d3b", "#57b88b", "#c1549a", "#fc9834",
+                      "#888593", "#906407", "#959d4f", "#662637",
+                      "#10b0ff", "var(--highlightpurple)", "#fee7c0", "#964c63",
+                      "#1da49c", "#0ad811", "#bbd9fd", "var(--yellow)",
+                      "#297192", "var(--green)", "#78579e", "#81ffad",
+                      "#739400", "#ca6949", "#d9bf01", "#646a58",
+                      "#d5097e", "#bb73a9", "#ccf6e9", "#9cb4b6"];
+
         vis.sportColors = vis.sportInfo.map(function (val, i) {
             return [val[0], vis.colors[i]];
         });
@@ -53,7 +58,7 @@ class PhysicalVis {
                     }
                 }
             })
-            .attr("opacity", 0.5);
+            .attr("opacity", 0.9);
 
 
         //Add tooltip
@@ -173,21 +178,14 @@ class PhysicalVis {
             .attr("cy", d => vis.yCircle - vis.legendScale(d))
             .attr("r", d => vis.legendScale(d));
 
-        // Make bubble label lines
-        vis.legendCircle.selectAll(".bubble-legend-lines").data(vis.bubbleLegendSizes).enter()
-            .append("line")
-            .attr("class", "bubble-legend-lines")
-            .attr('x1', d => vis.xCircle + vis.legendScale(d) )
-            .attr('x2', vis.xLabel)
-            .attr('y1', d => vis.yCircle - vis.legendScale(d) )
-            .attr('y2', d => vis.yCircle - vis.legendScale(d) );
 
         vis.legendCircle.selectAll(".bubble-legend-labels").data(vis.bubbleLegendSizes).enter()
             .append("text")
             .attr("class", "bubble-legend-labels")
-            .attr('x', vis.xLabel)
-            .attr('y', d => vis.yCircle - vis.legendScale(d) )
+            .attr('x', vis.xCircle)
+            .attr('y', d => vis.yCircle - (vis.legendScale(d)*2) + 15 )
             .text(d => Math.round(d));
+
 
         // Title for legend
         vis.svg.append('text')

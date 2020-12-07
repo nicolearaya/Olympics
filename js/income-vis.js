@@ -270,7 +270,6 @@ class IncomeVis {
         let toggleDots = $("#toggleIncomeDots").val();
         if (toggleDots === "On") {
         let toggleSeason = $("#toggleIncomeSeason").val();
-        console.log(toggleSeason)
         if (toggleSeason === "Both") {
             d3.selectAll(".cities")
                 .attr("visibility", "visible")
@@ -339,5 +338,5 @@ class IncomeVis {
                     .style("top", 0)
                     .html(``);
             });
-    }
+    }}
 }

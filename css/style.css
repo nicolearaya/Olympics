@@ -58,6 +58,15 @@ h6 {
 }
 
 
+.small-title {
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	margin: 40px 15px;
+}
+
 .slideDiv {
 	display: flex;
 	position: relative;
@@ -391,15 +400,19 @@ th {
 	display: flex;
 	margin-bottom: .5rem;
 	height: 35px;
+	padding-left: 10px;
 	font-size: 16px;
+	font-weight: 200;
+	border: 1px solid #969196;
+
 }
 
 #userAge, #userGender,#userWeight {
 	background-color: var(--lighterpurple);
-	border: 1px solid var(--offwhite);
+	border: 1px solid #969196;
 	border-radius: 2px;
 	color: var(--offwhite);
-	font-weight: 400;
+	font-weight: 200;
 	outline: none;
 }
 
@@ -407,12 +420,16 @@ input:focus {
 	background-color: var(--lighterpurple);
 }
 
+.form-group.row {
+	margin-top: 20px;
+}
+
 #userHeightFt, #userHeightIn {
 	background-color: var(--lighterpurple);
-	border: 1px solid var(--offwhite);
+	border: 1px solid #969196;
 	border-radius: 2px;
 	color: var(--offwhite);
-	font-weight: 400;
+	font-weight: 200;
 	outline: none;
 	width: 25%;
 }
@@ -422,7 +439,7 @@ input:focus {
 }
 #userGender {
 	height: 30px;
-	border: 1px solid var(--offwhite);
+	border: 1px solid #969196;
 	color: var(--offwhite);
 	background-color: var(--lighterpurple);
 	outline: var(--lighterpurple);
@@ -437,16 +454,42 @@ input:focus {
 	background-color: var(--lighteroverlay);
 }
 
+.user-input {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.user-input-values {
+	background-color: var(--lighteroverlay);
+	border-radius: 7px;
+	flex-grow: 1;
+}
+
+.user-input-header {
+	background-color: var(--lighteroverlay);
+	border-radius: 7px;
+	margin-bottom: 10px;
+	padding: 10px;
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+}
+
 #btn-physical {
-	background-color: var(--offwhite);
-	color: var(--lighterpurple);
-	border-radius: 2px;;
+	background-color: var(--highlightpurple);
+	color: white;
+	font-weight: 200;
+	padding: 5px 15px;
+	border-radius: 3px;
 	border: 1px solid var(--lighterpurple);
 	font-family: 'sofia-pro', sans-serif;
 }
 
 #btn-physical:hover {
-	background-color: var(--offwhite);
+	background-color: #7643c4;
 }
 
 .node-labels {
@@ -468,7 +511,7 @@ input:focus {
 
 .bubble-legend-circles {
 	fill: none;
-	stroke: white;
+	stroke: rgba(255,255,255,.5);
 }
 
 .bubble-legend-lines {
@@ -477,8 +520,9 @@ input:focus {
 }
 
 .bubble-legend-labels {
-	fill: white;
-	font-size: 8px;
+	fill: rgba(255,255,255,.7);
+	font-size: 12px;
+	text-anchor: middle;
 }
 
 .income-plot-dashboard {
