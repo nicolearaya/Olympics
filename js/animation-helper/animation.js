@@ -23,7 +23,6 @@ html`<button>Replay`
     const qsi = d3.interpolate([q, q, q, q], qs);
     qs.forEach(quads.push, quads);
     for (let j = 1, m = Math.max(1, Math.floor(q.w / 25)); j <= m; ++j) {
-      console.log("j = ", j, "m =", m)
       const t = d3.easeCubicInOut(j / m);
       context.clearRect(q.x, q.y, q.w, q.h);
       for (const s of qsi(t)) {
