@@ -70,7 +70,8 @@ function loadVis(data) {
                 Last: athlete["LAST NAME"],
                 Sport: athlete["SPORT"],
                 Hometown: athlete["HOMETOWN CITY"],
-                State: athlete["STATE ABR"]
+                State: athlete["STATE ABR"],
+                Season: athlete["SEASON"]
             }
         )
 
@@ -83,7 +84,8 @@ function loadVis(data) {
                 {
                     type: "Feature",
                     properties: {
-                        Hometown: athlete["HOMETOWN CITY"]
+                        Hometown: athlete["HOMETOWN CITY"],
+                        Season: athlete["SEASON"]
                     },
                     geometry: {
                         type: "Point",
