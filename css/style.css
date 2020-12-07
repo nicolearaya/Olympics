@@ -82,7 +82,6 @@ h6 {
 }
 
 .vertCenterDiv{
-	display: flex;
 	display: block;
 	align-items: center;
 }
@@ -106,7 +105,8 @@ h6 {
 }
 
 #slide2{
-	padding-top: 10%;
+	padding-top: 15%;
+	vertical-align: middle;
 	text-align: center;
 }
 
@@ -144,7 +144,27 @@ h6 {
 	width: 70px;
 	border-bottom: solid 2px white;
 	opacity: 0;
+}
 
+.introDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--lighteroverlay);
+}
+
+.backgroundDiv {
+	background-color: var(--lighteroverlay);
+}
+
+.noPadding{
+	padding: 0px;
+}
+
+.margin15{
+	margin-right: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 #title{
@@ -198,6 +218,14 @@ h6 {
 .width-100{
 	width: 100%;
 	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.height-100{
+	height: 100%;
+	width: auto;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -357,11 +385,42 @@ th {
 #userAge, #userGender, #userHeightFt, #userHeightIn, #userWeight {
 	display: flex;
 	margin-bottom: .5rem;
+	height: 35px;
+	font-size: 16px;
 }
 
+#userAge, #userGender,#userWeight {
+	background-color: var(--lighterpurple);
+	border: 1px solid var(--offwhite);
+	border-radius: 2px;
+	color: var(--offwhite);
+	font-weight: 400;
+	outline: none;
+}
+
+input:focus {
+	background-color: var(--lighterpurple);
+}
+
+#userHeightFt, #userHeightIn {
+	background-color: var(--lighterpurple);
+	border: 1px solid var(--offwhite);
+	border-radius: 2px;
+	color: var(--offwhite);
+	font-weight: 400;
+	outline: none;
+	width: 25%;
+}
+
+::placeholder {
+	color: var(--offwhite);
+}
 #userGender {
 	height: 30px;
-	color: #666e76;
+	border: 1px solid var(--offwhite);
+	color: var(--offwhite);
+	background-color: var(--lighterpurple);
+	outline: var(--lighterpurple);
 }
 
 #user-physical-trait-vis {
@@ -373,10 +432,16 @@ th {
 	background-color: var(--lighteroverlay);
 }
 
-.btn-physical {
-	background-color: var(--blue);
-	border: none;
+#btn-physical {
+	background-color: var(--offwhite);
+	color: var(--lighterpurple);
+	border-radius: 2px;;
+	border: 1px solid var(--lighterpurple);
 	font-family: 'sofia-pro', sans-serif;
+}
+
+#btn-physical:hover {
+	background-color: var(--offwhite);
 }
 
 .node-labels {
@@ -392,6 +457,24 @@ th {
 	padding: 10px
 }
 
+#physical-vis-table {
+	padding:10px;
+}
+
+.bubble-legend-circles {
+	fill: none;
+	stroke: white;
+}
+
+.bubble-legend-lines {
+	stroke: white;
+	stroke-dasharray: 2,2;
+}
+
+.bubble-legend-labels {
+	fill: white;
+	font-size: 8px;
+}
 
 .income-plot-dashboard {
 	width: 100%;
@@ -525,7 +608,7 @@ th {
 	flex: 1;
 }
 
-#toggleIncomeMap, #toggleIncomeDots {
+#toggleIncomeMap, #toggleIncomeSeason {
 	padding: 10px;
 	margin-left: 10px;
 	background-color: var(--lighteroverlay);
@@ -540,13 +623,14 @@ th {
 	padding: 5px;
 }
 
-#toggleIncomeDotsLabel {
+#toggleIncomeSeasonLabel {
 	padding: 5px;
 	margin-left: 40px;
 }
 
 
 #toggleIncomePlotLabel {
+	font-size: 14px;
 	padding: 5px;
 	float: right;
 }
@@ -683,7 +767,6 @@ text.hostPlotLabel .incomePlotLabel {
 }
 
 .cities {
-	fill: #ee2f4d;
 	opacity: 0.5;
 }
 
@@ -739,7 +822,7 @@ text.hostPlotLabel .incomePlotLabel {
 
 .sig {
 	font-size: 12px;
-	padding-top: 10%;
+	padding-top: 5%;
 	text-align: center;
 }
 
@@ -1059,4 +1142,12 @@ a {
 
 .row {
 	margin-top: 4vh;
+}
+
+.margin0{
+	margin-top:0px;
+}
+#conclusion{
+	background-color: var(--lighteroverlay);
+	padding: 30px;
 }

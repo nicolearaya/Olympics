@@ -21,7 +21,7 @@ class PhysicalVis {
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+            .attr("transform", "translate(" + vis.margin.left - 10 + "," + vis.margin.top + ")");
 
         vis.sportInfo = d3.rollups(vis.data, v => {return {"Weight":d3.mean(v, d => d.Weight), "Height":d3.mean(v, d => d.Height), "Age":d3.mean(v, d => d.Age), "Female":d3.count(v, femaleCount)/d3.count(v, d=> 1), "NumAthletes": d3.count(v, d=> 1)}}, d => d.Sport)
 
@@ -76,7 +76,7 @@ class PhysicalVis {
                          <h5><strong>${d[0]}</strong><h3>
                          <h6>Avg Age: ${d[1]["Age"].toFixed(1)}</h6> 
                          <h6>Gender Ratio: ${d3.format(".0%")(1 - d[1]["Female"])} M, ${d3.format(".0%")(d[1]["Female"])} F</h6>      
-                         <h6>Avg Height: ${d[1]["Height"].toFixed(1)} in</h6> 
+                         <h6>Avg Height: ${displayHeight(d[1]["Height"])}</h6> 
                          <h6>Avg Weight: ${d[1]["Weight"].toFixed(1)} lb</h6>                      
                      </div>`)
             })
@@ -149,6 +149,52 @@ class PhysicalVis {
                     })
             });
 
+        // Add legend
+        vis.legendScale = d3.scaleSqrt()
+            .domain([d3.min(vis.sportInfo, d => d[1]["NumAthletes"]), d3.max(vis.sportInfo, d => d[1]["NumAthletes"])])
+            .range([10,75]);
+
+        vis.legendCircle = vis.svg.append("g")
+            .attr("class", "bubble-legend");
+
+        vis.bubbleLegendSizes = [d3.quantile(vis.legendScale.domain(), .25),
+            d3.quantile(vis.legendScale.domain(), .60),
+            d3.quantile(vis.legendScale.domain(), 1)]
+
+        vis.xCircle = vis.width*0.89;
+        vis.yCircle = vis.height*0.95;
+        vis.xLabel = vis.width + 30;
+
+        // Make bubbles for legend
+        vis.legendCircle.selectAll(".bubble-legend-circles").data(vis.bubbleLegendSizes).enter()
+            .append('circle')
+            .attr("class", "bubble-legend-circles")
+            .attr("cx", vis.xCircle)
+            .attr("cy", d => vis.yCircle - vis.legendScale(d))
+            .attr("r", d => vis.legendScale(d));
+
+        // Make bubble label lines
+        vis.legendCircle.selectAll(".bubble-legend-lines").data(vis.bubbleLegendSizes).enter()
+            .append("line")
+            .attr("class", "bubble-legend-lines")
+            .attr('x1', d => vis.xCircle + vis.legendScale(d) )
+            .attr('x2', vis.xLabel)
+            .attr('y1', d => vis.yCircle - vis.legendScale(d) )
+            .attr('y2', d => vis.yCircle - vis.legendScale(d) );
+
+        vis.legendCircle.selectAll(".bubble-legend-labels").data(vis.bubbleLegendSizes).enter()
+            .append("text")
+            .attr("class", "bubble-legend-labels")
+            .attr('x', vis.xLabel)
+            .attr('y', d => vis.yCircle - vis.legendScale(d) )
+            .text(d => Math.round(d));
+
+        // Title for legend
+        vis.svg.append('text')
+            .attr("class", "size-legend-title")
+            .attr("x", vis.xCircle)
+            .attr("y", vis.yCircle + 20)
+            .text(`Number of Athletes`);
 
     }
 
@@ -231,49 +277,44 @@ class PhysicalVis {
     updateVis() {
         let vis = this;
 
-        // Display hover instruction
-        hovertext.style.display = "block";
-
         // Update node position and labels
         vis.displayData = vis.sportInfo.filter(function(d){
                 return d[0] === vis.userSport;
             })
 
-        vis.node.data(vis.displayData, d=> d[0])
-            .exit().remove();
+        let parent = document.getElementById(vis.parentElement);
+        parent.lastChild.remove();
 
-        // vis.label.data(vis.displayData, d=> d[0])
-        //     .exit().remove();
+        // change button display and header
+        document.getElementById("btn-physical").innerHTML = "Find Again";
+        document.getElementById("physical-right-header1").style.display = "none";
+        document.getElementById("physical-right-header2").style.display = "block";
+        document.getElementById("user-sport").innerHTML = vis.displayData[0][0];
+        document.getElementById("user-sport").style.display = "block";
 
-        vis.simulation = d3.forceSimulation(vis.displayData)
-            .force("x", d3.forceX().x(vis.width / 2))
-            .force("y", d3.forceY().y(vis.height / 2))
+        // display table
+        let table = d3.select("#physical-vis-table").append("table")
+            .attr("class", "table user-match");
+        let tbody = table.append("tbody");
 
-        vis.simulation
-            .on("tick", function(d) {
+        console.log(vis.displayData)
 
-                vis.node
-                    .attr("cx", d => d.x)
-                    .attr("cy", d => d.y)
-                    .attr("r", 60)
+        let tableData = [
+            {"label": "Avg Age", "data": vis.displayData[0][1]["Age"].toFixed(1)},
+            {"label": "Gender Ratio", "data": d3.format(".0%")(1 - vis.displayData[0][1]["Female"]) + "M, " + d3.format(".0%")(vis.displayData[0][1]["Female"]) + "F"},
+            {"label": "Avg Height", "data": displayHeight(vis.displayData[0][1]["Height"])},
+            {"label": "Avg Weight", "data": vis.displayData[0][1]["Weight"].toFixed(1) + " lb"},];
 
-                vis.label
-                    .attr("x", d => d.x)
-                    .attr("y", d => d.y)
-                    .attr("display", d=> {
-                        if (d[0] === vis.userSport) {
-                            return "null"
-                        } else {
-                            return "none"
-                        }
-                    })
-                    .text(d=> {
-                        if (d[0] === vis.userSport) {
-                            return "You play..."
-                        }
-                    })
-                    .attr("font-size", "16px");
-            });
+        let rows = tbody.selectAll("tr")
+            .data(tableData)
+            .enter()
+            .append("tr");
+
+        rows.append("th")
+            .text(d => d.label);
+
+        rows.append("td")
+            .text(d => d.data);
 
         vis.updateAgain()
     }
@@ -291,13 +332,13 @@ class PhysicalVis {
 
                 if (count === 1) {
 
-                    // Hide hover instructions
-                    hovertext.style.display = "none";
+                    document.getElementById("physical-right-header1").style.display = "block";
+                    document.getElementById("physical-right-header2").style.display = "none";
+                    document.getElementById("user-sport").style.display = "none";
 
-                    let parent = document.getElementById(vis.parentElement);
-                    while (parent.firstChild) {
-                        parent.firstChild.remove();
-                    }
+
+                    $("#physical-vis-table").empty();
+
                     vis.initVis();
                 }
         }})
@@ -313,4 +354,11 @@ function femaleCount (d) {
     } else {
         return NaN
     }
+}
+
+// Find height in ft and inches
+function displayHeight(val) {
+    var quotient = Math.floor(val/12);
+    var remainder = val % 12;
+    return quotient + "ft " + remainder.toFixed(0) + "in"
 }

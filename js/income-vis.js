@@ -62,6 +62,15 @@ class IncomeVis {
             .attr("cx", d=> vis.projection(d.geometry.coordinates)[0])
             .attr("cy", d=> vis.projection(d.geometry.coordinates)[1])
             .attr("r", 3)
+            .attr("fill", d => {
+                console.log(d.properties.Season)
+                if (d.properties.Season == "Summer"){
+                    return "#ee2f4d"
+                }
+                else {
+                    return "#000000"
+                }
+            })
             .attr("transform", `scale(${vis.zoom} ${vis.zoom})`);
 
         // draw states
@@ -102,7 +111,7 @@ class IncomeVis {
         vis.linearGradient.append('stop')
             .attr('class', 'stop-right')
             .attr('offset', '1')
-            .attr('stop-color','#08306B');
+            .attr('stop-color','#003ea0');
 
         vis.legend.append("rect")
             .attr("x", 0)
@@ -114,6 +123,43 @@ class IncomeVis {
         vis.Xaxis = vis.legend.append("g")
             .attr('transform', `translate(0, 20)`)
 
+        vis.circleLegend = vis.svg.append("g")
+
+
+        vis.circleLegend.append("rect")
+            .attr("x", 20)
+            .attr("y", vis.height-50)
+            .attr("width", 300)
+            .attr("height", 40)
+            .attr("rx", "5")
+            .attr("fill", "rgba(255,255,255,.1)")
+
+        vis.circleLegend.append("circle")
+            .attr("r", 3)
+            .attr("cx", 50)
+            .attr("cy", vis.height-30)
+            .attr("fill", "#ee2f4d")
+
+        vis.circleLegend.append("text")
+            .attr("transform", `translate(60, ${vis.height - 30})`)
+            .attr("fill", "white")
+            .attr("class", "income-plot-label")
+            .attr("dominant-baseline", "middle")
+            .text("Summer Athlete")
+
+        vis.circleLegend.append("circle")
+            .attr("r", 3)
+            .attr("cx", 200)
+            .attr("cy", vis.height-30)
+            .attr("fill", "#000000")
+
+        vis.circleLegend.append("text")
+            .attr("transform", `translate(210, ${vis.height - 30})`)
+            .attr("fill", "white")
+            .attr("class", "income-plot-label")
+            .attr("dominant-baseline", "middle")
+            .text("Winter Athlete")
+
         vis.wrangleData()
     }
 
@@ -122,7 +168,7 @@ class IncomeVis {
 
         vis.color = d3.scaleLinear()
             .domain(d3.extent(vis.incomeData, d=>d.ESTIMATE))
-            .range(["#C7DFFF", "#08306B"]);
+            .range(["#C7DFFF", "#003ea0"]);
 
         let displayData = vis.homeData;
 
@@ -223,8 +269,34 @@ class IncomeVis {
 
         let toggleDots = $("#toggleIncomeDots").val();
         if (toggleDots === "On") {
+        let toggleSeason = $("#toggleIncomeSeason").val();
+        console.log(toggleSeason)
+        if (toggleSeason === "Both") {
             d3.selectAll(".cities")
                 .attr("visibility", "visible")
+        }
+        else if (toggleSeason === "Summer") {
+            d3.selectAll(".cities")
+                .attr("visibility", d => {
+                    console.log(d)
+                    if (d.properties.Season == "Summer") {
+                        return "visible"
+                    }
+                    else {
+                        return "hidden"
+                    }
+                })
+        }
+        else if (toggleSeason === "Winter"){
+            d3.selectAll(".cities")
+                .attr("visibility", d => {
+                    console.log(d)
+                    if (d.properties.Season == "Winter") {
+                        return "visible"
+                    } else {
+                        return "hidden"
+                    }
+                })
         }
         else {
             d3.selectAll(".cities")
