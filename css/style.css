@@ -382,6 +382,11 @@ th {
 }
 
 /*Slide 2: User physical trait vis style*/
+.user-sports-guess-dashboard {
+	height: 70vh;
+}
+
+
 #userAge, #userGender, #userHeightFt, #userHeightIn, #userWeight {
 	display: flex;
 	margin-bottom: .5rem;
