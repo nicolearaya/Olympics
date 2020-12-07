@@ -1213,6 +1213,9 @@ a {
 	height: 150px;
 	width: 150px;
 	transition: 0.3s linear;
+	position:relative;
+	left:40px;
+	top:10px;
 }
 
 .box::after {
@@ -1264,7 +1267,7 @@ a {
 }
 
 .authors {
-	height: 70%;
+	height: 80%;
 }
 
 .footnote {
@@ -1282,5 +1285,13 @@ hr {
 #conclusion{
 	background-color: var(--lighteroverlay);
 	padding: 30px;
+}
+
+.authorImg{
+	width: 150px;
+	height:auto;
+	position:absolute;
+	top:50px;
+	left:50px;
 }
 
