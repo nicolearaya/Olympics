@@ -14,7 +14,7 @@
     * Data on country GDP: ```gdp-per-capita-clio-infra.csv```, ```noc_regions.csv```
     * Data on host medal wins: ```hosts_medals.csv```, ```summer_hosts.csv```
     * Data on sport popularity: ```popularity.csv```
-- js/:
+- ```js/```:
     * ```main.js```: main JavaScript file for loading data and all visualizations
     * ```fullpage.js```: implement scroll feature
     * User input vis:
