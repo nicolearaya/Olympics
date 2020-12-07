@@ -103,6 +103,10 @@ h6 {
 	background-color: var(--lighteroverlay);
 }
 
+.backgroundDiv {
+	background-color: var(--lighteroverlay);
+}
+
 .noPadding{
 	padding: 0px;
 }
