@@ -12,7 +12,7 @@
 	--green: #168C39;
 	--red: #EE2F4D;
 	--gray: #868686;
-	--offwhite: rgba(255,255,255,.9);
+	--offwhite: rgba(255, 255, 255, 0.9);
 	--lighteroverlay: rgba(255,255,255,.04)
 }
 
@@ -733,6 +733,7 @@ text.hostPlotLabel .incomePlotLabel {
 	font-size: 12px;
 	padding-top: 10%;
 	text-align: center;
+	vertical-align: text-top;
 }
 
 .gdp-bylines {
@@ -1052,3 +1053,76 @@ a {
 .row {
 	margin-top: 4vh;
 }
+
+.box {
+	animation: rotate 5s linear infinite;
+	background-color: var(--offwhite);
+	border-radius: var(--br-blobby);
+	padding-top: 40%;
+	padding-bottom:40%;
+	height: 150px;
+	width: 150px;
+	transition: 0.3s linear;
+}
+
+.box::after {
+	content: '';
+	background-color: var(--offwhite);
+	border-radius: var(--br-blobby-after);
+	position: absolute;
+	opacity: 0.5;
+	top: -2%;
+	left: -2%;
+	height: 104%;
+	width: 104%;
+	transition: 0.3s linear;
+}
+
+.box::before {
+	content: '';
+	background-color: var(--offwhite);
+	border-radius: var(--br-blobby-before);
+	position: absolute;
+	opacity: 0.5;
+	top: -4%;
+	left: -4%;
+	height: 108%;
+	width: 108%;
+	transition: 0.3s linear;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+:root {
+	--br-blobby: 50%;
+	--br-blobby-before: 50%;
+	--br-blobby-after: 50%;
+}
+
+.sources {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: text-top;
+}
+
+.authors {
+	height: 70%;
+}
+
+.footnote {
+	height:20%;
+	padding-top: .5%;
+}
+
+hr {
+	background-color: var(--offwhite);
+}
+
