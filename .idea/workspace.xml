@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="084d6cac-53af-467f-8a3a-a70bb4e94d31" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/income-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/income-vis.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,10 +108,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/1440.0.1016.746/0.0.1440.900@0.0.1440.900" timestamp="1607234032155" />
-    <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606617439840">
+    <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607317261649">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1440.900@0.0.1440.900" timestamp="1606617439840" />
+    <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1440.900@0.0.1440.900" timestamp="1607317261649" />
+    <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1440.808@0.23.1440.808" timestamp="1607317168706" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1607243590821">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
