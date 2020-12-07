@@ -17,6 +17,7 @@
 - ```js/```:
     * ```main.js```: main JavaScript file for loading data and all visualizations
     * ```fullpage.js```: implement scroll feature
+    * ```animation-helper/```: landing page visualization
     * User input vis:
         * ```physical-vis.js```: interactive visualization that finds user's most likely sport
     * Physical distribution of US athlete vis:
@@ -30,7 +31,6 @@
         * ```income-plot.js```: athletes' household income line graph 
         * ```income-plot-data-wrangling.js```: organizes data by season and county
     * Country wins and GDP vis:
-        * ```animation-helper/```: play function for vis
         * ```countryMedalsGDP.js```: bubble chart of medal wins and country GDP
         * ```nouislider.js```: enable slide scroll by time
         * ```wNumb.js```: calculate size of bubble
