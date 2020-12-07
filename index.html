@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin=""/>
+    <link rel="stylesheet" type="text/css" href="js/animation-helper/inspector.css">
+
 
     <!-- Custom CSS code -->
     <link rel="stylesheet" href="css/style.css">
@@ -25,10 +27,12 @@
 <div id="fullpage">
 
     <div id="slide1" class="section slideDiv background-grey">
-        <div class="vertCenterDiv">
+        <div id="animation"></div>
+        <div class="homepage-container">
+            <h3 id="subheading">Visualizing</h3>
             <h1 id="title" >Olympics Accessibility</h1>
+            <div id="underline" class="underline"></div>
             <h2 id="subtitle">How meritocratic are the Games really?</h2>
-            <img id="title-img" src="img/olympics-rings.png">
         </div>
     </div>
     <div id="slide2" class="section slideDiv">
@@ -285,8 +289,6 @@
                 <div class="col-8 center">
                     <div id="gdp-vis"></div>
                 </div>
-                <div class="col-8 center">
-                </div>
             </div>
         </div>
     </div>
@@ -424,6 +426,7 @@
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 <script src="js/main.js"></script>
+<script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
 
 
 <!-- d3 -->
@@ -521,6 +524,24 @@
     });
 </script>
 
+<!-- Homepage animation -->
+<script type="module">
+
+    import define from "./js/animation-helper/index.js";
+    import {Runtime, Library, Inspector} from "./js/animation-helper/runtime.js";
+
+
+    const runtime = new Runtime();
+    const main = runtime.module(define, Inspector.into(document.getElementById("animation")));
+
+    // Remove unneeded elements from first page animation
+    $('.observablehq').not('.observablehq:eq(3)').hide();
+
+    $('.observablehq:eq(3)').attr("id", "animation-div")
+
+
+</script>
+
 <script src="js/main.js"></script>
 <script src="js/income-plot.js"></script>
 <script src="js/income-vis.js"></script>
@@ -536,6 +557,11 @@
 <script src="js/nouislider.js"></script>
 <script src="js/wNumb.js"></script>
 <script src="js/popularity.js"></script>
+<script type="module" src="js/animation-helper/animation.js"></script>
+<script type="module" src="js/animation-helper/index.js"></script>
+
+
+
 
 <!-- leaflet -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

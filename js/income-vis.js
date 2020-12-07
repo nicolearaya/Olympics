@@ -129,9 +129,6 @@ class IncomeVis {
         // prepare hometown data by grouping all rows by state
         let athleteDataByState = Array.from(d3.group(displayData, d =>d.State), ([key, value]) => ({key, value}))
 
-        // have a look
-        //console.log(athleteDataByState)
-
         // init final data structure in which both data sets will be merged into
         vis.stateInfo = []
 
@@ -225,7 +222,6 @@ class IncomeVis {
         }
 
         let toggleDots = $("#toggleIncomeDots").val();
-        console.log(toggleDots)
         if (toggleDots === "On") {
             d3.selectAll(".cities")
                 .attr("visibility", "visible")

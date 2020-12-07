@@ -20,11 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="084d6cac-53af-467f-8a3a-a70bb4e94d31" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/animation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/3cf7c6cd1033debf0745a846b535cddf95a8a4313f196ed59fd300741faacd9d22c425e20670ef515d280e03a5f68488555443896c2cdadbf193f4334ae4af93" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/olympiclogophoto.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/olympiclogophoto.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/olympicslogo.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/olympicslogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/files/sprint.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/inspector.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/animation-helper/runtime.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/countryMedalsGDP.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/countryMedalsGDP.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/popularity.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popularity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/income-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/income-vis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/parallel-coord-vis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/parallel-coord-vis.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,15 +65,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/css/font" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/js/animation-helper/files" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/js/animation-helper/files" />
+      <recent name="$PROJECT_DIR$/js/animation-helper" />
+      <recent name="$PROJECT_DIR$/js" />
       <recent name="$PROJECT_DIR$/css/font" />
       <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$/js" />
-      <recent name="$PROJECT_DIR$/css" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -78,7 +92,7 @@
       <workItem from="1605821253871" duration="57500000" />
       <workItem from="1606174935775" duration="15000" />
       <workItem from="1606616830263" duration="13124000" />
-      <workItem from="1607125063965" duration="37720000" />
+      <workItem from="1607125063965" duration="51231000" />
     </task>
     <servers />
   </component>
@@ -98,10 +112,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="374" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606620948797">
+    <state x="0" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607288978339">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="374" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1606620948797" />
+    <state x="0" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1607288978339" />
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606032412264">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

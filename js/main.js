@@ -30,6 +30,15 @@ Promise.all(promises)
 
 function loadVis(data) {
 
+    // Fade in animation
+    d3.select("#title").transition().duration(1000).ease(d3.easeCubicIn).style("opacity", 1)
+    d3.select("#subheading").transition().duration(1000).ease(d3.easeCubicIn).style("opacity", 1)
+    d3.select("#underline").transition().delay(5000).duration(2000).ease(d3.easeCubicIn).style("opacity", 1)
+    d3.select("#subtitle").transition().delay(5000).duration(3000).ease(d3.easeCubicIn).style("opacity", 1)
+
+    d3.select("#animation-div").transition().duration(6000).ease(d3.easeCubicIn).style("opacity", 1)
+
+
     let athleteData = data[0];
     let hometownData = data[1];
     let incomeData = data[2];
@@ -191,3 +200,4 @@ function initIncomeVis(dataArray) {
     incomePlot = new IncomePlot("income-plot", dataArray[2]);
     hostMedalsVis = new HostMedalsVis("host-country-wins", dataArray[3], dataArray[4])
 }
+
