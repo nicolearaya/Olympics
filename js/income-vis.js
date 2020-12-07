@@ -308,6 +308,31 @@ class IncomeVis {
                 vis.stateInfo[d.properties.name].topSports.forEach(sport => {
                     if (sport[1] === 1) {
                         unit = "athlete"
+        let toggleSeason = $("#toggleIncomeSeason").val();
+        if (toggleSeason === "Both") {
+            d3.selectAll(".cities")
+                .attr("visibility", "visible")
+        }
+        else if (toggleSeason === "Summer") {
+            d3.selectAll(".cities")
+                .attr("visibility", d => {
+                    console.log(d)
+                    if (d.properties.Season == "Summer") {
+                        return "visible"
+                    }
+                    else {
+                        return "hidden"
+                    }
+                })
+        }
+        else if (toggleSeason === "Winter"){
+            d3.selectAll(".cities")
+                .attr("visibility", d => {
+                    console.log(d)
+                    if (d.properties.Season == "Winter") {
+                        return "visible"
+                    } else {
+                        return "hidden"
                     }
                     output += `<h6>${sport[0]}: ${sport[1]} ${unit}</h6>`
                 })
@@ -336,7 +361,7 @@ class IncomeVis {
                         .style("left", 0)
                         .style("top", 0)
                         .html(``);
-                });
-        }
-    }
+
+                 });
+    }})}}}
 }
