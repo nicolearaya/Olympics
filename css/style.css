@@ -845,16 +845,16 @@ text.hostPlotLabel .incomePlotLabel {
 	margin-bottom: 2%;
 	width: 95%;
 	border-radius: 5px;
-	height: 90%;
+	height: 100%;
 }
 
 #parallel-coord-vis {
 	width: 100%;
-	height: 90%;
+	height: 100%;
 }
 
 #report-card {
-	height: 70%;
+	height: 80%;
 	width: 100%;
 }
 
