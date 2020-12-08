@@ -13,7 +13,7 @@ class ParallelCoordVisVis {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 15, bottom: 20, left: 30};
+        vis.margin = {top: 30, right: 15, bottom: 20, left: 30};
 
         vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
             vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
