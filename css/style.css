@@ -834,7 +834,7 @@ text.hostPlotLabel .incomePlotLabel {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	height: 60vh;
+	height: 70vh;
 	margin-top: 10px;
 }
 
@@ -844,7 +844,7 @@ text.hostPlotLabel .incomePlotLabel {
 }
 
 #parallelTooltip {
- padding-bottom: 5px;
+	padding-bottom: 5px;
 }
 
 #sport-score {
@@ -852,7 +852,8 @@ text.hostPlotLabel .incomePlotLabel {
 }
 
 #sport-table {
-	font-size: 15px;
+	font-size: 14px;
+	height: 80%;
 }
 
 #accessibility-title {
@@ -873,8 +874,9 @@ text.hostPlotLabel .incomePlotLabel {
 
 .parallel-coord-vis-left {
 	background-color: var(--lighterpurple);
-	padding: 5px 5px 5px 20px;
+	padding: 5px 5px 10px 20px;
 	margin-right: 0px;
+	margin-bottom: 4%;
 	width: 95%;
 	border-radius: 5px;
 }

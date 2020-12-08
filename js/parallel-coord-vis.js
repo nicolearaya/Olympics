@@ -242,7 +242,7 @@ class ParallelCoordVisVis {
 
         vis.overallAxis
             .append("text")
-            .attr("y", 358)
+            .attr("y", 420)
             .text("Low")
             .style("fill", "#d1cde2");
 
