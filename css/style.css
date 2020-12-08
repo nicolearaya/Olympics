@@ -853,7 +853,7 @@ text.hostPlotLabel .incomePlotLabel {
 
 #sport-table {
 	font-size: 14px;
-	height: 80%;
+	height: 100%;
 }
 
 #accessibility-title {
@@ -876,7 +876,7 @@ text.hostPlotLabel .incomePlotLabel {
 	background-color: var(--lighterpurple);
 	padding: 5px 5px 10px 20px;
 	margin-right: 0px;
-	margin-bottom: 4%;
+	margin-bottom: 2%;
 	width: 95%;
 	border-radius: 5px;
 }
