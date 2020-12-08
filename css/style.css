@@ -876,7 +876,7 @@ text.hostPlotLabel .incomePlotLabel {
 	background-color: var(--lighterpurple);
 	padding: 5px 5px 10px 20px;
 	margin-right: 0px;
-	margin-bottom: 2%;
+	margin-bottom: 4%;
 	width: 95%;
 	border-radius: 5px;
 }
