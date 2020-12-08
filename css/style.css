@@ -845,7 +845,7 @@ text.hostPlotLabel .incomePlotLabel {
 	margin-bottom: 2%;
 	width: 95%;
 	border-radius: 5px;
-	height: 100%;
+	height: 90%;
 }
 
 #parallel-coord-vis {
